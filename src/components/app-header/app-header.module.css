@@ -1,0 +1,38 @@
+.header {
+  padding: 8px 0;
+  /* padding-right: 100px; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: space-around; */
+  background-color: #1c1c21;
+  width: 100%;
+  max-height: 88px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* justify-self:right; */
+}
+
+
+
+.link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #f2f2f3;
+  margin-left: 8px;
+  padding: 16px 20px;
+  width: max-content;
+  /* max-width: 137px;
+  max-height: 24px; */
+}
+
+.logo {
+    justify-self: center;
+    margin-left: 112px;
+    margin-right: 288px;
+}
