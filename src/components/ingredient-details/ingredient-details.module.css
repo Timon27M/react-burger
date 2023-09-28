@@ -1,0 +1,22 @@
+.content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image {
+    min-width: 480px;
+    min-height: 240px;
+}
+
+.blockData {
+    display: flex;
+    justify-content: space-between;
+    min-width: 516px;
+}
+
+.blockInfo {
+    min-width: 112px;
+    text-align: center;
+}

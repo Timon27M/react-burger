@@ -15,20 +15,18 @@ function Main() {
   const [selectedIngredient, setSelectedIngredient] = useState(null);
 
   useEffect(() => {
-    ingredientsApi.getIngradients()
-    .then((res) => {
-        console.log(res.data)
-        setIngredients(res.data)
-    })
-  }, [])
+    ingredientsApi.getIngradients().then((res) => {
+      setIngredients(res.data);
+    });
+  }, []);
 
   function clickIngradientOpen(ingradient) {
     setPopupIngredientIsOpened(true);
-    setSelectedIngredient(ingradient)
+    setSelectedIngredient(ingradient);
   }
 
   function clickOrderButton() {
-    setPopupOrderIsOpened(true)
+    setPopupOrderIsOpened(true);
   }
 
   function ingradientCloseClick() {
@@ -40,18 +38,25 @@ function Main() {
     <>
       <AppHeader />
       <div className={styles.container}>
-        <BurgerIngredients clickIngradientOpen={clickIngradientOpen} ingredients={ingredients}/>
-        <BurgerConstructor count={1234} ingredients={ingredients} clickOrderButton={clickOrderButton}/>
+        <BurgerIngredients
+          clickIngradientOpen={clickIngradientOpen}
+          ingredients={ingredients}
+        />
+        <BurgerConstructor
+          count={1234}
+          ingredients={ingredients}
+          clickOrderButton={clickOrderButton}
+        />
       </div>
       {popupOrderIsOpened && (
-      <Modal ingradientCloseClick={ingradientCloseClick}>
-        <OrderDetails />
+        <Modal ingradientCloseClick={ingradientCloseClick}>
+          <OrderDetails />
         </Modal>
       )}
       {popupIngredientIsOpened && (
-      <Modal ingradientCloseClick={ingradientCloseClick}>
-        <IngredientDetails selectedIngredient={selectedIngredient}/>
-      </Modal>
+        <Modal ingradientCloseClick={ingradientCloseClick}>
+          <IngredientDetails selectedIngredient={selectedIngredient} />
+        </Modal>
       )}
     </>
   );

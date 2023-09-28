@@ -1,4 +1,5 @@
 import styles from './ingradientCard.module.css';
+import PropTypes from 'prop-types';
 import { CurrencyIcon, Counter  } from '@ya.praktikum/react-developer-burger-ui-components'
 
 function IngradientCard({ image, price, name, count, ingradientClick, ingradient }) {
@@ -16,6 +17,15 @@ function IngradientCard({ image, price, name, count, ingradientClick, ingradient
             )}
         </div>
     )
+}
+
+IngradientCard.propTypes = { 
+    image: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    count: PropTypes.number.isRequired,
+    ingradientClick: PropTypes.func.isRequired,
+    ingradient: PropTypes.object.isRequired,
 }
 
 export default IngradientCard;
