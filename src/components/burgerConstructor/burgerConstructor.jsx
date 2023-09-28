@@ -1,6 +1,7 @@
 import styles from "./burgerConstructor.module.css";
 import { useState, useEffect } from "react";
 import PropTypes from 'prop-types';
+import { ingradientsTypes } from "../../utils/constants";
 import {
   ConstructorElement,
   DragIcon,
@@ -28,7 +29,7 @@ function BurgerConstructor({ count, ingredients, clickOrderButton }) {
               key={ingradientBun._id}
               type="top"
               isLocked={true}
-              text={ingradientBun.name}
+              text={`${ingradientBun.name} (верх)`}
               price={ingradientBun.price}
               thumbnail={ingradientBun.image}
             />
@@ -58,7 +59,7 @@ function BurgerConstructor({ count, ingredients, clickOrderButton }) {
               key={ingradientBun._id}
               type="bottom"
               isLocked={true}
-              text={ingradientBun.name}
+              text={`${ingradientBun.name} (низ)`}
               price={ingradientBun.price}
               thumbnail={ingradientBun.image}
             />
@@ -84,7 +85,7 @@ function BurgerConstructor({ count, ingredients, clickOrderButton }) {
 
 BurgerConstructor.propTypes = {
   count: PropTypes.number,
-  ingredients: PropTypes.object,
+  ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
   clickOrderButton: PropTypes.func.isRequired
 }
 

@@ -8,8 +8,6 @@
     max-width: 600px;
     display: flex;
     flex-direction: column;
-    margin-right: 20px;
-    margin-top: 40px;
 }
 
 .title {
@@ -25,7 +23,6 @@
     overflow-y: scroll;
     max-height: calc(100vh - 330px);
     scroll-behavior: smooth;
-    margin-top: 40px;
 }
 
 .modalBlock::-webkit-scrollbar {

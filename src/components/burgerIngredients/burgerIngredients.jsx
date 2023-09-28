@@ -1,6 +1,7 @@
 import styles from "./burgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import { ingradientsTypes } from "../../utils/constants";
 import { useState } from "react";
 import IngradientCard from "../ingradientCard/ingradientCard";
 
@@ -9,7 +10,7 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
 
   return (
     <section className={styles.root}>
-      <div className={styles.mainContent}>
+      <div className={`mt-10 mr-5 ${styles.mainContent}`}>
         <h2 className={`text text_type_main-large ${styles.title} mb-5`}>
           Соберите бургер
         </h2>
@@ -28,7 +29,7 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
             Начинки
           </Tab>
         </div>
-        <div className={styles.modalBlock}>
+        <div className={`mt-10 ${styles.modalBlock}`}>
           <h3
             className={`text text_type_main-medium mb-6 ${styles.titleIngradient}`}
           >
@@ -100,7 +101,7 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
 
 BurgerIngredients.propTypes = {
   clickIngradientOpen: PropTypes.func.isRequired,
-  ingredients: PropTypes.object,
+  ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
 };
 
 export default BurgerIngredients;
