@@ -18,7 +18,7 @@ function OrderDetails() {
       <p className={`mt-15 text text_type_main-default ${styles.subtitle}`}>
         Ваш заказ начали готовить
       </p>
-      <p className={`mt-2 pb-20 text text_type_main-default ${styles.text}`}>
+      <p className={`mt-2 pb-20 text text_type_main-default text_color_inactive`}>
         Дождитесь готовности на орбитальной станции
       </p>
     </div>
