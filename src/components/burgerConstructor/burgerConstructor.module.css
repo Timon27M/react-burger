@@ -14,15 +14,16 @@
     gap: 10px;
 }
 
-.elementStatic {
+/* .elementStatic {
     padding-left: 32px;
-}
+} */
 
 .elementsDynamic {
     composes: container;
     overflow-y: scroll;
     max-height: calc(100vh - 520px);
     scroll-behavior: smooth;
+    padding-right: 10px;
 }
 
 .elementsDynamic::-webkit-scrollbar {

@@ -1,23 +1,13 @@
 import styles from "./burgerIngredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useState, useEffect } from "react";
-import ingredientsApi from "../../utils/ingredientsApi";
+import { useState } from "react";
 import IngradientCard from "../ingradientCard/ingradientCard";
 
-function BurgerIngredients() {
-  const [current, setCurrent] = useState("");
-  const [ingredients, setIngredients] = useState([])
-
-  useEffect(() => {
-    ingredientsApi.getIngradients()
-    .then((res) => {
-        console.log(res.data)
-        setIngredients(res.data)
-    })
-  }, [])
+function BurgerIngredients({ clickIngradientOpen, ingredients }) {
+  const [current, setCurrent] = useState("Булки");
 
   return (
-    <div className={styles.root}>
+    <section className={styles.root} >
       <div className={styles.mainContent}>
         <h2 className={`text text_type_main-large ${styles.title} mb-5`}>
           Соберите бургер
@@ -42,7 +32,7 @@ function BurgerIngredients() {
           <div className={styles.container}>
             {ingredients.map((item) => {
                 if (item.type === 'bun') {
-                  return <IngradientCard image={item.image} price={item.price} name={item.name}/>
+                  return <IngradientCard ingradientClick={clickIngradientOpen} ingradient={item} image={item.image} price={item.price} name={item.name}/>
                 }
             })}
           </div>
@@ -50,7 +40,7 @@ function BurgerIngredients() {
           <div className={styles.container}>
             {ingredients.map((item) => {
                 if (item.type === 'sauce') {
-                  return <IngradientCard image={item.image} price={item.price} name={item.name}/>
+                  return <IngradientCard ingradientClick={clickIngradientOpen} image={item.image} price={item.price} name={item.name}/>
                 }
             })}
           </div>
@@ -58,13 +48,13 @@ function BurgerIngredients() {
           <div className={styles.container}>
             {ingredients.map((item) => {
                 if (item.type === 'main') {
-                  return <IngradientCard image={item.image} price={item.price} name={item.name}/>
+                  return <IngradientCard ingradientClick={clickIngradientOpen} image={item.image} price={item.price} name={item.name}/>
                 }
             })}
           </div>
           </div>
       </div>
-    </div>
+    </section>
   );
 }
 
