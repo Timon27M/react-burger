@@ -1,0 +1,60 @@
+.root {
+  display: flex;
+  width: 50%;
+  justify-content: start;
+}
+
+.mainContent {
+    width: max-content;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* .elementStatic {
+    padding-left: 32px;
+} */
+
+.elementsDynamic {
+    composes: container;
+    overflow-y: scroll;
+    max-height: calc(100vh - 520px);
+    scroll-behavior: smooth;
+    padding-right: 10px;
+}
+
+.elementsDynamic::-webkit-scrollbar {
+    background-color: #2f2f37;
+    height: 8px;
+    width: 8px;
+}
+
+.elementsDynamic::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+}
+
+.elementDynamic {
+    display: flex
+
+}
+
+.blockPrice {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.finalPrice {
+    margin-right: 40px;
+}
+
+.buttonList {
+    /* max-width: 24px;
+    max-height: 24px; */
+    padding: 0;
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+}

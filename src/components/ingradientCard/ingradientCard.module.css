@@ -1,0 +1,19 @@
+.container {
+    max-width: 272px;
+    max-height: 208px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.image {
+    max-width: 240px;
+    max-height: 120px;
+}
+
+.count {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
