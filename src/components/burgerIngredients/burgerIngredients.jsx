@@ -1,12 +1,37 @@
 import styles from "./burgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import {useSelector, useDispatch} from 'react-redux';
 import { ingradientsTypes } from "../../utils/constants";
+import { getBurgerConstructorIngradients } from "../../services/selectors";
+import { addIngredientPopup } from "../../services/actions/ingradientDetails";
+import { addIngredient, updateTotalPrice, deleteIngredient } from "../../services/actions/burgerConstructor";
 import { useState } from "react";
 import IngradientCard from "../ingradientCard/ingradientCard";
+import { ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
 
-function BurgerIngredients({ clickIngradientOpen, ingredients }) {
+function BurgerIngredients() {
   const [current, setCurrent] = useState("Булки");
+  const dispatch = useDispatch();
+  const ingredientsConstructor = useSelector(getBurgerConstructorIngradients)
+
+  const openIngradientPopup = (ingradient) => {
+    dispatch(addIngredientPopup(ingradient))
+  }
+
+  function onAdd(ingredientObj) {
+    if (ingredientObj.type === 'bun') {
+      ingredientsConstructor.some((item) => {
+         if (item.type === 'bun') {
+          dispatch(deleteIngredient(item.uniqId))
+         }
+      })
+    }
+      dispatch(addIngredient(ingredientObj))
+      dispatch(updateTotalPrice())
+  }
+
+  const ingredients = useSelector(state => state.ingredients.ingredients);
 
   return (
     <section className={styles.root}>
@@ -41,7 +66,8 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
                 return (
                   <IngradientCard
                     key={item._id}
-                    ingradientClick={clickIngradientOpen}
+                    ingradientClick={openIngradientPopup}
+                    // ingradientClick={onAdd}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -62,7 +88,8 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
                 return (
                   <IngradientCard
                   key={item._id}
-                    ingradientClick={clickIngradientOpen}
+                    ingradientClick={openIngradientPopup}
+                    // ingradientClick={onAdd}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -83,7 +110,8 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
                 return (
                   <IngradientCard
                   key={item._id}
-                    ingradientClick={clickIngradientOpen}
+                    ingradientClick={openIngradientPopup}
+                    // ingradientClick={onAdd}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -100,7 +128,6 @@ function BurgerIngredients({ clickIngradientOpen, ingredients }) {
 }
 
 BurgerIngredients.propTypes = {
-  clickIngradientOpen: PropTypes.func.isRequired,
   ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
 };
 

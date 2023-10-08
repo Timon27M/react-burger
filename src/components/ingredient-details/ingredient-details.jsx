@@ -1,7 +1,10 @@
 import styles from './ingredient-details.module.css';
 import PropTypes from 'prop-types';
+import {useSelector} from 'react-redux';
+import { getSelectedIngradient } from '../../services/selectors';
 
-function IngredientDetails({ selectedIngredient }) {
+function IngredientDetails() {
+    const selectedIngredient = useSelector(getSelectedIngradient)
     return (
         <div className={styles.content}>
             <img className={`mt-3 ${styles.image}`} src={selectedIngredient.image} alt="картинка" />

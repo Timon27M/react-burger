@@ -5,12 +5,16 @@
 }
 
 .mainContent {
-    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 586px;
 }
 
 .container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 10px;
 }
 
@@ -44,7 +48,8 @@
 .blockPrice {
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: center; 
+    width: 100%;
 }
 
 .finalPrice {

@@ -1,11 +1,16 @@
+import { useSelector } from 'react-redux';
 import styles from "./order-details.module.css";
 import orderDetailsImage from "../../images/orderDetailsImage.svg";
+import { getNumberOrder } from '../../services/selectors';
 
 function OrderDetails() {
+
+  const numberOrder = useSelector(getNumberOrder)
+
   return (
     <div className={styles.content}>
       <h2 className={`mt-20 text text_type_digits-large ${styles.number}`}>
-        034536
+      {numberOrder}
       </h2>
       <p className={`mt-8 text text_type_main-medium ${styles.title}`}>
         идентификатор заказа

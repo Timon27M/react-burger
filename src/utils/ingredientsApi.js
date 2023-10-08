@@ -19,6 +19,15 @@ class IngredientsApi {
         })
         .then(this._checkStatus)
     }
+
+    addOrder(ingredientsObj) {
+        return fetch(this._baseUrl + '/orders', {
+            method: 'POST',
+            headers: this._headers,
+            body: JSON.stringify(ingredientsObj)
+        })
+        .then(this._checkStatus)
+    }
 }
 
 const ingredientsApi = new IngredientsApi({

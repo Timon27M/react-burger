@@ -1,5 +1,8 @@
 import styles from "./main.module.css";
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { getIngradients } from "../../services/actions/ingradients";
+import { getIsOpenedPopupIngradient, getIsOpenedPopupOrder } from "../../services/selectors";
 import AppHeader from "../app-header/app-header";
 import BurgerIngredients from "../burgerIngredients/burgerIngredients";
 import BurgerConstructor from "../burgerConstructor/burgerConstructor";
@@ -9,53 +12,31 @@ import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 
 function Main() {
-  const [popupOrderIsOpened, setPopupOrderIsOpened] = useState(false);
-  const [popupIngredientIsOpened, setPopupIngredientIsOpened] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
+  // const [popupOrderIsOpened, setPopupOrderIsOpened] = useState(false);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    ingredientsApi.getIngradients().then((res) => {
-      setIngredients(res.data);
-    });
-  }, []);
+    dispatch(getIngradients(ingredientsApi))
+  }, [dispatch]);
 
-  function clickIngradientOpen(ingradient) {
-    setPopupIngredientIsOpened(true);
-    setSelectedIngredient(ingradient);
-  }
-
-  function clickOrderButton() {
-    setPopupOrderIsOpened(true);
-  }
-
-  function ingradientCloseClick() {
-    setPopupOrderIsOpened(false);
-    setPopupIngredientIsOpened(false);
-  }
+  const popupIngredientIsOpened = useSelector(getIsOpenedPopupIngradient);
+  const popupOrderIsOpened = useSelector(getIsOpenedPopupOrder);
 
   return (
     <>
       <AppHeader />
       <div className={styles.container}>
-        <BurgerIngredients
-          clickIngradientOpen={clickIngradientOpen}
-          ingredients={ingredients}
-        />
-        <BurgerConstructor
-          count={1234}
-          ingredients={ingredients}
-          clickOrderButton={clickOrderButton}
-        />
+        <BurgerIngredients />
+        <BurgerConstructor />
       </div>
       {popupOrderIsOpened && (
-        <Modal ingradientCloseClick={ingradientCloseClick}>
+        <Modal>
           <OrderDetails />
         </Modal>
       )}
       {popupIngredientIsOpened && (
-        <Modal ingradientCloseClick={ingradientCloseClick}>
-          <IngredientDetails selectedIngredient={selectedIngredient} />
+        <Modal >
+          <IngredientDetails />
         </Modal>
       )}
     </>
