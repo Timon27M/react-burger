@@ -115,9 +115,9 @@ function BurgerConstructor() {
 }
 
 BurgerConstructor.propTypes = {
-  count: PropTypes.number,
+  // count: PropTypes.number,
   // ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
-  clickOrderButton: PropTypes.func.isRequired
+  // clickOrderButton: PropTypes.func.isRequired
 }
 
 export default BurgerConstructor;

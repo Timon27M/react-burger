@@ -1,38 +1,65 @@
 import styles from "./burgerIngredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
-import {useSelector, useDispatch} from 'react-redux';
+import { Link } from "react-scroll";
+import { useSelector, useDispatch } from "react-redux";
 import { ingradientsTypes } from "../../utils/constants";
 import { getBurgerConstructorIngradients } from "../../services/selectors";
 import { addIngredientPopup } from "../../services/actions/ingradientDetails";
-import { addIngredient, updateTotalPrice, deleteIngredient } from "../../services/actions/burgerConstructor";
-import { useState } from "react";
+import {
+  addIngredient,
+  updateTotalPrice,
+  deleteIngredient,
+} from "../../services/actions/burgerConstructor";
+import { useState, useRef } from "react";
 import IngradientCard from "../ingradientCard/ingradientCard";
-import { ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
+// import { ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("Булки");
   const dispatch = useDispatch();
-  const ingredientsConstructor = useSelector(getBurgerConstructorIngradients)
+  const ingredientsConstructor = useSelector(getBurgerConstructorIngradients);
 
   const openIngradientPopup = (ingradient) => {
-    dispatch(addIngredientPopup(ingradient))
-  }
+    dispatch(addIngredientPopup(ingradient));
+  };
 
   function onAdd(ingredientObj) {
-    if (ingredientObj.type === 'bun') {
+    if (ingredientObj.type === "bun") {
       ingredientsConstructor.some((item) => {
-         if (item.type === 'bun') {
-          dispatch(deleteIngredient(item.uniqId))
-         }
-      })
+        if (item.type === "bun") {
+          dispatch(deleteIngredient(item.uniqId));
+        }
+      });
     }
-      dispatch(addIngredient(ingredientObj))
-      dispatch(updateTotalPrice())
+    dispatch(addIngredient(ingredientObj));
+    dispatch(updateTotalPrice());
   }
 
-  const ingredients = useSelector(state => state.ingredients.ingredients);
+  const ingredients = useSelector((state) => state.ingredients.ingredients);
 
+  const containerRef = useRef(null)
+  
+    const bunRef = useRef(null);
+  const sauceRef = useRef(null);
+  const mainRef = useRef(null);
+
+  function handleScroll() {
+    const bunDistance = Math.abs(bunRef.current.getBoundingClientRect().top - containerRef.current.getBoundingClientRect().top);
+    const sauceDistance = Math.abs(sauceRef.current.getBoundingClientRect().top - containerRef.current.getBoundingClientRect().top);
+    const mainDistance = Math.abs(mainRef.current.getBoundingClientRect().top - containerRef.current.getBoundingClientRect().top);
+    
+    if(bunDistance < sauceDistance && bunDistance < mainDistance) {
+        setCurrent('Булки')
+    }
+    else if(sauceDistance < mainDistance && sauceDistance < bunDistance) {
+        setCurrent('Соусы')
+    }
+    else if(mainDistance < bunDistance && mainDistance < sauceDistance) {
+        setCurrent('Начинки')
+    }
+}
+  
   return (
     <section className={styles.root}>
       <div className={`mt-10 mr-5 ${styles.mainContent}`}>
@@ -40,12 +67,45 @@ function BurgerIngredients() {
           Соберите бургер
         </h2>
         <div className={styles.navBar}>
-          <Tab value="Булки" active={current === "Булки"} onClick={setCurrent}>
-            Булки
-          </Tab>
+          <Link
+            to="bun"
+            spy={true}
+            smooth={true}
+            offset={5}
+            duration={0}
+            onSetActive={() => setCurrent("Булки")}
+            containerId="containerElement"
+          >
+            <Tab
+              value="Булки"
+              active={current === "Булки"}
+              onClick={setCurrent}
+            >
+              Булки
+            </Tab>
+          </Link>
+          <Link
+            to="sauce"
+            spy={true}
+            smooth={true}
+            offset={5}
+            duration={0}
+            onSetActive={() => setCurrent("Соусы")}
+            containerId="containerElement"
+          >
           <Tab value="Соусы" active={current === "Соусы"} onClick={setCurrent}>
             Соусы
           </Tab>
+          </Link>
+          <Link
+            to="main"
+            spy={true}
+            smooth={true}
+            offset={5}
+            duration={0}
+            onSetActive={() => setCurrent("Начинки")}
+            containerId="containerElement"
+          >
           <Tab
             value="Начинки"
             active={current === "Начинки"}
@@ -53,10 +113,13 @@ function BurgerIngredients() {
           >
             Начинки
           </Tab>
+          </Link>
         </div>
-        <div className={`mt-10 ${styles.modalBlock}`}>
+        <div className={`mt-10 ${styles.modalBlock}`} onScroll={handleScroll} id="containerElement" ref={containerRef}>
           <h3
             className={`text text_type_main-medium mb-6 ${styles.titleIngradient}`}
+            name='bun'
+            ref={bunRef}
           >
             Булки
           </h3>
@@ -79,6 +142,8 @@ function BurgerIngredients() {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
+            name='sauce'
+            ref={sauceRef}
           >
             Соусы
           </h3>
@@ -87,7 +152,7 @@ function BurgerIngredients() {
               if (item.type === "sauce") {
                 return (
                   <IngradientCard
-                  key={item._id}
+                    key={item._id}
                     ingradientClick={openIngradientPopup}
                     // ingradientClick={onAdd}
                     ingradient={item}
@@ -101,6 +166,8 @@ function BurgerIngredients() {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
+            name='main'
+            ref={mainRef}
           >
             Начинки
           </h3>
@@ -109,7 +176,7 @@ function BurgerIngredients() {
               if (item.type === "main") {
                 return (
                   <IngradientCard
-                  key={item._id}
+                    key={item._id}
                     ingradientClick={openIngradientPopup}
                     // ingradientClick={onAdd}
                     ingradient={item}
@@ -128,7 +195,7 @@ function BurgerIngredients() {
 }
 
 BurgerIngredients.propTypes = {
-  ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
+  // ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
 };
 
 export default BurgerIngredients;
