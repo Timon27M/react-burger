@@ -1,23 +1,22 @@
 import styles from "./modal.module.css";
 import ReactDOM from "react-dom";
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { closeIngredientPopup } from "../../services/actions/ingradientDetails";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { closeIngredientPopup } from "../../services/actions/ingradient-details";
 import { closeOrderPopup } from "../../services/actions/order";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import ModalOverflow from "../modal-overflow/modal-overflow";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 const modalRoot = document.getElementById("react-modals");
 
-
 function Modal({ children }) {
   const dispatch = useDispatch();
-  
+
   const closePopup = () => {
-    dispatch(closeIngredientPopup())
-    dispatch(closeOrderPopup())
-  }
-  
+    dispatch(closeIngredientPopup());
+    dispatch(closeOrderPopup());
+  };
+
   useEffect(() => {
     const onEscKeydown = (evt) => {
       if (evt.key === "Escape") {
@@ -28,8 +27,6 @@ function Modal({ children }) {
 
     return () => document.removeEventListener("keydown", onEscKeydown);
   }, []);
-
-
 
   function stopPropagation(e) {
     e.stopPropagation();
@@ -55,7 +52,7 @@ function Modal({ children }) {
 
 Modal.propTypes = {
   ingradientCloseClick: PropTypes.func.isRequired,
-  children: PropTypes.element.isRequired
-}
+  children: PropTypes.element.isRequired,
+};
 
 export default Modal;

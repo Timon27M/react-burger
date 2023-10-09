@@ -1,18 +1,19 @@
-import styles from "./burgerIngredients.module.css";
+import styles from "./burger-ingredients.module.css";
 import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-scroll";
+import { useDrag } from "react-dnd/dist/hooks";
 import { useSelector, useDispatch } from "react-redux";
 import { ingradientsTypes } from "../../utils/constants";
 import { getBurgerConstructorIngradients } from "../../services/selectors";
-import { addIngredientPopup } from "../../services/actions/ingradientDetails";
+import { addIngredientPopup } from "../../services/actions/ingradient-details";
 import {
   addIngredient,
   updateTotalPrice,
   deleteIngredient,
-} from "../../services/actions/burgerConstructor";
+} from "../../services/actions/burger-constructor";
 import { useState, useRef } from "react";
-import IngradientCard from "../ingradientCard/ingradientCard";
+import IngradientCard from "../ingradient-card/ingradient-card";
 // import { ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
 
 function BurgerIngredients() {
@@ -24,42 +25,64 @@ function BurgerIngredients() {
     dispatch(addIngredientPopup(ingradient));
   };
 
-  function onAdd(ingredientObj) {
-    if (ingredientObj.type === "bun") {
-      ingredientsConstructor.some((item) => {
-        if (item.type === "bun") {
-          dispatch(deleteIngredient(item.uniqId));
-        }
-      });
-    }
-    dispatch(addIngredient(ingredientObj));
-    dispatch(updateTotalPrice());
-  }
+  // const [{isDrag}, dragRef] = useDrag({
+  //   type: "ingredient",
+  //   item: current,
+  //   collect: monitor => ({
+  //       isDrag: monitor.isDragging()
+  //   })})
+
+  // function DraggableIngradient(ingredientObj) {
+  //   if (ingredientObj.type === "bun") {
+  //     ingredientsConstructor.some((item) => {
+  //       if (item.type === "bun") {
+  //         dispatch(deleteIngredient(item.uniqId));
+  //       }
+  //     });
+
+  //   }
+  //   // const { id } = ingredientObj;
+  //   dispatch(addIngredient(ingredientObj));
+  //   dispatch(updateTotalPrice());
+  //   const [{isDrag}, dragRef] = useDrag({
+  //     type: "animal",
+  //     item: ingredientObj,
+  //     collect: monitor => ({
+  //         isDrag: monitor.isDragging()
+  //     })})
+  // }
 
   const ingredients = useSelector((state) => state.ingredients.ingredients);
 
-  const containerRef = useRef(null)
-  
-    const bunRef = useRef(null);
+  const containerRef = useRef(null);
+
+  const bunRef = useRef(null);
   const sauceRef = useRef(null);
   const mainRef = useRef(null);
 
   function handleScroll() {
-    const bunDistance = Math.abs(bunRef.current.getBoundingClientRect().top - containerRef.current.getBoundingClientRect().top);
-    const sauceDistance = Math.abs(sauceRef.current.getBoundingClientRect().top - containerRef.current.getBoundingClientRect().top);
-    const mainDistance = Math.abs(mainRef.current.getBoundingClientRect().top - containerRef.current.getBoundingClientRect().top);
-    
-    if(bunDistance < sauceDistance && bunDistance < mainDistance) {
-        setCurrent('Булки')
+    const bunDistance = Math.abs(
+      bunRef.current.getBoundingClientRect().top -
+        containerRef.current.getBoundingClientRect().top
+    );
+    const sauceDistance = Math.abs(
+      sauceRef.current.getBoundingClientRect().top -
+        containerRef.current.getBoundingClientRect().top
+    );
+    const mainDistance = Math.abs(
+      mainRef.current.getBoundingClientRect().top -
+        containerRef.current.getBoundingClientRect().top
+    );
+
+    if (bunDistance < sauceDistance && bunDistance < mainDistance) {
+      setCurrent("Булки");
+    } else if (sauceDistance < mainDistance && sauceDistance < bunDistance) {
+      setCurrent("Соусы");
+    } else if (mainDistance < bunDistance && mainDistance < sauceDistance) {
+      setCurrent("Начинки");
     }
-    else if(sauceDistance < mainDistance && sauceDistance < bunDistance) {
-        setCurrent('Соусы')
-    }
-    else if(mainDistance < bunDistance && mainDistance < sauceDistance) {
-        setCurrent('Начинки')
-    }
-}
-  
+  }
+
   return (
     <section className={styles.root}>
       <div className={`mt-10 mr-5 ${styles.mainContent}`}>
@@ -93,9 +116,13 @@ function BurgerIngredients() {
             onSetActive={() => setCurrent("Соусы")}
             containerId="containerElement"
           >
-          <Tab value="Соусы" active={current === "Соусы"} onClick={setCurrent}>
-            Соусы
-          </Tab>
+            <Tab
+              value="Соусы"
+              active={current === "Соусы"}
+              onClick={setCurrent}
+            >
+              Соусы
+            </Tab>
           </Link>
           <Link
             to="main"
@@ -106,19 +133,24 @@ function BurgerIngredients() {
             onSetActive={() => setCurrent("Начинки")}
             containerId="containerElement"
           >
-          <Tab
-            value="Начинки"
-            active={current === "Начинки"}
-            onClick={setCurrent}
-          >
-            Начинки
-          </Tab>
+            <Tab
+              value="Начинки"
+              active={current === "Начинки"}
+              onClick={setCurrent}
+            >
+              Начинки
+            </Tab>
           </Link>
         </div>
-        <div className={`mt-10 ${styles.modalBlock}`} onScroll={handleScroll} id="containerElement" ref={containerRef}>
+        <div
+          className={`mt-10 ${styles.modalBlock}`}
+          onScroll={handleScroll}
+          id="containerElement"
+          ref={containerRef}
+        >
           <h3
             className={`text text_type_main-medium mb-6 ${styles.titleIngradient}`}
-            name='bun'
+            name="bun"
             ref={bunRef}
           >
             Булки
@@ -142,7 +174,7 @@ function BurgerIngredients() {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
-            name='sauce'
+            name="sauce"
             ref={sauceRef}
           >
             Соусы
@@ -166,7 +198,7 @@ function BurgerIngredients() {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
-            name='main'
+            name="main"
             ref={mainRef}
           >
             Начинки
