@@ -2,6 +2,7 @@ import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   ADD_TOTALPRICE,
+  UPDATE_SORT_INGREDIENTS,
 } from "../actions/burger-constructor";
 const initialState = {
   constructorIngredients: [],
@@ -11,6 +12,10 @@ const initialState = {
 const burgerConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
+      console.log([
+        ...state.constructorIngredients,
+        action.payload,
+      ])
       return {
         ...state,
         constructorIngredients: [
@@ -40,6 +45,27 @@ const burgerConstructorReducer = (state = initialState, action) => {
           },
           0
         ),
+      };
+    }
+    case UPDATE_SORT_INGREDIENTS: {
+      const newConstructorIngredients = [
+        ...state.constructorIngredients,
+      ]
+      const item = newConstructorIngredients[action.dragIndex]
+      newConstructorIngredients.splice(
+        action.dragIndex,
+        1
+      )
+      newConstructorIngredients.splice(
+        action.hoverIndex,
+        0,
+        item
+      )
+      console.log(newConstructorIngredients)
+      
+      return {
+        ...state,
+        constructorIngredients: newConstructorIngredients
       };
     }
     default: {

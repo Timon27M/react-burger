@@ -2,74 +2,55 @@ import style from './burger-constructor-card.module.css';
 import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
+import { UPDATE_SORT_INGREDIENTS } from '../../services/actions/burger-constructor';
 
 function BurgerConstructorCard({ children, index }) {
     const dispatch = useDispatch()
     const ref = useRef(null)
 
-    const [{ handlerId }, drop] = useDrop({
-        accept: 'innerIngridient',
-        collect(monitor) {
-            return {
-                handlerId: monitor.getHandlerId()
-            };
-        },
-        hover(item, monitor) {
-            if (!ref.current) {
-                return;
-            }
-            // Индекс перемещаемого элемента
-            const dragIndex = item.index;
-            // Индекс текущего элемента (над которым находится курсор при dnd)
-            const hoverIndex = index;
-
-            // Выходим, если индексы сопадают
-            if (dragIndex === hoverIndex) {
-                return;
+    const [{ isHover }, dropRef] = useDrop({
+        accept: 'ingridient',
+        collect: monitor => ({
+            isHover: monitor.isOver(),
+        }),
+        drop(item) {
+            console.log(item.index)
+            console.log(index)
+            const dragIndex = item.index
+            const hoverIndex = index
+            if ( dragIndex === hoverIndex ) {
+                return
             }
 
-            // Получаем положение текущего элемента относительно экрана
-            const hoverBoundingRect = ref.current?.getBoundingClientRect();
-            // Получаем центр текущего элемента по вертикали
-            const hoverMiddleY =
-                (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-            // Получаем положение курсора
-            const clientOffset = monitor.getClientOffset();
-            // Получаем положение курсора относительно текущего элемента
-            const hoverClientY = clientOffset.y - hoverBoundingRect.top;
-
-            // Выходим, если перемещаемый элемент ниже, чем 50% от высоты текущего
-            if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-                return;
-            }
-
-            // Выходим, если перемещаемый элемент выше, чем 50% от высоты текущего
-            if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-                return;
-            }
-
-            // dispatch({ type: SORT_INGRIDIENT, rest: { from: dragIndex, to: hoverIndex } });
-
-            // Сразу меняем индекс перемещаемого элемента
-            item.index = hoverIndex;
+            dispatch({
+                type: UPDATE_SORT_INGREDIENTS,
+                dragIndex: Number(dragIndex),
+                hoverIndex: Number(hoverIndex),
+            })
+            item.index = index;
         }
     });
 
-    const [{ isDragging }, drag] = useDrag({
-        type: 'innerIngridient',
+    const [{ isDragging }, dragRef] = useDrag({
+        type: 'ingridient',
         item: () => {
-            // Определяем элемент
             return { index };
         },
         collect: (monitor) => ({
             isDragging: monitor.isDragging()
         })
     });
+    const classNameIsDragging = 'mt-10';
+    if (isDragging) {
+        children = '';
+    }
 
-    drag(drop(ref));
+    const classNameIsHoverOnDropElement = style.isActive;
+
+    dragRef(dropRef(ref));
 
     return (
-        <div className='m-0 p-0' data-handler-id={handlerId} ref={ref}>
+        <div className={`m-0 p-0 ${ isDragging && classNameIsDragging} ${isHover && classNameIsHoverOnDropElement}`} ref={ref}>
             {children}
         </div>
     )

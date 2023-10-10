@@ -81,7 +81,7 @@ function BurgerConstructor() {
       >
         {ingredientsConstructor.length > 0 ? (
           <div className={styles.container}>
-            <BurgerConstructorCard>
+            {/* <BurgerConstructorCard> */}
               <div className={`pl-8 pr-4`}>
                 {ingradientBun && (
                   <ConstructorElement
@@ -94,7 +94,7 @@ function BurgerConstructor() {
                   />
                 )}
               </div>
-            </BurgerConstructorCard>
+            {/* </BurgerConstructorCard> */}
 
             <div className={styles.elementsDynamic}>
               {ingredientsConstructor.map((item, index) => {
@@ -118,7 +118,7 @@ function BurgerConstructor() {
               })}
             </div>
 
-            <BurgerConstructorCard>
+            {/* <BurgerConstructorCard> */}
               <div className={`pl-8 pr-4`}>
                 {ingradientBun && (
                   <ConstructorElement
@@ -131,7 +131,7 @@ function BurgerConstructor() {
                   />
                 )}
               </div>
-            </BurgerConstructorCard>
+            {/* </BurgerConstructorCard> */}
           </div>
         ) : (
           <p className={`mt-10 text text_type_main-medium`}>

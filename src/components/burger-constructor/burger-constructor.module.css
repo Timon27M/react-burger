@@ -20,12 +20,9 @@
 }
 
 .backgroundOpacity {
+    border-radius: 27px;
     background-color: rgba(255, 255, 255, 0.1);
 }
-
-/* .elementStatic {
-    padding-left: 32px;
-} */
 
 .elementsDynamic {
     composes: container;
