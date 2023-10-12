@@ -81,31 +81,30 @@ function BurgerConstructor() {
       >
         {ingredientsConstructor.length > 0 ? (
           <div className={styles.container}>
-            {/* <BurgerConstructorCard> */}
-              <div className={`pl-8 pr-4`}>
-                {ingradientBun && (
-                  <ConstructorElement
-                    key={ingradientBun.uniqId}
-                    type="top"
-                    isLocked={true}
-                    text={`${ingradientBun.name} (верх)`}
-                    price={ingradientBun.price}
-                    thumbnail={ingradientBun.image}
-                  />
-                )}
-              </div>
-            {/* </BurgerConstructorCard> */}
+              {ingradientBun && (
+                <div className={`pl-8 pr-4`}>
+                <ConstructorElement
+                  key={ingradientBun.uniqId}
+                  type="top"
+                  isLocked={true}
+                  text={`${ingradientBun.name} (верх)`}
+                  price={ingradientBun.price}
+                  thumbnail={ingradientBun.image}
+                />
+            </div>
+              )}
 
             <div className={styles.elementsDynamic}>
               {ingredientsConstructor.map((item, index) => {
                 if (item.type === "main" || item.type === "sauce") {
                   return (
-                    <BurgerConstructorCard index={index}>
-                      <div className={styles.elementDynamic} key={item.uniqId}>
+                    <BurgerConstructorCard index={index} key={item.uniqId}>
+                      <div className={styles.elementDynamic}>
                         <button className={`mr-2 ${styles.buttonList}`}>
                           <DragIcon type="primary" />
                         </button>
                         <ConstructorElement
+                          key={item.uniqId}
                           text={item.name}
                           price={item.price}
                           thumbnail={item.image}
@@ -118,20 +117,18 @@ function BurgerConstructor() {
               })}
             </div>
 
-            {/* <BurgerConstructorCard> */}
-              <div className={`pl-8 pr-4`}>
-                {ingradientBun && (
-                  <ConstructorElement
-                    key={ingradientBun.uniqId}
-                    type="bottom"
-                    isLocked={true}
-                    text={`${ingradientBun.name} (низ)`}
-                    price={ingradientBun.price}
-                    thumbnail={ingradientBun.image}
-                  />
-                )}
-              </div>
-            {/* </BurgerConstructorCard> */}
+              {ingradientBun && (
+            <div className={`pl-8 pr-4`}>
+                <ConstructorElement
+                  key={ingradientBun.uniqId}
+                  type="bottom"
+                  isLocked={true}
+                  text={`${ingradientBun.name} (низ)`}
+                  price={ingradientBun.price}
+                  thumbnail={ingradientBun.image}
+                />
+            </div>
+              )}
           </div>
         ) : (
           <p className={`mt-10 text text_type_main-medium`}>

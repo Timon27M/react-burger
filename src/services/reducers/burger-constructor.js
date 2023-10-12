@@ -15,6 +15,7 @@ const burgerConstructorReducer = (state = initialState, action) => {
       console.log([
         ...state.constructorIngredients,
         action.payload,
+        state.quantity
       ])
       return {
         ...state,

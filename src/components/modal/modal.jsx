@@ -51,7 +51,6 @@ function Modal({ children }) {
 }
 
 Modal.propTypes = {
-  ingradientCloseClick: PropTypes.func.isRequired,
   children: PropTypes.element.isRequired,
 };
 

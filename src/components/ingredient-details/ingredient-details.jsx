@@ -1,5 +1,5 @@
 import styles from './ingredient-details.module.css';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import {useSelector} from 'react-redux';
 import { getSelectedIngradient } from '../../services/selectors';
 
@@ -29,10 +29,6 @@ function IngredientDetails() {
             </div>
         </div>
     )
-}
-
-IngredientDetails.propTypes = {
-    selectedIngredient: PropTypes.object.isRequired
 }
 
 export default IngredientDetails;

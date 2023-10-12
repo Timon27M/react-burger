@@ -1,56 +1,18 @@
 import styles from "./burger-ingredients.module.css";
-import PropTypes from "prop-types";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-scroll";
-import { useDrag } from "react-dnd/dist/hooks";
 import { useSelector, useDispatch } from "react-redux";
-import { ingradientsTypes } from "../../utils/constants";
-import { getBurgerConstructorIngradients } from "../../services/selectors";
 import { addIngredientPopup } from "../../services/actions/ingradient-details";
-import {
-  addIngredient,
-  updateTotalPrice,
-  deleteIngredient,
-} from "../../services/actions/burger-constructor";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
-// import { ADD_INGREDIENT } from "../../services/actions/burgerConstructor";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("Булки");
   const dispatch = useDispatch();
-  const ingredientsConstructor = useSelector(getBurgerConstructorIngradients);
 
   const openIngradientPopup = (ingradient) => {
     dispatch(addIngredientPopup(ingradient));
   };
-
-  // const [{isDrag}, dragRef] = useDrag({
-  //   type: "ingredient",
-  //   item: current,
-  //   collect: monitor => ({
-  //       isDrag: monitor.isDragging()
-  //   })})
-
-  // function DraggableIngradient(ingredientObj) {
-  //   if (ingredientObj.type === "bun") {
-  //     ingredientsConstructor.some((item) => {
-  //       if (item.type === "bun") {
-  //         dispatch(deleteIngredient(item.uniqId));
-  //       }
-  //     });
-
-  //   }
-  //   // const { id } = ingredientObj;
-  //   dispatch(addIngredient(ingredientObj));
-  //   dispatch(updateTotalPrice());
-  //   const [{isDrag}, dragRef] = useDrag({
-  //     type: "animal",
-  //     item: ingredientObj,
-  //     collect: monitor => ({
-  //         isDrag: monitor.isDragging()
-  //     })})
-  // }
 
   const ingredients = useSelector((state) => state.ingredients.ingredients);
 
@@ -162,7 +124,6 @@ function BurgerIngredients() {
                   <IngradientCard
                     key={item._id}
                     ingradientClick={openIngradientPopup}
-                    // ingradientClick={onAdd}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
