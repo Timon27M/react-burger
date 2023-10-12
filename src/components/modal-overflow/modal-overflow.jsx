@@ -1,8 +1,7 @@
 import styles from "./modal-overflow.module.css";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 
 function ModalOverflow({ children, closePopup }) {
-
   return (
     <div className={styles.popup} onClick={closePopup}>
       {children}
@@ -11,8 +10,8 @@ function ModalOverflow({ children, closePopup }) {
 }
 
 ModalOverflow.propTypes = {
-   children: PropTypes.element.isRequired,
-   closePopup: PropTypes.func.isRequired
-}
+  children: PropTypes.element.isRequired,
+  closePopup: PropTypes.func.isRequired,
+};
 
 export default ModalOverflow;

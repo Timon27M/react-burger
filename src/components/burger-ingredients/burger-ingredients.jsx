@@ -27,12 +27,12 @@ function BurgerIngredients() {
       bunRef.current.getBoundingClientRect().top -
         containerRef.current.getBoundingClientRect().top
     );
-    const sauceDistance = Math.abs(
-      sauceRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
     const mainDistance = Math.abs(
       mainRef.current.getBoundingClientRect().top -
+        containerRef.current.getBoundingClientRect().top
+    );
+    const sauceDistance = Math.abs(
+      sauceRef.current.getBoundingClientRect().top -
         containerRef.current.getBoundingClientRect().top
     );
 
@@ -147,7 +147,6 @@ function BurgerIngredients() {
                   <IngradientCard
                     key={item._id}
                     ingradientClick={openIngradientPopup}
-                    // ingradientClick={onAdd}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -171,7 +170,6 @@ function BurgerIngredients() {
                   <IngradientCard
                     key={item._id}
                     ingradientClick={openIngradientPopup}
-                    // ingradientClick={onAdd}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -186,9 +184,5 @@ function BurgerIngredients() {
     </section>
   );
 }
-
-BurgerIngredients.propTypes = {
-  // ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
-};
 
 export default BurgerIngredients;

@@ -3,12 +3,10 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useDrop } from "react-dnd/dist/hooks";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
-import PropTypes from "prop-types";
 import {
   getBurgerConstructorIngradients,
   getTotalPice,
 } from "../../services/selectors";
-// import { ingradientsTypes } from "../../utils/constants";
 import {
   deleteIngredient,
   updateTotalPrice,
@@ -81,8 +79,8 @@ function BurgerConstructor() {
       >
         {ingredientsConstructor.length > 0 ? (
           <div className={styles.container}>
-              {ingradientBun && (
-                <div className={`pl-8 pr-4`}>
+            {ingradientBun && (
+              <div className={`pl-8 pr-4`}>
                 <ConstructorElement
                   key={ingradientBun.uniqId}
                   type="top"
@@ -91,8 +89,8 @@ function BurgerConstructor() {
                   price={ingradientBun.price}
                   thumbnail={ingradientBun.image}
                 />
-            </div>
-              )}
+              </div>
+            )}
 
             <div className={styles.elementsDynamic}>
               {ingredientsConstructor.map((item, index) => {
@@ -117,8 +115,8 @@ function BurgerConstructor() {
               })}
             </div>
 
-              {ingradientBun && (
-            <div className={`pl-8 pr-4`}>
+            {ingradientBun && (
+              <div className={`pl-8 pr-4`}>
                 <ConstructorElement
                   key={ingradientBun.uniqId}
                   type="bottom"
@@ -127,8 +125,8 @@ function BurgerConstructor() {
                   price={ingradientBun.price}
                   thumbnail={ingradientBun.image}
                 />
-            </div>
-              )}
+              </div>
+            )}
           </div>
         ) : (
           <p className={`mt-10 text text_type_main-medium`}>
@@ -152,11 +150,5 @@ function BurgerConstructor() {
     </section>
   );
 }
-
-BurgerConstructor.propTypes = {
-  // count: PropTypes.number,
-  // ingredients: PropTypes.arrayOf(ingradientsTypes).isRequired,
-  // clickOrderButton: PropTypes.func.isRequired
-};
 
 export default BurgerConstructor;

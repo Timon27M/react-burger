@@ -14,8 +14,6 @@ function BurgerConstructorCard({ children, index }) {
             isHover: monitor.isOver(),
         }),
         drop(item) {
-            console.log(item.index)
-            console.log(index)
             const dragIndex = item.index
             const hoverIndex = index
             if ( dragIndex === hoverIndex ) {

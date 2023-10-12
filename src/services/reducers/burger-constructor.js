@@ -12,11 +12,6 @@ const initialState = {
 const burgerConstructorReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
-      console.log([
-        ...state.constructorIngredients,
-        action.payload,
-        state.quantity
-      ])
       return {
         ...state,
         constructorIngredients: [
@@ -52,7 +47,7 @@ const burgerConstructorReducer = (state = initialState, action) => {
       const newConstructorIngredients = [
         ...state.constructorIngredients,
       ]
-      const item = newConstructorIngredients[action.dragIndex]
+      const dragIngradient = newConstructorIngredients[action.dragIndex]
       newConstructorIngredients.splice(
         action.dragIndex,
         1
@@ -60,9 +55,8 @@ const burgerConstructorReducer = (state = initialState, action) => {
       newConstructorIngredients.splice(
         action.hoverIndex,
         0,
-        item
+        dragIngradient
       )
-      console.log(newConstructorIngredients)
       
       return {
         ...state,
