@@ -4,7 +4,7 @@ import Main from '../main/main';
 
 function App() {
   return (
-    <div className={styles.app} style={{ display: 'flex' }}>
+    <div className={styles.app}>
       <Main />
     </div>
   );
