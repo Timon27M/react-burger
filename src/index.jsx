@@ -8,7 +8,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./services/reducers/root-reducer";
 // import store from "./services/store/store";
 import "./index.css";
-import App from "./components/app/App";
+import App from "./components/app/app";
 import reportWebVitals from "./reportWebVitals";
 
 const composeEnhancers =
