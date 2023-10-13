@@ -28,6 +28,8 @@ function BurgerConstructor() {
 
   const ingredientsConstructor = useSelector(getBurgerConstructorIngradients);
 
+  const classButton = ingredientsConstructor.length < 1 ? styles.buttonDisabled : ''
+
   useEffect(() => {
     ingredientsConstructor.map((item) => {
       if (item.type === "bun") {
@@ -141,6 +143,7 @@ function BurgerConstructor() {
             htmlType="button"
             type="primary"
             size="large"
+            extraClass={classButton}
             onClick={clickOrderButton}
           >
             Оформить заказ

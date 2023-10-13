@@ -3,6 +3,7 @@ import { useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { useDispatch } from 'react-redux';
 import { UPDATE_SORT_INGREDIENTS } from '../../services/actions/burger-constructor';
+import PropTypes from "prop-types";
 
 function BurgerConstructorCard({ children, index }) {
     const dispatch = useDispatch()
@@ -16,6 +17,7 @@ function BurgerConstructorCard({ children, index }) {
         drop(item) {
             const dragIndex = item.index
             const hoverIndex = index
+            
             if ( dragIndex === hoverIndex ) {
                 return
             }
@@ -53,5 +55,10 @@ function BurgerConstructorCard({ children, index }) {
         </div>
     )
 }
+
+BurgerConstructorCard.propTypes = {
+    children: PropTypes.element.isRequired,
+    index: PropTypes.number.isRequired,
+  };
 
 export default BurgerConstructorCard;

@@ -15,9 +15,15 @@ import ingredientsApi from "../../utils/ingredientsApi";
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import { closeIngredientPopup } from "../../services/actions/ingradient-details";
+import { closeOrderPopup } from "../../services/actions/order";
 
 function Main() {
   const dispatch = useDispatch();
+  const closePopup = () => {
+    dispatch(closeIngredientPopup());
+    dispatch(closeOrderPopup());
+  };
 
   useEffect(() => {
     dispatch(getIngradients(ingredientsApi));
@@ -27,7 +33,6 @@ function Main() {
   const popupOrderIsOpened = useSelector(getIsOpenedPopupOrder);
 
   return (
-    <>
       <DndProvider backend={HTML5Backend}>
         <AppHeader />
         <div className={styles.container}>
@@ -35,17 +40,16 @@ function Main() {
           <BurgerConstructor />
         </div>
         {popupOrderIsOpened && (
-          <Modal>
+          <Modal closePopup={closePopup}>
             <OrderDetails />
           </Modal>
         )}
         {popupIngredientIsOpened && (
-          <Modal>
+          <Modal closePopup={closePopup}>
             <IngredientDetails />
           </Modal>
         )}
       </DndProvider>
-    </>
   );
 }
 
