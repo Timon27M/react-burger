@@ -34,7 +34,7 @@ function Main() {
 
   return (
       <DndProvider backend={HTML5Backend}>
-        <AppHeader />
+        {/* <AppHeader /> */}
         <div className={styles.container}>
           <BurgerIngredients />
           <BurgerConstructor />
