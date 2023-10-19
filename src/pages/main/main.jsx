@@ -8,13 +8,13 @@ import {
   getIsOpenedPopupIngradient,
   getIsOpenedPopupOrder,
 } from "../../services/selectors";
-import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burger-ingredients/burger-ingredients";
-import BurgerConstructor from "../burger-constructor/burger-constructor";
+import AppHeader from "../../components/app-header/app-header";
+import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import ingredientsApi from "../../utils/ingredientsApi";
-import OrderDetails from "../order-details/order-details";
-import Modal from "../modal/modal";
-import IngredientDetails from "../ingredient-details/ingredient-details";
+import OrderDetails from "../../components/order-details/order-details";
+import Modal from "../../components/modal/modal";
+import IngredientDetails from "../../components/ingredient-details/ingredient-details";
 import { closeIngredientPopup } from "../../services/actions/ingradient-details";
 import { closeOrderPopup } from "../../services/actions/order";
 
@@ -33,23 +33,23 @@ function Main() {
   const popupOrderIsOpened = useSelector(getIsOpenedPopupOrder);
 
   return (
-      <DndProvider backend={HTML5Backend}>
-        {/* <AppHeader /> */}
-        <div className={styles.container}>
-          <BurgerIngredients />
-          <BurgerConstructor />
-        </div>
-        {popupOrderIsOpened && (
-          <Modal closePopup={closePopup}>
-            <OrderDetails />
-          </Modal>
-        )}
-        {popupIngredientIsOpened && (
-          <Modal closePopup={closePopup}>
-            <IngredientDetails />
-          </Modal>
-        )}
-      </DndProvider>
+    <DndProvider backend={HTML5Backend}>
+      {/* <AppHeader /> */}
+      <div className={styles.container}>
+        <BurgerIngredients />
+        <BurgerConstructor />
+      </div>
+      {popupOrderIsOpened && (
+        <Modal closePopup={closePopup}>
+          <OrderDetails />
+        </Modal>
+      )}
+      {popupIngredientIsOpened && (
+        <Modal closePopup={closePopup}>
+          <IngredientDetails />
+        </Modal>
+      )}
+    </DndProvider>
   );
 }
 
