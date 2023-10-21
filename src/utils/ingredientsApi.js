@@ -28,6 +28,7 @@ class IngredientsApi {
         })
         .then(this._checkStatus)
     }
+    
 }
 
 const ingredientsApi = new IngredientsApi({

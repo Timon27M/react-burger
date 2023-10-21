@@ -1,7 +1,7 @@
 import {
   OPEN_INGREDIENT_POPUP,
   CLOSE_INGREDIENT_POPUP,
-} from "../actions/ingradient-details";
+} from "../actions/ingredient-details";
 const initialState = {
   ingredient: {},
   isPopupOpened: false,

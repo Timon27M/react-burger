@@ -8,6 +8,8 @@ import ForgotPassword from "../../pages/forgot-password/forgot-password";
 import ResetPassword from "../../pages/reset-password/reset-password";
 import Profile from "../../pages/profile/profile";
 import ProfileInfo from "../profile-info/profile-info";
+import ProtectedRoute from "../protected-route/protected-route";
+// import OrdersHistory from "./orders-history/orders-history";
 
 function App() {
   return (
@@ -19,9 +21,9 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/reset-password" element={<ResetPassword />} />
-        <Route path="/profile" element={<Profile />}>
-          <Route path="" element={<ProfileInfo/>} />
-          <Route path="orders" />
+        <Route path="/profile" element={<ProtectedRoute element={Profile} />}>
+          <Route path="" element={<ProtectedRoute element={ProfileInfo} />} />
+          {/* <Route path="orders" /> */}
         </Route>
       </Routes>
     </div>

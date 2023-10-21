@@ -2,7 +2,7 @@ import {
   GET_INGRADIENTS_FAILED,
   GET_INGRADIENTS_SUCCESS,
   GET_INGRADIENTS_REQUEST,
-} from "../actions/ingradients";
+} from "../actions/ingredients";
 const initialState = {
   ingredients: [],
   isLoading: false,

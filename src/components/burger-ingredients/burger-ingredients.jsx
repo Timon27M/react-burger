@@ -2,7 +2,7 @@ import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-scroll";
 import { useSelector, useDispatch } from "react-redux";
-import { addIngredientPopup } from "../../services/actions/ingradient-details";
+import { addIngredientPopup } from "../../services/actions/ingredient-details";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
 

@@ -20,3 +20,7 @@ export const getNumberOrder = (state) => {
 export const getIsOpenedPopupOrder = (state) => {
     return state.order.isOpenOrderPopup
 }
+
+export const getIsLoggedIn = (state) => {
+    return state.currentUser.isLoggedIn
+}

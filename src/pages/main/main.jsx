@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import { getIngradients } from "../../services/actions/ingradients";
+import { getIngradients } from "../../services/actions/ingredients";
 import {
   getIsOpenedPopupIngradient,
   getIsOpenedPopupOrder,
@@ -15,7 +15,7 @@ import ingredientsApi from "../../utils/ingredientsApi";
 import OrderDetails from "../../components/order-details/order-details";
 import Modal from "../../components/modal/modal";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
-import { closeIngredientPopup } from "../../services/actions/ingradient-details";
+import { closeIngredientPopup } from "../../services/actions/ingredient-details";
 import { closeOrderPopup } from "../../services/actions/order";
 
 function Main() {
