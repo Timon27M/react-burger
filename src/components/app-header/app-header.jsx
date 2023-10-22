@@ -13,7 +13,7 @@ function AppHeader() {
             <div className={styles.logo}>
               <Logo />
             </div>
-            <Link to={'/profile'} className={styles.link}><ProfileIcon type="secondary" /><p className='text text_type_main-default text_color_inactive p-2'>Личный кабинет</p></Link>
+            <Link to={'/profile/'} className={styles.link}><ProfileIcon type="secondary" /><p className='text text_type_main-default text_color_inactive p-2'>Личный кабинет</p></Link>
         </header>
     );
 }

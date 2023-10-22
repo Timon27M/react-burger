@@ -23,10 +23,14 @@
 
 .link {
     text-decoration: none;
-    color: #F2F2F3;
+    color: #8585AD;
     /* min-width: 320px; */
     width: 100%;
     min-height: 64px;
+}
+
+.linkActive {
+    color: #F2F2F3;
 }
 
 .text {

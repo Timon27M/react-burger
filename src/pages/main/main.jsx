@@ -8,7 +8,6 @@ import {
   getIsOpenedPopupIngradient,
   getIsOpenedPopupOrder,
 } from "../../services/selectors";
-import AppHeader from "../../components/app-header/app-header";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import ingredientsApi from "../../utils/ingredientsApi";
@@ -20,6 +19,7 @@ import { closeOrderPopup } from "../../services/actions/order";
 
 function Main() {
   const dispatch = useDispatch();
+
   const closePopup = () => {
     dispatch(closeIngredientPopup());
     dispatch(closeOrderPopup());

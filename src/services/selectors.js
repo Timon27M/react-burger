@@ -24,3 +24,7 @@ export const getIsOpenedPopupOrder = (state) => {
 export const getIsLoggedIn = (state) => {
     return state.currentUser.isLoggedIn
 }
+
+export const getCurrentUser = (state) => {
+    return state.currentUser.currentUser
+}

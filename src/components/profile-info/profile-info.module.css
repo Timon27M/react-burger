@@ -1,3 +1,7 @@
-.profileInfo {
-    
+.buttons {
+    text-align: left;
+    display: none;
+}
+.active {
+    display: block;
 }

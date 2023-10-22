@@ -42,8 +42,10 @@ class UserApi {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        token: getCookie("refreshToken"),
       },
+      body: JSON.stringify({
+        "token": getCookie("refreshToken"),
+      })
     }).then(this._checkStatus);
   }
 
@@ -54,13 +56,13 @@ class UserApi {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        'token': getCookie("refreshToken")
+        'token': getCookie('refreshToken')
       })
     }).then(this._checkStatus);
   }
 
   getUser() {
-    return fetch(this._baseUrl + "user", {
+    return fetch(this._baseUrl + "/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -70,11 +72,11 @@ class UserApi {
   }
 
   updateUser(name, email) {
-    return fetch(this._baseUrl + "user", {
+    return fetch(this._baseUrl + "/user", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${getCookie("accessToken")}`,
+        Authorization: `Bearer ${getCookie('accessToken')}`,
       },
       body: JSON.stringify({
         name: name,
@@ -82,6 +84,7 @@ class UserApi {
       })
     }).then(this._checkStatus);
   }
+
 }
 
 const userApi = new UserApi({
