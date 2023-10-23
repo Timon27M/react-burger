@@ -28,3 +28,7 @@ export const getIsLoggedIn = (state) => {
 export const getCurrentUser = (state) => {
     return state.currentUser.currentUser
 }
+
+export const getIngredients = (state) => {
+    return state.ingredients.ingredients
+}

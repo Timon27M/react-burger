@@ -4,14 +4,19 @@ import { Link } from "react-scroll";
 import { useSelector, useDispatch } from "react-redux";
 import { addIngredientPopup } from "../../services/actions/ingredient-details";
 import { useState, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import IngradientCard from "../ingradient-card/ingradient-card";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("Булки");
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const openIngradientPopup = (ingradient) => {
-    dispatch(addIngredientPopup(ingradient));
+    dispatch(addIngredientPopup());
+    // console.log(ingradient)
+    navigate(`/ingredient/${ingradient._id}`)
+
   };
 
   const ingredients = useSelector((state) => state.ingredients.ingredients);

@@ -1,9 +1,25 @@
 import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
-import { getSelectedIngradient } from "../../services/selectors";
+import { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
+import { getSelectedIngradient, getIngredients } from "../../services/selectors";
 
 function IngredientDetails() {
-  const selectedIngredient = useSelector(getSelectedIngradient);
+  const [selectedIngredient, setSelectedIngredient] = useState({});
+  const ingredients = useSelector(getIngredients)
+
+  const { id } = useParams();
+
+  useEffect(() => {
+    const ingredient = ingredients.find((ingredient) => {
+      return ingredient._id === id
+    })
+    // console.log(ingredients)
+    console.log(ingredient)
+
+    setSelectedIngredient(ingredient);
+  })
+
   return (
     <>
       <h2 className="mt-3 text text_type_main-large">Детали ингредиента</h2>

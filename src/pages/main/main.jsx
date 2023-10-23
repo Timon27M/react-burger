@@ -14,16 +14,9 @@ import ingredientsApi from "../../utils/ingredientsApi";
 import OrderDetails from "../../components/order-details/order-details";
 import Modal from "../../components/modal/modal";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
-import { closeIngredientPopup } from "../../services/actions/ingredient-details";
-import { closeOrderPopup } from "../../services/actions/order";
 
-function Main() {
+function Main({ closePopup }) {
   const dispatch = useDispatch();
-
-  const closePopup = () => {
-    dispatch(closeIngredientPopup());
-    dispatch(closeOrderPopup());
-  };
 
   useEffect(() => {
     dispatch(getIngradients(ingredientsApi));
