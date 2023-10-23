@@ -31,7 +31,6 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/login" element={<ProtectedRoute element={Login} auth/>} />
-        {/* <Route path="/login" element={<Login />} /> */}
         <Route path="/register" element={<ProtectedRoute element={Register} auth/>} />
         <Route path="/forgot-password" element={<ProtectedRoute element={ForgotPassword} auth/>} />
         <Route path="/reset-password" element={<ProtectedRoute element={ResetPassword} auth/>} />

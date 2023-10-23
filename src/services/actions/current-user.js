@@ -1,6 +1,7 @@
 import userApi from "../../utils/userApi";
 import { deleteCookie, getCookie, setCookie } from "../../utils/cookie";
 import { useNavigate } from "react-router-dom";
+import { getUserRequest } from "../../utils/functions";
 
 export const GET_USER_REQUEST = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
@@ -31,7 +32,6 @@ export const loginUser =
               user: res.user,
             },
           });
-          console.log(res)
           setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
           setCookie("refreshToken", res.refreshToken);
           navigate("/profile", { replace: true });
@@ -68,10 +68,10 @@ export const registerUser =
       });
   };
 
-export const logoutUser = (refreshToken) => (dispatch) => {
+export const logoutUser = () => (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   userApi
-    .logoutUser(refreshToken)
+    .logoutUser()
     .then((res) => {
       dispatch({ type: DELETE_USER });
       deleteCookie("accessToken");
@@ -103,11 +103,7 @@ export const updateUser = (data, accessToken) => (dispatch) => {
     });
 };
 
-
-export const updateToken = () => (dispatch) => {
-  console.log(getCookie('accessToken'))
-  console.log(getCookie('refreshToken'))
-  // dispatch({ type: GET_USER_REQUEST });
+const updateToken = () => (dispatch) => {
   userApi
     .updateToken()
     .then((res) => {
@@ -116,23 +112,43 @@ export const updateToken = () => (dispatch) => {
         setCookie("refreshToken", res.refreshToken);
       }
     })
-    .cacth((err) => {
+    .then(() => {
+      getUserRequest(dispatch, userApi, GET_USER_REQUEST, GET_USER_SUCCESS);
+    })
+    .catch((err) => {
       console.log(err);
     });
 };
 
 export const getUser = () => (dispatch) => {
-  dispatch({ type: GET_USER_REQUEST });
+  getUserRequest(
+    dispatch,
+    userApi,
+    GET_USER_REQUEST,
+    GET_USER_SUCCESS,
+    updateToken
+  );
+};
+
+export const forgotPassword = (email, func) => {
   userApi
-    .getUser()
+    .forgotPassword(email)
     .then((res) => {
       if (res && res.success) {
-        dispatch({
-          type: GET_USER_SUCCESS,
-          payload: {
-            user: res.user,
-          },
-        });
+        func();
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+};
+
+export const resetPassword = (password, token, func) => {
+  userApi
+    .resetPassword(password, token)
+    .then((res) => {
+      if (res && res.success) {
+        func();
       }
     })
     .catch((err) => {

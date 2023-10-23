@@ -15,7 +15,7 @@ class UserApi {
   }
 
   createUser(name, email, password) {
-    return fetch(this._baseUrl + "/register", {
+    return fetch(this._baseUrl + "/auth/register", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -27,7 +27,7 @@ class UserApi {
   }
 
   loginUser(email, password) {
-    return fetch(this._baseUrl + "/login", {
+    return fetch(this._baseUrl + "/auth/login", {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -38,19 +38,19 @@ class UserApi {
   }
 
   updateToken() {
-    return fetch(this._baseUrl + "/token", {
+    return fetch(this._baseUrl + "/auth/token", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        "token": getCookie("refreshToken"),
+        'token': getCookie("refreshToken"),
       })
     }).then(this._checkStatus);
   }
 
   logoutUser() {
-    return fetch(this._baseUrl + "/logout", {
+    return fetch(this._baseUrl + "/auth/logout", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,7 +62,7 @@ class UserApi {
   }
 
   getUser() {
-    return fetch(this._baseUrl + "/user", {
+    return fetch(this._baseUrl + "/auth/user", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -72,7 +72,7 @@ class UserApi {
   }
 
   updateUser(name, email) {
-    return fetch(this._baseUrl + "/user", {
+    return fetch(this._baseUrl + "/auth/user", {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -85,10 +85,31 @@ class UserApi {
     }).then(this._checkStatus);
   }
 
+  forgotPassword(email) {
+    return fetch(this._baseUrl + "/password-reset", {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        email: email
+      })
+    }).then(this._checkStatus)
+  }
+ 
+  resetPassword(password, token) {
+    return fetch(this._baseUrl + "/password-reset/reset", {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({
+        "password": password,
+        "token": token
+      })
+    }).then(this._checkStatus)
+  }
+
 }
 
 const userApi = new UserApi({
-  baseUrl: "https://norma.nomoreparties.space/api/auth",
+  baseUrl: "https://norma.nomoreparties.space/api",
   headers: {
     "Content-Type": "application/json",
   },

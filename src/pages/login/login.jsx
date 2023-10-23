@@ -16,19 +16,24 @@ function Login() {
   const navigate = useNavigate();
 
   const { inputValues, handleChange } = useForm({
-    email: '',
-    password: ''
-  })
+    email: "",
+    password: "",
+  });
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    dispatch(loginUser(inputValues, navigate))
+    dispatch(loginUser(inputValues, navigate));
   }
 
   return (
     <div>
-      <ComponentAuth handleSubmit={handleSubmit} title="Вход" textButton="Войти" formName="formLogin">
+      <ComponentAuth
+        handleSubmit={handleSubmit}
+        title="Вход"
+        textButton="Войти"
+        formName="formLogin"
+      >
         <EmailInput
           placeholder={"E-mail"}
           name="email"
