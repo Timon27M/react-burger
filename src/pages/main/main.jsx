@@ -37,11 +37,11 @@ function Main({ closePopup }) {
           <OrderDetails />
         </Modal>
       )}
-      {popupIngredientIsOpened && (
+      {/* {popupIngredientIsOpened && (
         <Modal closePopup={closePopup}>
           <IngredientDetails />
-        </Modal>
-      )}
+        </Modal> */}
+      {/* )} */}
     </DndProvider>
   );
 }

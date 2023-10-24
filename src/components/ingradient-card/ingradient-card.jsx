@@ -6,6 +6,7 @@ import {
   CurrencyIcon,
   Counter,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Link, useLocation } from "react-router-dom";
 import { getBurgerConstructorIngradients } from "../../services/selectors";
 import { useMemo } from "react";
 
@@ -13,6 +14,8 @@ function IngradientCard({ image, price, name, ingradientClick, ingradient }) {
   function handleIngradient() {
     ingradientClick(ingradient);
   }
+
+  const location = useLocation()
 
   const constructorIngradients = useSelector(getBurgerConstructorIngradients);
 
@@ -35,14 +38,14 @@ function IngradientCard({ image, price, name, ingradientClick, ingradient }) {
   });
 
   return (
-    <div className={styles.container} onClick={handleIngradient} ref={dragRef}>
+    <Link to={`/ingredient/${ingradient._id}`} state={{background: location}} className={styles.container} onClick={handleIngradient} ref={dragRef}>
       <img className={styles.image} src={image} alt="картинка" />
       <p className={`text text_type_digits-default m-2 ${styles.price}`}>
         {price} <CurrencyIcon type="primary" />
       </p>
       <p className="m-0 text text_type_main-default">{name}</p>
       {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
-    </div>
+    </Link>
   );
 }
 

@@ -1,7 +1,7 @@
 import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from 'react';
 import Login from "../../pages/login/login";
@@ -19,15 +19,23 @@ import { getIsOpenedPopupIngradient } from "../../services/selectors";
 import { closeIngredientPopup } from "../../services/actions/ingredient-details";
 import { closeOrderPopup } from "../../services/actions/order";
 import IngredientPopup from "../../pages/ingredient-popup/ingredient-popup";
+import Modal from "../modal/modal";
 
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation()
+
+  useEffect(() => {
+    console.log(location)
+  }, [])
 
   const closePopup = () => {
     dispatch(closeIngredientPopup());
     dispatch(closeOrderPopup());
   };
+
+  const background = location.state && location.state.background
 
   useEffect(() => {
       const token = getCookie('accessToken')
@@ -39,7 +47,7 @@ function App() {
   return (
     <div className={styles.app}>
       <AppHeader />
-      <Routes>
+      <Routes location={background || location}>
         <Route path="/" element={<Main closePopup={closePopup}/>} />
         <Route path="/login" element={<ProtectedRoute element={Login} auth/>} />
         <Route path="/register" element={<ProtectedRoute element={Register} auth/>} />
@@ -49,10 +57,10 @@ function App() {
           <Route path="" element={<ProtectedRoute element={ProfileInfo} />} />
           <Route path="orders" />
         </Route>
-        <Route path="/ingredient/:id" element={<IngredientPopup closePopup={closePopup}/>} />
+        {/* <Route path="/ingredient/:id" element={<Modal closePopup={closePopup}><IngredientDetails /></Modal>} /> */}
       </Routes>
+      <Routes><Route path="/ingredient/:id" element={<Modal closePopup={closePopup}><IngredientDetails /></Modal>} /></Routes>
     </div>
   );
 }
-
 export default App;

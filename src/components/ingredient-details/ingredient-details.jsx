@@ -1,24 +1,34 @@
 import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
-import { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
-import { getSelectedIngradient, getIngredients } from "../../services/selectors";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import {
+  getSelectedIngradient,
+  getIngredients,
+} from "../../services/selectors";
 
 function IngredientDetails() {
   const [selectedIngredient, setSelectedIngredient] = useState({});
-  const ingredients = useSelector(getIngredients)
+  const ingredients = useSelector(getIngredients);
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
+  const ingredient = ingredients.find((ingredient) => {
+    return ingredient._id === id;
+  });
   useEffect(() => {
-    const ingredient = ingredients.find((ingredient) => {
-      return ingredient._id === id
-    })
     // console.log(ingredients)
-    console.log(ingredient)
+    console.log(ingredient);
+
+    if (!ingredient) {
+      navigate("/");
+      console.log(ingredient);
+      setSelectedIngredient({});
+    }
 
     setSelectedIngredient(ingredient);
-  })
+  }, [ingredient]);
 
   return (
     <>
