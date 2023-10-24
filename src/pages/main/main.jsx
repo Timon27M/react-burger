@@ -18,9 +18,9 @@ import IngredientDetails from "../../components/ingredient-details/ingredient-de
 function Main({ closePopup }) {
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(getIngradients(ingredientsApi));
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getIngradients(ingredientsApi));
+  // }, [dispatch]);
 
   const popupIngredientIsOpened = useSelector(getIsOpenedPopupIngradient);
   const popupOrderIsOpened = useSelector(getIsOpenedPopupOrder);

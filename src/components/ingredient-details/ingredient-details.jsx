@@ -1,36 +1,31 @@
 import styles from "./ingredient-details.module.css";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
-  getSelectedIngradient,
   getIngredients,
 } from "../../services/selectors";
 
 function IngredientDetails() {
   const [selectedIngredient, setSelectedIngredient] = useState({});
   const ingredients = useSelector(getIngredients);
-  const navigate = useNavigate();
 
   const { id } = useParams();
-
-  const ingredient = ingredients.find((ingredient) => {
-    return ingredient._id === id;
-  });
+  
   useEffect(() => {
-    // console.log(ingredients)
+    const ingredient = ingredients.find((ingredient) => {
+      return ingredient._id === id;
+    });
+    console.log(ingredients);
     console.log(ingredient);
+    console.log(id);
 
-    if (!ingredient) {
-      navigate("/");
-      console.log(ingredient);
-      setSelectedIngredient({});
-    }
-
-    setSelectedIngredient(ingredient);
-  }, [ingredient]);
+    setSelectedIngredient(ingredient)
+  }, [ingredients]);
 
   return (
+    <>
+    {!ingredients ? ('') : 
     <>
       <h2 className="mt-3 text text_type_main-large">Детали ингредиента</h2>
       <div className={styles.content}>
@@ -77,6 +72,8 @@ function IngredientDetails() {
           </div>
         </div>
       </div>
+      </>
+  }
     </>
   );
 }

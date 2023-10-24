@@ -1,18 +1,12 @@
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-scroll";
-import { useSelector, useDispatch } from "react-redux";
-import { addIngredientPopup } from "../../services/actions/ingredient-details";
+import { useSelector } from "react-redux";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
 
 function BurgerIngredients() {
   const [current, setCurrent] = useState("Булки");
-  const dispatch = useDispatch();
-
-  const openIngradientPopup = (ingradient) => {
-    dispatch(addIngredientPopup());
-  };
 
   const ingredients = useSelector((state) => state.ingredients.ingredients);
 
@@ -123,7 +117,6 @@ function BurgerIngredients() {
                 return (
                   <IngradientCard
                     key={item._id}
-                    ingradientClick={openIngradientPopup}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -146,7 +139,6 @@ function BurgerIngredients() {
                 return (
                   <IngradientCard
                     key={item._id}
-                    ingradientClick={openIngradientPopup}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
@@ -169,7 +161,6 @@ function BurgerIngredients() {
                 return (
                   <IngradientCard
                     key={item._id}
-                    ingradientClick={openIngradientPopup}
                     ingradient={item}
                     image={item.image}
                     price={item.price}
