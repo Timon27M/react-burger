@@ -1,6 +1,5 @@
 import styles from "./login.module.css";
 import ComponentAuth from "../../components/component-auth/component-auth";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../services/actions/current-user";
 import { useForm } from "../../hooks/hooks";

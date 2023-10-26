@@ -6,7 +6,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(-1, {replace: true})
+    navigate(-1, { replace: true });
   }
 
   return (
@@ -16,15 +16,15 @@ function NotFound() {
           404
         </p>
         <p className="text text_type_main-large">Страницы не существует</p>
-          <Button
-            htmlType="button"
-            type="primary"
-            size="large"
-            extraClass={`mt-10 text text text_type_main-medium ${styles.button}`}
-            onClick={handleClick}
-          >
-            Назад
-          </Button>
+        <Button
+          htmlType="button"
+          type="primary"
+          size="large"
+          extraClass={`mt-10 text text text_type_main-medium ${styles.button}`}
+          onClick={handleClick}
+        >
+          Назад
+        </Button>
       </div>
     </div>
   );

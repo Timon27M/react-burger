@@ -7,7 +7,6 @@ import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 const modalRoot = document.getElementById("react-modals");
 
 function Modal({ children, closePopup }) {
-
   useEffect(() => {
     const onEscKeydown = (evt) => {
       if (evt.key === "Escape") {
@@ -42,7 +41,7 @@ function Modal({ children, closePopup }) {
 
 Modal.propTypes = {
   children: PropTypes.element.isRequired,
-  closePopup: PropTypes.func.isRequired
+  closePopup: PropTypes.func.isRequired,
 };
 
 export default Modal;

@@ -3,9 +3,7 @@ import PropTypes from "prop-types";
 import { useSelector } from "react-redux";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
-import {
-  getIsOpenedPopupOrder,
-} from "../../services/selectors";
+import { getIsOpenedPopupOrder } from "../../services/selectors";
 import BurgerIngredients from "../../components/burger-ingredients/burger-ingredients";
 import BurgerConstructor from "../../components/burger-constructor/burger-constructor";
 import OrderDetails from "../../components/order-details/order-details";
@@ -30,7 +28,7 @@ function Main({ closePopup }) {
 }
 
 Main.propTypes = {
-  closePopup: PropTypes.func.isRequired
-}
+  closePopup: PropTypes.func.isRequired,
+};
 
 export default Main;

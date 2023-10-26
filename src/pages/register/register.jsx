@@ -11,7 +11,6 @@ import ComponentAuth from "../../components/component-auth/component-auth";
 import { Link } from "react-router-dom";
 
 function Register() {
-
   const dispatch = useDispatch();
 
   const { inputValues, handleChange } = useForm({
@@ -21,10 +20,9 @@ function Register() {
   });
 
   function handleSubmit(e) {
-    e.preventDefault()
+    e.preventDefault();
 
-    console.log(inputValues)
-    dispatch(registerUser(inputValues))
+    dispatch(registerUser(inputValues));
   }
 
   return (
@@ -61,7 +59,7 @@ function Register() {
       </ComponentAuth>
       <p className="mt-20 text text_type_main-default text_color_inactive">
         Уже зарегистрированы?{" "}
-        <Link className={styles.link} type='submit' to="/login" >
+        <Link className={styles.link} type="submit" to="/login">
           Войти
         </Link>
       </p>

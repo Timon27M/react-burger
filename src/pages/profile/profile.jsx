@@ -20,19 +20,22 @@ function Profile() {
         <nav className={`${styles.navLinks} text text_type_main-medium`}>
           <NavLink
             to={"/profile/"}
-            className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ''}`}
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.linkActive : ""}`
+            }
           >
             Профиль
           </NavLink>
-          {/* to={"/profile/orders"} */}
           <NavLink
-          to={"/profile/orders"}
-            className={({ isActive }) => `${styles.link} ${isActive ? styles.linkActive : ''}`}
+            to={"/profile/orders"}
+            className={({ isActive }) =>
+              `${styles.link} ${isActive ? styles.linkActive : ""}`
+            }
           >
             История заказов
           </NavLink>
           <NavLink
-            to={'/login'}
+            to={"/login"}
             className={`${styles.link}`}
             onClick={handleClick}
           >

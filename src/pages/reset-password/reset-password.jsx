@@ -19,13 +19,13 @@ function ResetPassword() {
   });
 
   function callback() {
-    navigate('/login', {replace: true})
+    navigate("/login", { replace: true });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(resetPassword(inputValues.password, inputValues.token, callback))
+    dispatch(resetPassword(inputValues.password, inputValues.token, callback));
   }
 
   return (

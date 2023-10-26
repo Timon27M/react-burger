@@ -6,6 +6,7 @@ import BurgerConstructorCard from "../burger-constructor-card/burger-constructor
 import {
   getBurgerConstructorIngradients,
   getTotalPice,
+  getIsLoggedIn,
 } from "../../services/selectors";
 import {
   deleteIngredient,
@@ -17,6 +18,7 @@ import {
   CurrencyIcon,
   Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
+import { useNavigate } from "react-router-dom";
 import { addIngredient } from "../../services/actions/burger-constructor";
 import ingredientsApi from "../../utils/ingredientsApi";
 import { getOrder } from "../../services/actions/order";
@@ -24,11 +26,15 @@ import { getOrder } from "../../services/actions/order";
 function BurgerConstructor() {
   const [ingradientBun, setIngradientBun] = useState(null);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const totalPrice = useSelector(getTotalPice);
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   const ingredientsConstructor = useSelector(getBurgerConstructorIngradients);
 
-  const classButton = ingredientsConstructor.length < 1 ? styles.buttonDisabled : ''
+  const classButton =
+    ingredientsConstructor.length < 1 ? styles.buttonDisabled : "";
 
   useEffect(() => {
     ingredientsConstructor.map((item) => {
@@ -39,13 +45,17 @@ function BurgerConstructor() {
   }, [ingredientsConstructor]);
 
   const clickOrderButton = () => {
-    const ingradientsOrderId = [...ingredientsConstructor].map((item) => {
-      return item._id;
-    });
-    const ingradientsObj = {
-      ingredients: ingradientsOrderId,
-    };
-    dispatch(getOrder(ingredientsApi, ingradientsObj));
+    if (isLoggedIn) {
+      const ingradientsOrderId = [...ingredientsConstructor].map((item) => {
+        return item._id;
+      });
+      const ingradientsObj = {
+        ingredients: ingradientsOrderId,
+      };
+      dispatch(getOrder(ingredientsApi, ingradientsObj));
+    } else {
+      navigate("/login");
+    }
   };
 
   function onDeleteIngredient(uniqId) {

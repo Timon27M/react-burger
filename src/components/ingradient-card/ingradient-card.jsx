@@ -11,8 +11,7 @@ import { getBurgerConstructorIngradients } from "../../services/selectors";
 import { useMemo } from "react";
 
 function IngradientCard({ image, price, name, ingradient }) {
-
-  const location = useLocation()
+  const location = useLocation();
 
   const constructorIngradients = useSelector(getBurgerConstructorIngradients);
 
@@ -35,7 +34,12 @@ function IngradientCard({ image, price, name, ingradient }) {
   });
 
   return (
-    <Link to={`/ingredient/${ingradient._id}`} state={{background: location}} className={styles.container} ref={dragRef}>
+    <Link
+      to={`/ingredient/${ingradient._id}`}
+      state={{ background: location }}
+      className={styles.container}
+      ref={dragRef}
+    >
       <img className={styles.image} src={image} alt="картинка" />
       <p className={`text text_type_digits-default m-2 ${styles.price}`}>
         {price} <CurrencyIcon type="primary" />

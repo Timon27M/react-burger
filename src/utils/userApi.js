@@ -44,8 +44,8 @@ class UserApi {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        'token': getCookie("refreshToken"),
-      })
+        token: getCookie("refreshToken"),
+      }),
     }).then(this._checkStatus);
   }
 
@@ -56,8 +56,8 @@ class UserApi {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        'token': getCookie('refreshToken')
-      })
+        token: getCookie("refreshToken"),
+      }),
     }).then(this._checkStatus);
   }
 
@@ -76,36 +76,35 @@ class UserApi {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${getCookie('accessToken')}`,
+        Authorization: `Bearer ${getCookie("accessToken")}`,
       },
       body: JSON.stringify({
         name: name,
         email: email,
-      })
+      }),
     }).then(this._checkStatus);
   }
 
   forgotPassword(email) {
     return fetch(this._baseUrl + "/password-reset", {
-      method: 'POST',
+      method: "POST",
       headers: this._headers,
       body: JSON.stringify({
-        email: email
-      })
-    }).then(this._checkStatus)
-  }
- 
-  resetPassword(password, token) {
-    return fetch(this._baseUrl + "/password-reset/reset", {
-      method: 'POST',
-      headers: this._headers,
-      body: JSON.stringify({
-        "password": password,
-        "token": token
-      })
-    }).then(this._checkStatus)
+        email: email,
+      }),
+    }).then(this._checkStatus);
   }
 
+  resetPassword(password, token) {
+    return fetch(this._baseUrl + "/password-reset/reset", {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        password: password,
+        token: token,
+      }),
+    }).then(this._checkStatus);
+  }
 }
 
 const userApi = new UserApi({

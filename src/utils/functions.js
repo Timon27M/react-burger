@@ -1,8 +1,14 @@
 import { getCookie } from "./cookie";
 
-export function getUserRequest(dispatch, api, GET_USER_REQUEST, GET_USER_SUCCESS, errFunc) {
-    dispatch({ type: GET_USER_REQUEST });
-    api
+export function getUserRequest(
+  dispatch,
+  api,
+  GET_USER_REQUEST,
+  GET_USER_SUCCESS,
+  errFunc
+) {
+  dispatch({ type: GET_USER_REQUEST });
+  api
     .getUser()
     .then((res) => {
       if (res && res.success) {
@@ -15,9 +21,9 @@ export function getUserRequest(dispatch, api, GET_USER_REQUEST, GET_USER_SUCCESS
       }
     })
     .catch((err) => {
-      console.log(err)
-      if (errFunc && getCookie('refreshToken')) {
-        dispatch(errFunc())
+      console.log(err);
+      if (errFunc && getCookie("refreshToken")) {
+        dispatch(errFunc());
       }
-    })
-  }
+    });
+}

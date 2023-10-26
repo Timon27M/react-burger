@@ -41,8 +41,8 @@ function ProfileInfo() {
   function clickCancel(e) {
     e.preventDefault();
 
-    setInputValues({ ...currentUser, password: "" })
-    setDisabled(true)
+    setInputValues({ ...currentUser, password: "" });
+    setDisabled(true);
   }
 
   const buttonsActive = useMemo(() => {
