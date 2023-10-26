@@ -13,19 +13,18 @@ function IngredientDetails() {
   const { id } = useParams();
   
   useEffect(() => {
-    const ingredient = ingredients.find((ingredient) => {
-      return ingredient._id === id;
-    });
-    console.log(ingredients);
-    console.log(ingredient);
-    console.log(id);
+    if (ingredients.length !== 0) {
+      const ingredient = ingredients.find((ingredient) => {
+        return ingredient._id === id;
+      });
+      setSelectedIngredient(ingredient)
+    }
 
-    setSelectedIngredient(ingredient)
   }, [ingredients]);
 
   return (
     <>
-    {!ingredients ? ('') : 
+    {ingredients.length === 0 ? ('Загрузка') : 
     <>
       <h2 className="mt-3 text text_type_main-large">Детали ингредиента</h2>
       <div className={styles.content}>

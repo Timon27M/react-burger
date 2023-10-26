@@ -3,7 +3,7 @@ import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { useEffect } from 'react';
+import { useEffect } from "react";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
 import ForgotPassword from "../../pages/forgot-password/forgot-password";
@@ -19,7 +19,7 @@ import { closeOrderPopup } from "../../services/actions/order";
 import IngredientPopup from "../../pages/ingredient-popup/ingredient-popup";
 import { getIngradients } from "../../services/actions/ingredients";
 import ingredientsApi from "../../utils/ingredientsApi";
-
+import NotFound from "../../pages/not-found/not-found";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,37 +32,60 @@ function App() {
   };
 
   const closePopupIngredientDetails = () => {
-    navigate(-1, {replace: true})
-  }
+    navigate(-1, { replace: true });
+  };
 
-  const background = location.state && location.state.background
+  const background = location.state && location.state.background;
 
   useEffect(() => {
-      const token = getCookie('accessToken')
-      if (token) {
-        dispatch(getUser())
-      }
-      dispatch(getIngradients(ingredientsApi))
-  }, [])
+    const token = getCookie("accessToken");
+    if (token) {
+      dispatch(getUser());
+    }
+    dispatch(getIngradients(ingredientsApi));
+  }, []);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
-        <Route path="/" element={<Main closePopup={closePopupOrder}/>} />
-        <Route path="/login" element={<ProtectedRoute element={Login} auth/>} />
-        <Route path="/register" element={<ProtectedRoute element={Register} auth/>} />
-        <Route path="/forgot-password" element={<ProtectedRoute element={ForgotPassword} auth/>} />
-        <Route path="/reset-password" element={<ProtectedRoute element={ResetPassword} auth/>} />
+        <Route path="/" element={<Main closePopup={closePopupOrder} />} />
+        <Route
+          path="/login"
+          element={<ProtectedRoute element={Login} auth />}
+        />
+        <Route
+          path="/register"
+          element={<ProtectedRoute element={Register} auth />}
+        />
+        <Route
+          path="/forgot-password"
+          element={<ProtectedRoute element={ForgotPassword} auth />}
+        />
+        <Route
+          path="/reset-password"
+          element={<ProtectedRoute element={ResetPassword} auth />}
+        />
         <Route path="/profile/" element={<ProtectedRoute element={Profile} />}>
           <Route path="" element={<ProtectedRoute element={ProfileInfo} />} />
           <Route path="orders" />
         </Route>
         <Route path="/ingredient/:id" element={<IngredientDetails />} />
+        <Route
+          path="*"
+          element={<NotFound/>}
+        />
       </Routes>
-      <Routes>
-        {background && <Route path="/ingredient/:id" element={<IngredientPopup closePopup={closePopupIngredientDetails}/>} /> }
+      {background && (
+        <Routes>
+          <Route
+            path="/ingredient/:id"
+            element={
+              <IngredientPopup closePopup={closePopupIngredientDetails} />
+            }
+          />
         </Routes>
+      )}
     </div>
   );
 }

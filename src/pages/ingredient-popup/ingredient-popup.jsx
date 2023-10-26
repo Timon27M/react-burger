@@ -1,5 +1,6 @@
 import Modal from "../../components/modal/modal";
 import IngredientDetails from "../../components/ingredient-details/ingredient-details";
+import PropTypes from "prop-types";
 
 function IngredientPopup({ closePopup }) {
     return (
@@ -8,5 +9,9 @@ function IngredientPopup({ closePopup }) {
         </Modal>
     )
 }
+
+IngredientPopup.propTypes = {
+    closePopup: PropTypes.func.isRequired
+  }
 
 export default IngredientPopup
