@@ -3,7 +3,6 @@ import ComponentAuth from "../../components/component-auth/component-auth";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../services/actions/current-user";
 import { useForm } from "../../hooks/hooks";
-import { useNavigate } from "react-router-dom";
 import {
   EmailInput,
   PasswordInput,
@@ -12,7 +11,6 @@ import { Link } from "react-router-dom";
 
 function Login() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { inputValues, handleChange } = useForm({
     email: "",
@@ -22,7 +20,7 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
 
-    dispatch(loginUser(inputValues, navigate));
+    dispatch(loginUser(inputValues));
   }
 
   return (

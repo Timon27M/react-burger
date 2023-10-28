@@ -18,7 +18,7 @@ import IngredientDetails from "../ingredient-details/ingredient-details";
 import { closeOrderPopup } from "../../services/actions/order";
 import IngredientPopup from "../../pages/ingredient-popup/ingredient-popup";
 import { getIngradients } from "../../services/actions/ingredients";
-import ingredientsApi from "../../utils/ingredientsApi";
+import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
 
 function App() {
@@ -42,7 +42,7 @@ function App() {
     if (token) {
       dispatch(getUser());
     }
-    dispatch(getIngradients(ingredientsApi));
+    dispatch(getIngradients(api));
   }, []);
 
   return (

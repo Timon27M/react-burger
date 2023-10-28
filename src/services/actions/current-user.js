@@ -1,4 +1,4 @@
-import userApi from "../../utils/userApi";
+import api from "../../utils/api";
 import { deleteCookie, setCookie } from "../../utils/cookie";
 import { getUserRequest } from "../../utils/functions";
 
@@ -9,10 +9,10 @@ export const GET_USER_FAILED = "GET_USER_FAILED";
 export const DELETE_USER = "DELETE_USER";
 
 export const loginUser =
-  ({ email, password }, navigate) =>
+  ({ email, password }) =>
   (dispatch) => {
     dispatch({ type: GET_USER_REQUEST });
-    userApi
+    api
       .loginUser(email, password)
       .then((res) => {
         if (res && res.success) {
@@ -24,7 +24,6 @@ export const loginUser =
           });
           setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
           setCookie("refreshToken", res.refreshToken);
-          navigate("/profile", { replace: true });
         }
       })
       .catch((err) => {
@@ -37,7 +36,7 @@ export const registerUser =
   ({ name, email, password }) =>
   (dispatch) => {
     dispatch({ type: GET_USER_REQUEST });
-    userApi
+    api
       .createUser(name, email, password)
       .then((res) => {
         if (res && res.success) {
@@ -59,7 +58,7 @@ export const registerUser =
 
 export const logoutUser = () => (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
-  userApi
+  api
     .logoutUser()
     .then((res) => {
       dispatch({ type: DELETE_USER });
@@ -73,7 +72,7 @@ export const logoutUser = () => (dispatch) => {
 
 export const updateUser = (data, accessToken) => (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
-  userApi
+  api
     .updateUser(data.name, data.email)
     .then((res) => {
       if (res && res.success) {
@@ -92,7 +91,7 @@ export const updateUser = (data, accessToken) => (dispatch) => {
 };
 
 const updateToken = () => (dispatch) => {
-  userApi
+  api
     .updateToken()
     .then((res) => {
       if (res && res.success) {
@@ -101,7 +100,7 @@ const updateToken = () => (dispatch) => {
       }
     })
     .then(() => {
-      getUserRequest(dispatch, userApi, GET_USER_REQUEST, GET_USER_SUCCESS);
+      getUserRequest(dispatch, api, GET_USER_REQUEST, GET_USER_SUCCESS);
     })
     .catch((err) => {
       console.log(err);
@@ -111,7 +110,7 @@ const updateToken = () => (dispatch) => {
 export const getUser = () => (dispatch) => {
   getUserRequest(
     dispatch,
-    userApi,
+    api,
     GET_USER_REQUEST,
     GET_USER_SUCCESS,
     updateToken
@@ -119,7 +118,7 @@ export const getUser = () => (dispatch) => {
 };
 
 export const forgotPassword = (email, func) => () => {
-  userApi
+  api
     .forgotPassword(email)
     .then((res) => {
       if (res && res.success) {
@@ -132,7 +131,7 @@ export const forgotPassword = (email, func) => () => {
 };
 
 export const resetPassword = (password, token, func) => () => {
-  userApi
+  api
     .resetPassword(password, token)
     .then((res) => {
       if (res && res.success) {

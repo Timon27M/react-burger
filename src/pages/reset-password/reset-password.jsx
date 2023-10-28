@@ -6,12 +6,14 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/hooks";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { resetPassword } from "../../services/actions/current-user";
+import { getIsOpenResetPasswordPage } from "../../services/selectors";
 
 function ResetPassword() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const isOpenResetPasswordPage = useSelector(getIsOpenResetPasswordPage);
 
   const { inputValues, handleChange } = useForm({
     password: "",
@@ -29,7 +31,10 @@ function ResetPassword() {
   }
 
   return (
-    <div>
+    <>
+    {!isOpenResetPasswordPage ? 
+    ( <p className={`mt-30 text text_type_main-large`}>Страница недоступна</p>) : 
+    (<div>
       <ComponentAuth
         title="Восстановление пароля"
         textButton="Сохранить"
@@ -58,7 +63,9 @@ function ResetPassword() {
           Войти
         </Link>
       </p>
-    </div>
+    </div>)
+    }
+    </>
   );
 }
 

@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/hooks";
 import { forgotPassword } from "../../services/actions/current-user";
 import { useDispatch } from "react-redux";
+import { openResetPasswordPage } from "../../services/actions/reset-password";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
@@ -15,6 +16,7 @@ function ForgotPassword() {
   });
 
   function callback() {
+    dispatch(openResetPasswordPage())
     navigate("/reset-password", { replace: true });
   }
 

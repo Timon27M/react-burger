@@ -20,7 +20,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
 import { addIngredient } from "../../services/actions/burger-constructor";
-import ingredientsApi from "../../utils/ingredientsApi";
+import ingredientsApi from "../../utils/api";
 import { getOrder } from "../../services/actions/order";
 
 function BurgerConstructor() {

@@ -5,7 +5,7 @@ import {
   Logo,
   ProfileIcon,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 function AppHeader() {
@@ -42,9 +42,9 @@ function AppHeader() {
           </p>
         </NavLink>
       </div>
-      <div className={styles.logo}>
+      <Link to='/' className={styles.logo}>
         <Logo />
-      </div>
+      </Link>
       <NavLink to={"/profile/"} className={`${styles.link}`}>
         <ProfileIcon
           type={`${

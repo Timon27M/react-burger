@@ -25,16 +25,16 @@ const currentUserReducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: action.payload.user,
-        isLoading: false,
         isLoggedIn: true,
+        isLoading: false,
       };
     }
     case GET_USER_FAILED: {
       return {
         ...state,
-        isLoading: false,
         currentUser: { name: "", email: "" },
         isLoggedIn: false,
+        isLoading: false,
       };
     }
     case DELETE_USER: {
@@ -42,6 +42,7 @@ const currentUserReducer = (state = initialState, action) => {
         ...state,
         currentUser: { name: "", email: "" },
         isLoggedIn: false,
+        isLoading: false
       };
     }
     default: {

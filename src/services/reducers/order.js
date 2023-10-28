@@ -15,7 +15,7 @@ const initialState = {
 const orderReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
-      return { ...state, isLoading: true };
+      return { ...state, isLoading: true, isOpenOrderPopup: true };
     }
     case GET_ORDER_SUCCESS: {
       return {
