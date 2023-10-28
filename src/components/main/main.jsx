@@ -1,64 +1,55 @@
 import styles from "./main.module.css";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { getIngradients } from "../../services/actions/ingradients";
+import {
+  getIsOpenedPopupIngradient,
+  getIsOpenedPopupOrder,
+} from "../../services/selectors";
 import AppHeader from "../app-header/app-header";
-import BurgerIngredients from "../burgerIngredients/burgerIngredients";
-import BurgerConstructor from "../burgerConstructor/burgerConstructor";
+import BurgerIngredients from "../burger-ingredients/burger-ingredients";
+import BurgerConstructor from "../burger-constructor/burger-constructor";
 import ingredientsApi from "../../utils/ingredientsApi";
 import OrderDetails from "../order-details/order-details";
 import Modal from "../modal/modal";
 import IngredientDetails from "../ingredient-details/ingredient-details";
+import { closeIngredientPopup } from "../../services/actions/ingradient-details";
+import { closeOrderPopup } from "../../services/actions/order";
 
 function Main() {
-  const [popupOrderIsOpened, setPopupOrderIsOpened] = useState(false);
-  const [popupIngredientIsOpened, setPopupIngredientIsOpened] = useState(false);
-  const [ingredients, setIngredients] = useState([]);
-  const [selectedIngredient, setSelectedIngredient] = useState(null);
+  const dispatch = useDispatch();
+  const closePopup = () => {
+    dispatch(closeIngredientPopup());
+    dispatch(closeOrderPopup());
+  };
 
   useEffect(() => {
-    ingredientsApi.getIngradients().then((res) => {
-      setIngredients(res.data);
-    });
-  }, []);
+    dispatch(getIngradients(ingredientsApi));
+  }, [dispatch]);
 
-  function clickIngradientOpen(ingradient) {
-    setPopupIngredientIsOpened(true);
-    setSelectedIngredient(ingradient);
-  }
-
-  function clickOrderButton() {
-    setPopupOrderIsOpened(true);
-  }
-
-  function ingradientCloseClick() {
-    setPopupOrderIsOpened(false);
-    setPopupIngredientIsOpened(false);
-  }
+  const popupIngredientIsOpened = useSelector(getIsOpenedPopupIngradient);
+  const popupOrderIsOpened = useSelector(getIsOpenedPopupOrder);
 
   return (
-    <>
-      <AppHeader />
-      <div className={styles.container}>
-        <BurgerIngredients
-          clickIngradientOpen={clickIngradientOpen}
-          ingredients={ingredients}
-        />
-        <BurgerConstructor
-          count={1234}
-          ingredients={ingredients}
-          clickOrderButton={clickOrderButton}
-        />
-      </div>
-      {popupOrderIsOpened && (
-        <Modal ingradientCloseClick={ingradientCloseClick}>
-          <OrderDetails />
-        </Modal>
-      )}
-      {popupIngredientIsOpened && (
-        <Modal ingradientCloseClick={ingradientCloseClick}>
-          <IngredientDetails selectedIngredient={selectedIngredient} />
-        </Modal>
-      )}
-    </>
+      <DndProvider backend={HTML5Backend}>
+        <AppHeader />
+        <div className={styles.container}>
+          <BurgerIngredients />
+          <BurgerConstructor />
+        </div>
+        {popupOrderIsOpened && (
+          <Modal closePopup={closePopup}>
+            <OrderDetails />
+          </Modal>
+        )}
+        {popupIngredientIsOpened && (
+          <Modal closePopup={closePopup}>
+            <IngredientDetails />
+          </Modal>
+        )}
+      </DndProvider>
   );
 }
 

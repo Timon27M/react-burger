@@ -1,0 +1,5 @@
+.isActive {
+    border-radius: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}

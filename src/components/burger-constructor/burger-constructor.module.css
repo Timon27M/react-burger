@@ -5,18 +5,34 @@
 }
 
 .mainContent {
-    width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 586px;
+    box-sizing:content-box;
 }
 
 .container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     gap: 10px;
 }
 
-/* .elementStatic {
-    padding-left: 32px;
-} */
+.buttonDisabled {
+    cursor: default;
+    background:rgba(255, 255, 255, 0.098);
+}
+
+.buttonDisabled:hover {
+    box-shadow: none;
+    filter: none;
+}
+
+.backgroundOpacity {
+    border-radius: 27px;
+    background-color: rgba(255, 255, 255, 0.1);
+}
 
 .elementsDynamic {
     composes: container;
@@ -44,7 +60,8 @@
 .blockPrice {
     display: flex;
     justify-content: end;
-    align-items: center;
+    align-items: center; 
+    width: 100%;
 }
 
 .finalPrice {
