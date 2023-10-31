@@ -1,9 +1,12 @@
 import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
+  DELETE_INGREDIENTS,
   ADD_TOTALPRICE,
   UPDATE_SORT_INGREDIENTS,
 } from "../actions/burger-constructor";
+
+
 const initialState = {
   constructorIngredients: [],
   totalPrice: 0,
@@ -26,6 +29,12 @@ const burgerConstructorReducer = (state = initialState, action) => {
         constructorIngredients: state.constructorIngredients.filter(
           (item) => item.uniqId !== action.payload
         ),
+      };
+    }
+    case DELETE_INGREDIENTS: {
+      return {
+        ...state,
+        constructorIngredients: [],
       };
     }
     case ADD_TOTALPRICE: {
