@@ -1,7 +1,7 @@
 import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate, Location } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import Login from "../../pages/login/login";
@@ -22,7 +22,7 @@ import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
 
 function App() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -32,10 +32,12 @@ function App() {
   };
 
   const closePopupIngredientDetails = () => {
-    navigate(-1, { replace: true });
+    navigate(-1);
   };
 
-  const background = location.state && location.state.background;
+  const locationState = location.state as { background: Location }
+
+  const background = locationState && locationState.background;
 
   useEffect(() => {
     const token = getCookie("accessToken");

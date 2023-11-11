@@ -17,8 +17,8 @@ function Login() {
     password: "",
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
 
     dispatch(loginUser(inputValues));
   }
@@ -37,13 +37,13 @@ function Login() {
           size={"default"}
           type={"email"}
           value={inputValues.email}
-          onChange={handleChange}
+          onChange={() => handleChange}
           extraClass="mb-6"
         />
         <PasswordInput
           name="password"
           value={inputValues.password}
-          onChange={handleChange}
+          onChange={() => handleChange}
         />
       </ComponentAuth>
       <p className="mt-20 text text_type_main-default text_color_inactive">

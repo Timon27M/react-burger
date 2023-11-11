@@ -2,9 +2,14 @@ import { useSelector } from "react-redux";
 import { getIsLoggedIn, getIsLoading } from "../../services/selectors";
 import { Navigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
-import { useMemo } from "react";
+import { useMemo, FC } from "react";
 
-function ProtectedRoute({ element: Component, auth, ...props }) {
+interface IProtectedRoute {
+  element: FC;
+  auth?: boolean
+}
+
+function ProtectedRoute({ element: Component, auth }: IProtectedRoute) {
   const isLoggedIn = useSelector(getIsLoggedIn);
   const isLoading = useSelector(getIsLoading);
   const location = useLocation();
@@ -29,7 +34,7 @@ function ProtectedRoute({ element: Component, auth, ...props }) {
     return <Navigate to={from} replace state={{ from: location}}/>;
   }
   
-  return <Component {...props} />;
+  return <Component />;
 }
 
 export default ProtectedRoute;

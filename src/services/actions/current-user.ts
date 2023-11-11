@@ -1,3 +1,5 @@
+// @ts-nocheck
+import { AnyAction } from "redux";
 import api from "../../utils/api";
 import { deleteCookie, setCookie } from "../../utils/cookie";
 import { getUserRequest } from "../../utils/functions";
@@ -8,9 +10,14 @@ export const GET_USER_FAILED = "GET_USER_FAILED";
 
 export const DELETE_USER = "DELETE_USER";
 
+// interface ILoginUser {
+//   email: string;
+//   password: string;
+// }
+
 export const loginUser =
-  ({ email, password }) =>
-  (dispatch) => {
+  ({ email, password }: any): AnyAction =>
+  (dispatch: any) => {
     dispatch({ type: GET_USER_REQUEST });
     api
       .loginUser(email, password)
