@@ -11,7 +11,7 @@ import { resetPassword } from "../../services/actions/current-user";
 import { getIsOpenResetPasswordPage } from "../../services/selectors";
 
 function ResetPassword() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const navigate = useNavigate();
   const isOpenResetPasswordPage = useSelector(getIsOpenResetPasswordPage);
 
@@ -24,8 +24,8 @@ function ResetPassword() {
     navigate("/login", { replace: true });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.SyntheticEvent) {
+    evt.preventDefault();
 
     dispatch(resetPassword(inputValues.password, inputValues.token, callback));
   }

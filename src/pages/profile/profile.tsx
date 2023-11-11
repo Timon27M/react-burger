@@ -5,13 +5,13 @@ import { logoutUser } from "../../services/actions/current-user";
 import { getCookie } from "../../utils/cookie";
 
 function Profile() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
 
-  function handleClick(e) {
-    e.preventDefault();
+  function handleClick(evt: React.SyntheticEvent) {
+    evt.preventDefault();
 
     const refreshToken = getCookie("refreshToken");
-    dispatch(logoutUser(refreshToken));
+    dispatch(logoutUser());
   }
 
   return (

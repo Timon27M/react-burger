@@ -8,7 +8,7 @@ import { useDispatch } from "react-redux";
 import { openResetPasswordPage } from "../../services/actions/reset-password";
 
 function ForgotPassword() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<any>();
   const navigate = useNavigate();
 
   const { inputValues, handleChange } = useForm({
@@ -20,8 +20,8 @@ function ForgotPassword() {
     navigate("/reset-password", { replace: true });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
 
     dispatch(forgotPassword(inputValues.email, callback));
   }

@@ -40,7 +40,7 @@ export const loginUser =
   };
 
 export const registerUser =
-  ({ name, email, password }) =>
+  ({ name, email, password }: any): AnyAction =>
   (dispatch) => {
     dispatch({ type: GET_USER_REQUEST });
     api

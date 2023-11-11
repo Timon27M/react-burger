@@ -4,11 +4,6 @@ type IInputValue = {
   [name: string]: string;
 }
 
-// interface IAtributes {
-//   value: string;
-//   name: string;
-// }
-
 export function useForm(values: IInputValue) {
     const [inputValues, setInputValues] = useState(values);
 

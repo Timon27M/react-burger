@@ -19,7 +19,7 @@ function Register() {
     password: "",
   });
 
-  function handleSubmit(e) {
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     dispatch(registerUser(inputValues));

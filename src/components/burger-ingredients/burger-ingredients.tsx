@@ -4,17 +4,19 @@ import { Link } from "react-scroll";
 import { useSelector } from "react-redux";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
+import { TIngradientObj } from "../../utils/types";
+import { FC } from 'react';
 
-function BurgerIngredients() {
+const BurgerIngredients: FC = () => {
   const [current, setCurrent] = useState("Булки");
+  // @ts-ignore
+  const ingredients: Array<TIngradientObj> = useSelector((state) => state.ingredients.ingredients);
 
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const containerRef = useRef<any>(null);
 
-  const containerRef = useRef(null);
-
-  const bunRef = useRef(null);
-  const sauceRef = useRef(null);
-  const mainRef = useRef(null);
+  const bunRef = useRef<any>(null);
+  const sauceRef = useRef<any>(null);
+  const mainRef = useRef<any>(null);
 
   function handleScroll() {
     const bunDistance = Math.abs(
