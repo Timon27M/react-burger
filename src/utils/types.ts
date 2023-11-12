@@ -20,3 +20,48 @@ export type TIngradientObj = {
     readonly image_large: string;
     readonly __v: number;
   };
+
+  export type TServerResponse<T> = {
+    success: boolean;
+  } & T;
+  
+  export type TOrderObj = {
+    number: number
+  }
+  
+  export type TUserObj = {
+    email: string;
+    name: string;
+  }
+  
+  export type TIngredients = TServerResponse<TIngradientObj>
+  
+  
+  export type TOrderAdd = TServerResponse<{
+    name: string;
+    order: TOrderObj;
+    success: boolean;
+  }>
+  
+  export type TUserCreate = TServerResponse<{
+    email: string;
+    password: string;
+    name: string;
+  }>
+  
+  export type TUserLogin = TServerResponse<{
+    email: string;
+    password: string;
+  }> 
+  
+  export type TUpdateToken = TServerResponse<{
+    token: string;
+  }>
+  
+  export type TMessageResponse = TServerResponse<{
+    message: string;
+  }>
+  
+  export type TGetUser = TServerResponse<{
+    user: TUserObj;
+  }>

@@ -1,4 +1,5 @@
 import { getCookie } from "./cookie";
+import { TGetUser } from "./types";
 
 export const getUserRequest = (
   dispatch: any,
@@ -10,7 +11,7 @@ export const getUserRequest = (
   dispatch({ type: GET_USER_REQUEST });
   api
     .getUser()
-    .then((res: any) => {
+    .then((res: TGetUser) => {
       if (res && res.success) {
         dispatch({
           type: GET_USER_SUCCESS,
