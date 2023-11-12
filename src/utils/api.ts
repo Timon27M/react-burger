@@ -1,12 +1,14 @@
 import { getCookie } from "./cookie";
+import { TIngradientObj } from "./types";
 
 class Api {
-  constructor(options) {
-    this._baseUrl = options.baseUrl;
-    this._headers = options.headers;
+  private _baseUrl: string;
+
+  constructor(url: string) {
+    this._baseUrl = url;
   }
 
-  _checkStatus(res) {
+  _checkStatus(res: Response) {
     if (res.ok) {
       return res.json();
     }
@@ -17,11 +19,13 @@ class Api {
   getIngradients() {
     return fetch(this._baseUrl + "/ingredients", {
       method: "GET",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+      },
     }).then(this._checkStatus);
   }
 
-  addOrder(ingredientsObj) {
+  addOrder(ingredientsObj: Array<TIngradientObj>) {
     return fetch(this._baseUrl + "/orders", {
       method: "POST",
       headers: {
@@ -32,10 +36,12 @@ class Api {
     }).then(this._checkStatus);
   }
 
-  createUser(name, email, password) {
+  createUser(name: string, email: string, password: string) {
     return fetch(this._baseUrl + "/auth/register", {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         name: name,
         email: email,
@@ -44,10 +50,12 @@ class Api {
     }).then(this._checkStatus);
   }
 
-  loginUser(email, password) {
+  loginUser(email: string, password: string) {
     return fetch(this._baseUrl + "/auth/login", {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: email,
         password: password,
@@ -89,7 +97,7 @@ class Api {
     }).then(this._checkStatus);
   }
 
-  updateUser(name, email) {
+  updateUser(name: string, email: string) {
     return fetch(this._baseUrl + "/auth/user", {
       method: "PATCH",
       headers: {
@@ -103,20 +111,24 @@ class Api {
     }).then(this._checkStatus);
   }
 
-  forgotPassword(email) {
+  forgotPassword(email: string) {
     return fetch(this._baseUrl + "/password-reset", {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         email: email,
       }),
     }).then(this._checkStatus);
   }
 
-  resetPassword(password, token) {
+  resetPassword(password: string, token: string) {
     return fetch(this._baseUrl + "/password-reset/reset", {
       method: "POST",
-      headers: this._headers,
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify({
         password: password,
         token: token,
@@ -125,12 +137,7 @@ class Api {
   }
 }
 
-const api = new Api({
-  baseUrl: "https://norma.nomoreparties.space/api",
-  headers: {
-    "Content-Type": "application/json",
-  },
-});
+const api = new Api("https://norma.nomoreparties.space/api");
 
 export default api;
 
