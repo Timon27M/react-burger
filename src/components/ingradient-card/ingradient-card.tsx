@@ -1,5 +1,4 @@
 import styles from "./ingradient-card.module.css";
-import PropTypes from "prop-types";
 import { useDrag } from "react-dnd/dist/hooks";
 import { useSelector } from "react-redux";
 import {
@@ -8,12 +7,20 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useLocation } from "react-router-dom";
 import { getBurgerConstructorIngradients } from "../../services/selectors";
-import { useMemo } from "react";
+import { useMemo, FC } from "react";
+import { TIngradientObj } from "../../utils/types"; 
 
-function IngradientCard({ image, price, name, ingradient }) {
+interface IIngradientCard {
+  image: string;
+  price: number;
+  name: string;
+  ingradient: TIngradientObj
+}
+
+const IngradientCard: FC<IIngradientCard> = ({ image, price, name, ingradient }) => {
   const location = useLocation();
 
-  const constructorIngradients = useSelector(getBurgerConstructorIngradients);
+  const constructorIngradients: Array<TIngradientObj> = useSelector(getBurgerConstructorIngradients);
 
   const count = useMemo(() => {
     const checkedIngradient = constructorIngradients.filter((item) => {
@@ -45,17 +52,9 @@ function IngradientCard({ image, price, name, ingradient }) {
         {price} <CurrencyIcon type="primary" />
       </p>
       <p className="m-0 text text_type_main-default">{name}</p>
-      {count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
+      {count && count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
     </Link>
   );
 }
-
-IngradientCard.propTypes = {
-  image: PropTypes.string.isRequired,
-  price: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  count: PropTypes.number,
-  ingradient: PropTypes.object.isRequired,
-};
 
 export default IngradientCard;

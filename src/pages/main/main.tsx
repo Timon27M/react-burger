@@ -19,11 +19,13 @@ const Main: FC<TClosePopup> = ({ closePopup }) => {
         <BurgerIngredients />
         <BurgerConstructor />
       </div>
+      <>
       {popupOrderIsOpened && (
         <Modal closePopup={closePopup}>
           <OrderDetails />
         </Modal>
       )}
+      </>
     </DndProvider>
   );
 }

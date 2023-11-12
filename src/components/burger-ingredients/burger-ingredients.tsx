@@ -5,32 +5,36 @@ import { useSelector } from "react-redux";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
 import { TIngradientObj } from "../../utils/types";
-import { FC } from 'react';
 
-const BurgerIngredients: FC = () => {
+const BurgerIngredients = () => {
   const [current, setCurrent] = useState("Булки");
   // @ts-ignore
   const ingredients: Array<TIngradientObj> = useSelector((state) => state.ingredients.ingredients);
 
-  const containerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const bunRef = useRef<any>(null);
-  const sauceRef = useRef<any>(null);
-  const mainRef = useRef<any>(null);
+  const bunRef = useRef<HTMLHeadingElement>(null);
+  const sauceRef = useRef<HTMLHeadingElement>(null);
+  const mainRef = useRef<HTMLHeadingElement>(null);
 
   function handleScroll() {
-    const bunDistance = Math.abs(
-      bunRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
-    const mainDistance = Math.abs(
-      mainRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
-    const sauceDistance = Math.abs(
-      sauceRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
+    if (containerRef.current && bunRef.current && sauceRef.current && mainRef.current) {
+      const bunDistance = Math.abs(
+        bunRef.current.getBoundingClientRect().top -
+          containerRef.current.getBoundingClientRect().top
+      );
+   
+      const mainDistance = Math.abs(
+        mainRef.current.getBoundingClientRect().top -
+          containerRef.current.getBoundingClientRect().top
+      );
+
+      const sauceDistance = Math.abs(
+        sauceRef.current.getBoundingClientRect().top -
+          containerRef.current.getBoundingClientRect().top
+      );
+    
+  
 
     if (bunDistance < sauceDistance && bunDistance < mainDistance) {
       setCurrent("Булки");
@@ -39,6 +43,7 @@ const BurgerIngredients: FC = () => {
     } else if (mainDistance < bunDistance && mainDistance < sauceDistance) {
       setCurrent("Начинки");
     }
+  }
   }
 
   return (
@@ -108,7 +113,7 @@ const BurgerIngredients: FC = () => {
         >
           <h3
             className={`text text_type_main-medium mb-6 ${styles.titleIngradient}`}
-            name="bun"
+            id="bun"
             ref={bunRef}
           >
             Булки
@@ -130,7 +135,7 @@ const BurgerIngredients: FC = () => {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
-            name="sauce"
+            id="sauce"
             ref={sauceRef}
           >
             Соусы
@@ -152,7 +157,7 @@ const BurgerIngredients: FC = () => {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
-            name="main"
+            id="main"
             ref={mainRef}
           >
             Начинки

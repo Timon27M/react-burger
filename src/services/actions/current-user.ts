@@ -77,7 +77,7 @@ export const logoutUser = () => (dispatch) => {
     });
 };
 
-export const updateUser = (data, accessToken) => (dispatch) => {
+export const updateUser = (data): AnyAction => (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   api
     .updateUser(data.name, data.email)

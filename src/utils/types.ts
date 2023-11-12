@@ -2,6 +2,10 @@ export type TClosePopup = {
     closePopup: () => void;
 };
 
+export type TModal = TClosePopup & {
+    children?: React.ReactNode;
+  };
+
 export type TIngradientObj = {
     readonly _id: string;
     readonly name: string;

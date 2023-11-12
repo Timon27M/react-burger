@@ -1,7 +1,7 @@
 import styles from "./profile-info.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { getCurrentUser } from "../../services/selectors";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useMemo, useRef, FormEvent } from "react";
 import {
   EmailInput,
   PasswordInput,
@@ -21,9 +21,13 @@ function ProfileInfo() {
     setInputValues({ ...currentUser, password: "" });
   }, []);
 
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const onIconClick = () => {
-    setTimeout(() => inputRef.current.focus(), 0);
+    setTimeout(() => {
+      if (inputRef.current) {
+        inputRef.current.focus();
+      }
+    }, 0);
     setDisabled(false);
   };
 
@@ -33,13 +37,13 @@ function ProfileInfo() {
     password: "",
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.SyntheticEvent) {
+    evt.preventDefault();
     dispatch(updateUser(inputValues));
   }
 
-  function clickCancel(e) {
-    e.preventDefault();
+  function clickCancel(evt: React.SyntheticEvent) {
+    evt.preventDefault();
 
     setInputValues({ ...currentUser, password: "" });
     setDisabled(true);
