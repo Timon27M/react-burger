@@ -4,11 +4,11 @@ import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/hooks";
 import { forgotPassword } from "../../services/actions/current-user";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks";
 import { openResetPasswordPage } from "../../services/actions/reset-password";
 
 function ForgotPassword() {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { inputValues, handleChange } = useForm({
@@ -35,7 +35,6 @@ function ForgotPassword() {
         handleSubmit={handleSubmit}
       >
         <EmailInput
-          type={"email"}
           value={inputValues.email}
           name="email"
           onChange={handleChange}

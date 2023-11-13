@@ -1,7 +1,7 @@
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-scroll";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
 import { TIngradientObj } from "../../utils/types";

@@ -2,7 +2,7 @@ import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
 import { Routes, Route, useLocation, useNavigate, Location } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks"; 
 import { useEffect } from "react";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
@@ -22,7 +22,7 @@ import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
 
 function App() {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const location = useLocation();
 
   const navigate = useNavigate();

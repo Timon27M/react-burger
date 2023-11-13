@@ -6,12 +6,12 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../utils/type-hooks";
 import { resetPassword } from "../../services/actions/current-user";
 import { getIsOpenResetPasswordPage } from "../../services/selectors";
 
 function ResetPassword() {
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const isOpenResetPasswordPage = useSelector(getIsOpenResetPasswordPage);
 
@@ -44,7 +44,6 @@ function ResetPassword() {
         <PasswordInput
           name="password"
           placeholder={"Введите новый пароль"}
-          type={"password"}
           value={inputValues.password}
           onChange={handleChange}
         />

@@ -1,20 +1,29 @@
 import style from "./burger-constructor-card.module.css";
 import { useRef } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks";
 import { UPDATE_SORT_INGREDIENTS } from "../../services/actions/burger-constructor";
-import PropTypes from "prop-types";
+import { FC } from 'react';
 
-function BurgerConstructorCard({ children, index }) {
+interface IBurgerConstructorCard {
+  children?: React.ReactNode;
+  index: number;
+}
+
+interface IItemId {
+  index: number;
+}
+
+const BurgerConstructorCard: FC<IBurgerConstructorCard> = ({ children, index }) => {
   const dispatch = useDispatch();
   const ref = useRef(null);
 
-  const [{ isHover }, dropRef] = useDrop({
+  const [{ isHover }, dropRef] = useDrop<any, any, any>({
     accept: "ingridient",
     collect: (monitor) => ({
       isHover: monitor.isOver(),
     }),
-    drop(item) {
+    drop(item: IItemId) {
       const dragIndex = item.index;
       const hoverIndex = index;
 
@@ -60,10 +69,5 @@ function BurgerConstructorCard({ children, index }) {
     </div>
   );
 }
-
-BurgerConstructorCard.propTypes = {
-  children: PropTypes.element.isRequired,
-  index: PropTypes.number.isRequired,
-};
 
 export default BurgerConstructorCard;

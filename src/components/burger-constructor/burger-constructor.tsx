@@ -1,6 +1,6 @@
 import styles from "./burger-constructor.module.css";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../utils/type-hooks";
 import { useDrop } from "react-dnd/dist/hooks";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
 import {
@@ -31,7 +31,7 @@ type TIngradientObjConstructor = TIngradientObj & {
 function BurgerConstructor() {
   const [ingradientBun, setIngradientBun] =
     useState<TIngradientObjConstructor | null>(null);
-  const dispatch = useDispatch<any>();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const totalPrice = useSelector(getTotalPice);

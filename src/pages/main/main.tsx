@@ -1,5 +1,5 @@
 import styles from "./main.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { getIsOpenedPopupOrder } from "../../services/selectors";

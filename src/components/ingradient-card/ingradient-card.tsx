@@ -1,6 +1,6 @@
 import styles from "./ingradient-card.module.css";
 import { useDrag } from "react-dnd/dist/hooks";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import {
   CurrencyIcon,
   Counter,

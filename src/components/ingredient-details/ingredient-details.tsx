@@ -1,5 +1,5 @@
 import styles from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getIngredients } from "../../services/selectors";

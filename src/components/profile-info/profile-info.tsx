@@ -1,7 +1,7 @@
 import styles from "./profile-info.module.css";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../utils/type-hooks";
 import { getCurrentUser } from "../../services/selectors";
-import { useState, useEffect, useMemo, useRef, FormEvent } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
 import {
   EmailInput,
   PasswordInput,
