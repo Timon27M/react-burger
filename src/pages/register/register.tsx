@@ -41,7 +41,6 @@ function Register() {
           name="name"
         />
         <EmailInput
-          error={false}
           isIcon={false}
           placeholder={"E-mail"}
           size={"default"}
