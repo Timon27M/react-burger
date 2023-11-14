@@ -6,7 +6,7 @@ function NotFound() {
   const navigate = useNavigate();
 
   function handleClick() {
-    navigate(-1, { replace: true });
+    navigate(-1);
   }
 
   return (

@@ -1,6 +1,6 @@
 import styles from "./burger-constructor.module.css";
 import { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "../../utils/type-hooks";
 import { useDrop } from "react-dnd/dist/hooks";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
 import {
@@ -22,22 +22,32 @@ import { useNavigate } from "react-router-dom";
 import { addIngredient } from "../../services/actions/burger-constructor";
 import ingredientsApi from "../../utils/api";
 import { getOrder } from "../../services/actions/order";
+import { TIngradientObj } from "../../utils/types";
+
+type TIngradientObjConstructor = TIngradientObj & {
+  readonly uniqId: string;
+};
 
 function BurgerConstructor() {
-  const [ingradientBun, setIngradientBun] = useState(null);
+  const [ingradientBun, setIngradientBun] =
+    useState<TIngradientObjConstructor | null>(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const totalPrice = useSelector(getTotalPice);
   const isLoggedIn = useSelector(getIsLoggedIn);
 
-  const ingredientsConstructor = useSelector(getBurgerConstructorIngradients);
+  const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(getBurgerConstructorIngradients);
 
   const classButton =
     ingredientsConstructor.length < 1 ? styles.buttonDisabled : "";
 
   useEffect(() => {
     ingredientsConstructor.map((item) => {
+      if (typeof item === null) {
+        return;
+      }
+
       if (item.type === "bun") {
         setIngradientBun(item);
       }
@@ -58,14 +68,14 @@ function BurgerConstructor() {
     }
   };
 
-  function onDeleteIngredient(uniqId) {
+  function onDeleteIngredient(uniqId: string) {
     dispatch(deleteIngredient(uniqId));
     dispatch(updateTotalPrice());
   }
 
   const [{ isHover }, drop] = useDrop({
     accept: "ingredient",
-    drop(ingredient) {
+    drop(ingredient: TIngradientObjConstructor) {
       if (ingredient.type === "bun") {
         ingredientsConstructor.some((item) => {
           if (item.type === "bun") {
@@ -105,7 +115,7 @@ function BurgerConstructor() {
             )}
 
             <div className={styles.elementsDynamic}>
-              {ingredientsConstructor.map((item, index) => {
+              {ingredientsConstructor.map((item, index: number) => {
                 if (item.type === "main" || item.type === "sauce") {
                   return (
                     <BurgerConstructorCard index={index} key={item.uniqId}>

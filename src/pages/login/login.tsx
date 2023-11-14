@@ -1,6 +1,6 @@
 import styles from "./login.module.css";
 import ComponentAuth from "../../components/component-auth/component-auth";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks";
 import { loginUser } from "../../services/actions/current-user";
 import { useForm } from "../../hooks/hooks";
 import {
@@ -17,8 +17,8 @@ function Login() {
     password: "",
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
 
     dispatch(loginUser(inputValues));
   }
@@ -35,7 +35,6 @@ function Login() {
           placeholder={"E-mail"}
           name="email"
           size={"default"}
-          type={"email"}
           value={inputValues.email}
           onChange={handleChange}
           extraClass="mb-6"

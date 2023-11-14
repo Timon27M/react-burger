@@ -1,12 +1,13 @@
 import styles from "./ingredient-details.module.css";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getIngredients } from "../../services/selectors";
+import { TIngradientObj } from "../../utils/types";
 
 function IngredientDetails() {
-  const [selectedIngredient, setSelectedIngredient] = useState({});
-  const ingredients = useSelector(getIngredients);
+  const [selectedIngredient, setSelectedIngredient] = useState<TIngradientObj | null>(null);
+  const ingredients: Array<TIngradientObj> = useSelector(getIngredients);
 
   const { id } = useParams();
 
@@ -15,7 +16,9 @@ function IngredientDetails() {
       const ingredient = ingredients.find((ingredient) => {
         return ingredient._id === id;
       });
-      setSelectedIngredient(ingredient);
+      if (ingredient) {
+        setSelectedIngredient(ingredient);
+      }
     }
   }, [ingredients]);
 
@@ -24,6 +27,8 @@ function IngredientDetails() {
       {ingredients.length === 0 ? (
         "Загрузка"
       ) : (
+        <>
+        { selectedIngredient && 
         <>
           <h2 className="mt-3 text text_type_main-large">Детали ингредиента</h2>
           <div className={styles.content}>
@@ -71,7 +76,10 @@ function IngredientDetails() {
             </div>
           </div>
         </>
-      )}
+}
+      </>
+      )
+      }
     </>
   );
 }

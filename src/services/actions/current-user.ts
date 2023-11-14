@@ -1,3 +1,5 @@
+// @ts-nocheck
+import { AnyAction } from "redux";
 import api from "../../utils/api";
 import { deleteCookie, setCookie } from "../../utils/cookie";
 import { getUserRequest } from "../../utils/functions";
@@ -8,9 +10,14 @@ export const GET_USER_FAILED = "GET_USER_FAILED";
 
 export const DELETE_USER = "DELETE_USER";
 
+// interface ILoginUser {
+//   email: string;
+//   password: string;
+// }
+
 export const loginUser =
-  ({ email, password }) =>
-  (dispatch) => {
+  ({ email, password }: any): AnyAction =>
+  (dispatch: any) => {
     dispatch({ type: GET_USER_REQUEST });
     api
       .loginUser(email, password)
@@ -33,7 +40,7 @@ export const loginUser =
   };
 
 export const registerUser =
-  ({ name, email, password }) =>
+  ({ name, email, password }: any): AnyAction =>
   (dispatch) => {
     dispatch({ type: GET_USER_REQUEST });
     api
@@ -70,7 +77,7 @@ export const logoutUser = () => (dispatch) => {
     });
 };
 
-export const updateUser = (data, accessToken) => (dispatch) => {
+export const updateUser = (data): AnyAction => (dispatch) => {
   dispatch({ type: GET_USER_REQUEST });
   api
     .updateUser(data.name, data.email)

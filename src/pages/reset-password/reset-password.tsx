@@ -6,7 +6,7 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/hooks";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "../../utils/type-hooks";
 import { resetPassword } from "../../services/actions/current-user";
 import { getIsOpenResetPasswordPage } from "../../services/selectors";
 
@@ -24,8 +24,8 @@ function ResetPassword() {
     navigate("/login", { replace: true });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.SyntheticEvent) {
+    evt.preventDefault();
 
     dispatch(resetPassword(inputValues.password, inputValues.token, callback));
   }
@@ -44,7 +44,6 @@ function ResetPassword() {
         <PasswordInput
           name="password"
           placeholder={"Введите новый пароль"}
-          type={"password"}
           value={inputValues.password}
           onChange={handleChange}
         />

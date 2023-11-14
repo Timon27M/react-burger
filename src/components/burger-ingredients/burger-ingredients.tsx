@@ -1,34 +1,40 @@
 import styles from "./burger-ingredients.module.css";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link } from "react-scroll";
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
+import { TIngradientObj } from "../../utils/types";
 
-function BurgerIngredients() {
+const BurgerIngredients = () => {
   const [current, setCurrent] = useState("Булки");
+  // @ts-ignore
+  const ingredients: Array<TIngradientObj> = useSelector((state) => state.ingredients.ingredients);
 
-  const ingredients = useSelector((state) => state.ingredients.ingredients);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const containerRef = useRef(null);
-
-  const bunRef = useRef(null);
-  const sauceRef = useRef(null);
-  const mainRef = useRef(null);
+  const bunRef = useRef<HTMLHeadingElement>(null);
+  const sauceRef = useRef<HTMLHeadingElement>(null);
+  const mainRef = useRef<HTMLHeadingElement>(null);
 
   function handleScroll() {
-    const bunDistance = Math.abs(
-      bunRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
-    const mainDistance = Math.abs(
-      mainRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
-    const sauceDistance = Math.abs(
-      sauceRef.current.getBoundingClientRect().top -
-        containerRef.current.getBoundingClientRect().top
-    );
+    if (containerRef.current && bunRef.current && sauceRef.current && mainRef.current) {
+      const bunDistance = Math.abs(
+        bunRef.current.getBoundingClientRect().top -
+          containerRef.current.getBoundingClientRect().top
+      );
+   
+      const mainDistance = Math.abs(
+        mainRef.current.getBoundingClientRect().top -
+          containerRef.current.getBoundingClientRect().top
+      );
+
+      const sauceDistance = Math.abs(
+        sauceRef.current.getBoundingClientRect().top -
+          containerRef.current.getBoundingClientRect().top
+      );
+    
+  
 
     if (bunDistance < sauceDistance && bunDistance < mainDistance) {
       setCurrent("Булки");
@@ -37,6 +43,7 @@ function BurgerIngredients() {
     } else if (mainDistance < bunDistance && mainDistance < sauceDistance) {
       setCurrent("Начинки");
     }
+  }
   }
 
   return (
@@ -106,7 +113,7 @@ function BurgerIngredients() {
         >
           <h3
             className={`text text_type_main-medium mb-6 ${styles.titleIngradient}`}
-            name="bun"
+            id="bun"
             ref={bunRef}
           >
             Булки
@@ -128,7 +135,7 @@ function BurgerIngredients() {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
-            name="sauce"
+            id="sauce"
             ref={sauceRef}
           >
             Соусы
@@ -150,7 +157,7 @@ function BurgerIngredients() {
           </div>
           <h3
             className={`text text_type_main-medium mt-10 mb-6 ${styles.titleIngradient}`}
-            name="main"
+            id="main"
             ref={mainRef}
           >
             Начинки

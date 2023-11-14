@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useSelector } from "../../utils/type-hooks";
 import styles from "./order-details.module.css";
 import orderDetailsImage from "../../images/orderDetailsImage.svg";
 import { getNumberOrder, getIsLoadingOrder } from "../../services/selectors";

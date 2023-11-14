@@ -4,7 +4,7 @@ import { EmailInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "../../hooks/hooks";
 import { forgotPassword } from "../../services/actions/current-user";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks";
 import { openResetPasswordPage } from "../../services/actions/reset-password";
 
 function ForgotPassword() {
@@ -20,8 +20,8 @@ function ForgotPassword() {
     navigate("/reset-password", { replace: true });
   }
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
 
     dispatch(forgotPassword(inputValues.email, callback));
   }
@@ -35,7 +35,6 @@ function ForgotPassword() {
         handleSubmit={handleSubmit}
       >
         <EmailInput
-          type={"email"}
           value={inputValues.email}
           name="email"
           onChange={handleChange}

@@ -4,7 +4,7 @@ import {
   PasswordInput,
   Input,
 } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks";
 import { useForm } from "../../hooks/hooks";
 import { registerUser } from "../../services/actions/current-user";
 import ComponentAuth from "../../components/component-auth/component-auth";
@@ -19,8 +19,8 @@ function Register() {
     password: "",
   });
 
-  function handleSubmit(e) {
-    e.preventDefault();
+  function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
 
     dispatch(registerUser(inputValues));
   }
@@ -45,7 +45,6 @@ function Register() {
           isIcon={false}
           placeholder={"E-mail"}
           size={"default"}
-          type={"email"}
           name={"email"}
           value={inputValues.email}
           onChange={handleChange}

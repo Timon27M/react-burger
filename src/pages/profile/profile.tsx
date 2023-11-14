@@ -1,17 +1,17 @@
 import styles from "./profile.module.css";
 import { NavLink, Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch } from "../../utils/type-hooks";
 import { logoutUser } from "../../services/actions/current-user";
 import { getCookie } from "../../utils/cookie";
 
 function Profile() {
   const dispatch = useDispatch();
 
-  function handleClick(e) {
-    e.preventDefault();
+  function handleClick(evt: React.SyntheticEvent) {
+    evt.preventDefault();
 
     const refreshToken = getCookie("refreshToken");
-    dispatch(logoutUser(refreshToken));
+    dispatch(logoutUser());
   }
 
   return (

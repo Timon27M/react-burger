@@ -1,8 +1,8 @@
 import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { Routes, Route, useLocation, useNavigate, Location } from "react-router-dom";
+import { useDispatch } from "../../utils/type-hooks"; 
 import { useEffect } from "react";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
@@ -32,10 +32,12 @@ function App() {
   };
 
   const closePopupIngredientDetails = () => {
-    navigate(-1, { replace: true });
+    navigate(-1);
   };
 
-  const background = location.state && location.state.background;
+  const locationState = location.state as { background: Location }
+
+  const background = locationState && locationState.background;
 
   useEffect(() => {
     const token = getCookie("accessToken");

@@ -1,16 +1,17 @@
 import { getCookie } from "./cookie";
+import { TGetUser } from "./types";
 
-export function getUserRequest(
-  dispatch,
-  api,
-  GET_USER_REQUEST,
-  GET_USER_SUCCESS,
-  errFunc
-) {
+export const getUserRequest = (
+  dispatch: any,
+  api: any,
+  GET_USER_REQUEST: string,
+  GET_USER_SUCCESS: string,
+  errFunc: () => void
+) => {
   dispatch({ type: GET_USER_REQUEST });
   api
     .getUser()
-    .then((res) => {
+    .then((res: TGetUser) => {
       if (res && res.success) {
         dispatch({
           type: GET_USER_SUCCESS,
@@ -20,7 +21,7 @@ export function getUserRequest(
         });
       }
     })
-    .catch((err) => {
+    .catch((err: any) => {
       console.log(err);
       if (errFunc && getCookie("refreshToken")) {
         dispatch(errFunc());
