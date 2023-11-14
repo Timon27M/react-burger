@@ -2,7 +2,6 @@ import styles from "./profile.module.css";
 import { NavLink, Outlet } from "react-router-dom";
 import { useDispatch } from "../../utils/type-hooks";
 import { logoutUser } from "../../services/actions/current-user";
-import { getCookie } from "../../utils/cookie";
 
 function Profile() {
   const dispatch = useDispatch();
@@ -10,7 +9,6 @@ function Profile() {
   function handleClick(evt: React.SyntheticEvent) {
     evt.preventDefault();
 
-    const refreshToken = getCookie("refreshToken");
     dispatch(logoutUser());
   }
 
