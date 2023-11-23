@@ -20,6 +20,7 @@ import IngredientPopup from "../../pages/ingredient-popup/ingredient-popup";
 import { getIngradients } from "../../services/actions/ingredients";
 import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
+import Feed from "../../pages/feed/feed";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Main closePopup={closePopupOrder} />} />
+        <Route path="/feed" element={<Feed />} /> 
         <Route
           path="/login"
           element={<ProtectedRoute element={Login} auth />}

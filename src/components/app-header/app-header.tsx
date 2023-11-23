@@ -29,7 +29,7 @@ function AppHeader() {
             Конструктор
           </p>
         </NavLink>
-        <NavLink to={"/orders"} className={`${styles.link}`}>
+        <NavLink to={"/feed"} className={`${styles.link}`}>
           <ListIcon
             type={`${pathname === "/orders" ? "primary" : "secondary"}`}
           />

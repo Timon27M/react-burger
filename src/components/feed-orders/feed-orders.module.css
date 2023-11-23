@@ -1,0 +1,12 @@
+.container {
+    min-width: 600px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.contant {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
