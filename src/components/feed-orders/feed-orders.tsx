@@ -9,6 +9,9 @@ function FeedOrders() {
       </h2>
       <div className={`${styles.contant}`}>
         <Order />
+        <Order />
+        <Order />
+        <Order />
       </div>
     </div>
   );
