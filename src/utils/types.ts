@@ -28,14 +28,22 @@ export type TIngradientObj = {
   export type TOrderObj = {
     number: number
   }
+
+  export type TPassword = {
+    password: string;
+  }
   
-  export type TUserObj = {
+  export type TUserInfo = {
     email: string;
     name: string;
   }
+
+  export type TUserObj = TUserInfo & TPassword;
   
-  export type TIngredients = TServerResponse<TIngradientObj>
-  
+  export type TIngredients = TServerResponse<{
+    data: TIngradientObj
+  }>
+  // export type TIngredients = TServerResponse<TIngradientObj>
   
   export type TOrderAdd = TServerResponse<{
     name: string;
@@ -43,25 +51,57 @@ export type TIngradientObj = {
     success: boolean;
   }>
   
-  export type TUserCreate = TServerResponse<{
-    email: string;
-    password: string;
-    name: string;
-  }>
+  export type TUserCreate = TServerResponse<
+  {
+    user: TUserObj,
+    accessToken: string,
+    refreshToken: string,
+  }
+  >
+  // export type TUserCreate = TServerResponse<{
+  //   email: string;
+  //   password: string;
+  //   name: string;
+  // }>
   
   export type TUserLogin = TServerResponse<{
-    email: string;
-    password: string;
+    user: TUserInfo
+    accessToken: string,
+    refreshToken: string,
   }> 
+
+  // export type TResUpdateToken = TServerResponse<{
+  //   accessToken: string,
+  //   refreshToken: string,
+  // }>
+
+  // export type TUserLogin = TServerResponse<{
+  //   email: string;
+  //   password: string;
+  // }> 
   
   export type TUpdateToken = TServerResponse<{
-    token: string;
+    accessToken: string,
+    refreshToken: string,
   }>
+  // export type TUpdateToken = TServerResponse<{
+  //   token: string;
+  // }>
   
   export type TMessageResponse = TServerResponse<{
     message: string;
   }>
   
   export type TGetUser = TServerResponse<{
-    user: TUserObj;
+    user: TUserInfo;
   }>
+
+  export type TResUser = TServerResponse<{
+    user: TUserInfo,
+    accessToken: string,
+    refreshToken: string,
+  }>
+
+  export type TIngredientId = {
+    ingredients: Array<string>
+  }

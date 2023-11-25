@@ -12,7 +12,7 @@ import Profile from "../../pages/profile/profile";
 import ProfileInfo from "../profile-info/profile-info";
 import ProtectedRoute from "../protected-route/protected-route";
 import { getUser } from "../../services/actions/current-user";
-import { getCookie } from "../../utils/cookie";
+import { deleteCookie, getCookie } from "../../utils/cookie";
 import IngredientDetails from "../ingredient-details/ingredient-details";
 // import OrdersHistory from "./orders-history/orders-history";
 import { closeOrderPopup } from "../../services/actions/order";

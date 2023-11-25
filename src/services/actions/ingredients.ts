@@ -1,6 +1,9 @@
-export const GET_INGRADIENTS_REQUEST = 'GET_INGRADIENTS_REQUEST';
-export const GET_INGRADIENTS_SUCCESS = 'GET_INGRADIENTS_SUCCESS';
-export const GET_INGRADIENTS_FAILED = 'GET_INGRADIENTS_FAILED';
+import { TIngredients } from "../../utils/types";
+import { AppDispacth } from "../../utils/type-hooks";
+
+export const GET_INGRADIENTS_REQUEST: 'GET_INGRADIENTS_REQUEST' = 'GET_INGRADIENTS_REQUEST';
+export const GET_INGRADIENTS_SUCCESS: 'GET_INGRADIENTS_SUCCESS' = 'GET_INGRADIENTS_SUCCESS';
+export const GET_INGRADIENTS_FAILED: 'GET_INGRADIENTS_FAILED' = 'GET_INGRADIENTS_FAILED';
 
 // interface IIngredientArray {
 //   _id: string;
@@ -17,10 +20,10 @@ export const GET_INGRADIENTS_FAILED = 'GET_INGRADIENTS_FAILED';
 //   __v: number;
 // }
 
-export const getIngradients = (ingredientsApi) => (dispatch) => {
+export const getIngradients = (ingredientsApi: any) => (dispatch: AppDispacth) => {
     dispatch({type: GET_INGRADIENTS_REQUEST})
     ingredientsApi.getIngradients()
-    .then((res) => {
+    .then((res: TIngredients) => {
         dispatch({type: GET_INGRADIENTS_SUCCESS, payload: res.data})
       })
       .catch(() => {

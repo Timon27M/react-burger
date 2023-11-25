@@ -59,10 +59,10 @@ function BurgerConstructor() {
       const ingradientsOrderId = [...ingredientsConstructor].map((item) => {
         return item._id;
       });
-      const ingradientsObj = {
+      const ingradientsId = {
         ingredients: ingradientsOrderId,
       };
-      dispatch(getOrder(ingredientsApi, ingradientsObj));
+      dispatch(getOrder(ingredientsApi, ingradientsId));
     } else {
       navigate("/login");
     }

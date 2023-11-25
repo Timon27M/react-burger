@@ -1,12 +1,12 @@
-// @ts-nocheck
-import { AnyAction } from "redux";
 import api from "../../utils/api";
 import { deleteCookie, setCookie } from "../../utils/cookie";
 import { getUserRequest } from "../../utils/functions";
+import { AppDispacth } from "../../utils/type-hooks";
+import { TUserObj } from "../../utils/types";
 
-export const GET_USER_REQUEST = "GET_USER_REQUEST";
-export const GET_USER_SUCCESS = "GET_USER_SUCCESS";
-export const GET_USER_FAILED = "GET_USER_FAILED";
+export const GET_USER_REQUEST: "GET_USER_REQUEST" = "GET_USER_REQUEST";
+export const GET_USER_SUCCESS: "GET_USER_SUCCESS" = "GET_USER_SUCCESS";
+export const GET_USER_FAILED: "GET_USER_FAILED" = "GET_USER_FAILED";
 
 export const DELETE_USER = "DELETE_USER";
 
@@ -16,8 +16,8 @@ export const DELETE_USER = "DELETE_USER";
 // }
 
 export const loginUser =
-  ({ email, password }: any): AnyAction =>
-  (dispatch: any) => {
+  ({ email, password }: any) =>
+  (dispatch: AppDispacth) => {
     dispatch({ type: GET_USER_REQUEST });
     api
       .loginUser(email, password)
@@ -40,8 +40,8 @@ export const loginUser =
   };
 
 export const registerUser =
-  ({ name, email, password }: any): AnyAction =>
-  (dispatch) => {
+  ({ name, email, password }: any) =>
+  (dispatch: AppDispacth) => {
     dispatch({ type: GET_USER_REQUEST });
     api
       .createUser(name, email, password)
@@ -63,7 +63,7 @@ export const registerUser =
       });
   };
 
-export const logoutUser = () => (dispatch) => {
+export const logoutUser = () => (dispatch: AppDispacth) => {
   dispatch({ type: GET_USER_REQUEST });
   api
     .logoutUser()
@@ -77,27 +77,29 @@ export const logoutUser = () => (dispatch) => {
     });
 };
 
-export const updateUser = (data): AnyAction => (dispatch) => {
-  dispatch({ type: GET_USER_REQUEST });
-  api
-    .updateUser(data.name, data.email)
-    .then((res) => {
-      if (res && res.success) {
-        dispatch({
-          type: GET_USER_SUCCESS,
-          payload: {
-            user: res.user,
-          },
-        });
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-      dispatch({ type: GET_USER_FAILED });
-    });
-};
+export const updateUser =
+  (data: any) =>
+  (dispatch: AppDispacth) => {
+    dispatch({ type: GET_USER_REQUEST });
+    api
+      .updateUser(data.name, data.email)
+      .then((res) => {
+        if (res && res.success) {
+          dispatch({
+            type: GET_USER_SUCCESS,
+            payload: {
+              user: res.user,
+            },
+          });
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch({ type: GET_USER_FAILED });
+      });
+  };
 
-const updateToken = () => (dispatch) => {
+const updateToken = () => (dispatch: AppDispacth) => {
   api
     .updateToken()
     .then((res) => {
@@ -107,14 +109,17 @@ const updateToken = () => (dispatch) => {
       }
     })
     .then(() => {
-      getUserRequest(dispatch, api, GET_USER_REQUEST, GET_USER_SUCCESS);
+      getUserRequest(dispatch, api, GET_USER_REQUEST, GET_USER_SUCCESS, updateToken);
     })
     .catch((err) => {
       console.log(err);
+      api.logoutUser()
+      deleteCookie('accessToken')
+      deleteCookie('refreshToken')
     });
 };
 
-export const getUser = () => (dispatch) => {
+export const getUser = () => (dispatch: AppDispacth) => {
   getUserRequest(
     dispatch,
     api,
@@ -124,7 +129,7 @@ export const getUser = () => (dispatch) => {
   );
 };
 
-export const forgotPassword = (email, func) => () => {
+export const forgotPassword = (email: string, func: () => void) => () => {
   api
     .forgotPassword(email)
     .then((res) => {
@@ -137,7 +142,7 @@ export const forgotPassword = (email, func) => () => {
     });
 };
 
-export const resetPassword = (password, token, func) => () => {
+export const resetPassword = (password: string, token: string, func: () => void) => () => {
   api
     .resetPassword(password, token)
     .then((res) => {

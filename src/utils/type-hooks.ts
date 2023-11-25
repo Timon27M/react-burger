@@ -6,9 +6,9 @@ import {
 import store from "../services/store/store";
 import rootReducer from "../services/reducers/root-reducer";
 
-type AppDispacth = typeof store.dispatch;
+export type AppDispacth = typeof store.dispatch;
 
-type DispatchFunc = () => AppDispacth;
+export type DispatchFunc = () => AppDispacth;
 type RootState = ReturnType<typeof rootReducer>
 
 
