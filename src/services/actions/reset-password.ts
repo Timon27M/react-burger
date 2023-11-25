@@ -8,3 +8,10 @@ export const openResetPasswordPage = () => (dispatch: AppDispacth) => {
         payload: true
     })
 }
+
+type TGetResetPasswordPageAction = {
+    readonly type: typeof GET_RESET_PASSWORD_PAGE,
+    readonly payload: boolean
+}
+
+export type TResetPasswordActions = TGetResetPasswordPageAction;

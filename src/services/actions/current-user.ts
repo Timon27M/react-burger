@@ -77,27 +77,25 @@ export const logoutUser = () => (dispatch: AppDispacth) => {
     });
 };
 
-export const updateUser =
-  (data: any) =>
-  (dispatch: AppDispacth) => {
-    dispatch({ type: GET_USER_REQUEST });
-    api
-      .updateUser(data.name, data.email)
-      .then((res) => {
-        if (res && res.success) {
-          dispatch({
-            type: GET_USER_SUCCESS,
-            payload: {
-              user: res.user,
-            },
-          });
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-        dispatch({ type: GET_USER_FAILED });
-      });
-  };
+export const updateUser = (data: any) => (dispatch: AppDispacth) => {
+  dispatch({ type: GET_USER_REQUEST });
+  api
+    .updateUser(data.name, data.email)
+    .then((res) => {
+      if (res && res.success) {
+        dispatch({
+          type: GET_USER_SUCCESS,
+          payload: {
+            user: res.user,
+          },
+        });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch({ type: GET_USER_FAILED });
+    });
+};
 
 const updateToken = () => (dispatch: AppDispacth) => {
   api
@@ -109,13 +107,19 @@ const updateToken = () => (dispatch: AppDispacth) => {
       }
     })
     .then(() => {
-      getUserRequest(dispatch, api, GET_USER_REQUEST, GET_USER_SUCCESS, updateToken);
+      getUserRequest(
+        dispatch,
+        api,
+        GET_USER_REQUEST,
+        GET_USER_SUCCESS,
+        updateToken
+      );
     })
     .catch((err) => {
       console.log(err);
-      api.logoutUser()
-      deleteCookie('accessToken')
-      deleteCookie('refreshToken')
+      api.logoutUser();
+      deleteCookie("accessToken");
+      deleteCookie("refreshToken");
     });
 };
 
@@ -142,15 +146,41 @@ export const forgotPassword = (email: string, func: () => void) => () => {
     });
 };
 
-export const resetPassword = (password: string, token: string, func: () => void) => () => {
-  api
-    .resetPassword(password, token)
-    .then((res) => {
-      if (res && res.success) {
-        func();
-      }
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+export const resetPassword =
+  (password: string, token: string, func: () => void) => () => {
+    api
+      .resetPassword(password, token)
+      .then((res) => {
+        if (res && res.success) {
+          func();
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+type TGetUserRequestAction = {
+  readonly type: typeof GET_USER_REQUEST;
 };
+
+type TGetUserSuccessAction = {
+  readonly type: typeof GET_USER_SUCCESS;
+  readonly payload: {
+    user: TUserObj;
+  };
+};
+
+type TGetUserFailedAction = {
+  readonly type: typeof GET_USER_FAILED;
+};
+
+type TDeleteUserAction = {
+  readonly type: typeof DELETE_USER;
+};
+
+export type TCurrentUserActions =
+  | TGetUserRequestAction
+  | TGetUserSuccessAction
+  | TGetUserFailedAction
+  | TDeleteUserAction;

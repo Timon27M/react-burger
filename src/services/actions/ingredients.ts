@@ -1,4 +1,4 @@
-import { TIngredients } from "../../utils/types";
+import { TIngradientObj, TIngredients } from "../../utils/types";
 import { AppDispacth } from "../../utils/type-hooks";
 
 export const GET_INGRADIENTS_REQUEST: 'GET_INGRADIENTS_REQUEST' = 'GET_INGRADIENTS_REQUEST';
@@ -30,3 +30,18 @@ export const getIngradients = (ingredientsApi: any) => (dispatch: AppDispacth) =
         dispatch({type: GET_INGRADIENTS_FAILED})
       })
 }
+
+type TGetIngredientsRequestAction = {
+  readonly type: typeof GET_INGRADIENTS_REQUEST
+}
+
+type TGetIngredientsSuccessAction = {
+  readonly type: typeof GET_INGRADIENTS_SUCCESS
+  readonly payload: Array<TIngradientObj>
+}
+
+type TGetIngredientsFailedAction = {
+  readonly type: typeof GET_INGRADIENTS_FAILED
+}
+
+export type TIndgredientsActions = TGetIngredientsRequestAction | TGetIngredientsSuccessAction | TGetIngredientsFailedAction;

@@ -1,18 +1,25 @@
+import { TIngradientObjConstructor } from "../../utils/types";
 import {
   ADD_INGREDIENT,
   DELETE_INGREDIENT,
   DELETE_INGREDIENTS,
   ADD_TOTALPRICE,
   UPDATE_SORT_INGREDIENTS,
+  TBurgerConstructorActions,
 } from "../actions/burger-constructor";
 
+type TBurgerConstructorState = {
+  constructorIngredients: Array<TIngradientObjConstructor>,
+  totalPrice: number
+}
 
-const initialState = {
+
+const initialState: TBurgerConstructorState = {
   constructorIngredients: [],
   totalPrice: 0,
 };
 
-const burgerConstructorReducer = (state = initialState, action) => {
+const burgerConstructorReducer = (state = initialState, action: TBurgerConstructorActions) => {
   switch (action.type) {
     case ADD_INGREDIENT: {
       return {

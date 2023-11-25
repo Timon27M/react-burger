@@ -1,13 +1,21 @@
+import { TUserInfo } from "../../utils/types";
 import {
   GET_USER_REQUEST,
   GET_USER_SUCCESS,
   GET_USER_FAILED,
   DELETE_USER,
+  TCurrentUserActions,
 } from "../actions/current-user";
 
-const initialState = {
+type TCurrentUserState = {
+  isLoading: boolean,
+  currentUser: TUserInfo,
+  isLoggedIn: boolean,
+  refreshToken: string
+}
+
+const initialState: TCurrentUserState = {
   isLoading: false,
-  error: null,
   currentUser: {
     name: "",
     email: "",
@@ -16,7 +24,7 @@ const initialState = {
   refreshToken: "",
 };
 
-const currentUserReducer = (state = initialState, action) => {
+const currentUserReducer = (state = initialState, action: TCurrentUserActions) => {
   switch (action.type) {
     case GET_USER_REQUEST: {
       return { ...state, isLoading: true };

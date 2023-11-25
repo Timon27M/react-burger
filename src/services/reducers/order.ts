@@ -1,18 +1,27 @@
+import { TOrder } from "../../utils/types";
 import {
   GET_ORDER_FAILED,
   GET_ORDER_REQUEST,
   GET_ORDER_SUCCESS,
   CLOSE_ORDER_POPUP,
+  TOrderActions,
 } from "../actions/order";
-const initialState = {
+
+type TOrderState = {
+  orders: Array<TOrder>,
+  lastNumberOrder: number | null,
+  isLoading: boolean,
+  isOpenOrderPopup: boolean
+}
+
+const initialState: TOrderState = {
   orders: [],
   lastNumberOrder: null,
   isLoading: false,
-  error: null,
   isOpenOrderPopup: false,
 };
 
-const orderReducer = (state = initialState, action) => {
+const orderReducer = (state = initialState, action: TOrderActions) => {
   switch (action.type) {
     case GET_ORDER_REQUEST: {
       return { ...state, isLoading: true, isOpenOrderPopup: true };

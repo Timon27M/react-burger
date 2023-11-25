@@ -22,11 +22,7 @@ import { useNavigate } from "react-router-dom";
 import { addIngredient } from "../../services/actions/burger-constructor";
 import ingredientsApi from "../../utils/api";
 import { getOrder } from "../../services/actions/order";
-import { TIngradientObj } from "../../utils/types";
-
-type TIngradientObjConstructor = TIngradientObj & {
-  readonly uniqId: string;
-};
+import { TIngradientObjConstructor } from "../../utils/types";
 
 function BurgerConstructor() {
   const [ingradientBun, setIngradientBun] =

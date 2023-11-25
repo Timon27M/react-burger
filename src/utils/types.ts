@@ -105,3 +105,27 @@ export type TIngradientObj = {
   export type TIngredientId = {
     ingredients: Array<string>
   }
+
+  export type TIngradientObjConstructor = TIngradientObj & {
+    readonly uniqId: string;
+  };
+
+  export type TOrder = TServerResponse<{
+    name: string,
+    order: {
+      ingredients: Array<TIngradientObj>
+      _id: string,
+      owner: {
+        name: string,
+        email: string,
+        createdAt: string,
+        updatedAt: string,
+      },
+      status: string,
+      name: string,
+      createdAt: string,
+      updatedAt: string,
+      number: number,
+      price: number
+    }
+  }>
