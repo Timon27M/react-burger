@@ -1,4 +1,4 @@
-import { TOrder } from "../../utils/types";
+import { TOrderInfo } from "../../utils/types";
 import {
   GET_ORDER_FAILED,
   GET_ORDER_REQUEST,
@@ -8,7 +8,7 @@ import {
 } from "../actions/order";
 
 type TOrderState = {
-  orders: Array<TOrder>,
+  orders: Array<TOrderInfo>,
   lastNumberOrder: number | null,
   isLoading: boolean,
   isOpenOrderPopup: boolean

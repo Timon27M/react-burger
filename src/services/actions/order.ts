@@ -1,5 +1,5 @@
 import { AppDispacth } from "../../utils/type-hooks";
-import { TIngredientId, TOrder } from "../../utils/types";
+import { TIngredientId, TOrderInfo } from "../../utils/types";
 import { deleteIngredientsConstructor } from "./burger-constructor";
 
 export const GET_ORDER_FAILED: "GET_ORDER_FAILED" = "GET_ORDER_FAILED";
@@ -34,7 +34,7 @@ type TGetOrderRequestAction = {
 
 type TGetOrderSuccessAction = {
   readonly type: typeof GET_ORDER_SUCCESS;
-  readonly payload: TOrder;
+  readonly payload: TOrderInfo;
 };
 
 type TGetOrderFailedAction = {

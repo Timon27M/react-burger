@@ -110,22 +110,27 @@ export type TIngradientObj = {
     readonly uniqId: string;
   };
 
-  export type TOrder = TServerResponse<{
-    name: string,
-    order: {
-      ingredients: Array<TIngradientObj>
+  export type TOrder = {
+    ingredients: Array<TIngradientObj>
       _id: string,
-      owner: {
-        name: string,
-        email: string,
-        createdAt: string,
-        updatedAt: string,
-      },
       status: string,
       name: string,
       createdAt: string,
       updatedAt: string,
       number: number,
       price: number
-    }
+  }
+
+  export type TOwner = {
+    owner: {
+      name: string,
+      email: string,
+      createdAt: string,
+      updatedAt: string,
+    },
+  }
+
+  export type TOrderInfo = TServerResponse<{
+    name: string,
+    order: TOrder & TOwner
   }>
