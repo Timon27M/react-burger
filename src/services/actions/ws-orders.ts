@@ -33,3 +33,11 @@ export type TWSOrdersActions =
   | TWSConnectionErrorAction
   | TWSConnectionClosedAction
   | TWSGetMessageAction;
+
+  export type TWSStoreActions = {
+    wsInit: typeof  WS_CONNECTION_START,
+    onOpen: typeof  WS_CONNECTION_SUCCESS,
+    onClose: typeof WS_CONNECTION_CLOSED,
+    onError: typeof  WS_CONNECTION_ERROR,
+    onMessage: typeof  WS_GET_MESSAGE,
+  };

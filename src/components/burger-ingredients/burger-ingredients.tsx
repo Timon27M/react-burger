@@ -5,11 +5,12 @@ import { useSelector } from "../../utils/type-hooks";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
 import { TIngradientObj } from "../../utils/types";
+import { getIngredients } from "../../services/selectors";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState("Булки");
   // @ts-ignore
-  const ingredients: Array<TIngradientObj> = useSelector((state) => state.ingredients.ingredients);
+  const ingredients: Array<TIngradientObj> = useSelector(getIngredients);
 
   const containerRef = useRef<HTMLDivElement>(null);
 

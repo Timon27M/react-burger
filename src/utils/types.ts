@@ -111,7 +111,7 @@ export type TIngradientObj = {
   };
 
   export type TOrder = {
-    ingredients: Array<TIngradientObj>
+    ingredients: Array<string>
       _id: string,
       status: string,
       name: string,
@@ -126,7 +126,7 @@ export type TIngradientObj = {
       name: string,
       email: string,
       createdAt: string,
-      updatedAt: string,
+      updatedAt: string
     },
   }
 
@@ -134,3 +134,12 @@ export type TIngradientObj = {
     name: string,
     order: TOrder & TOwner
   }>
+
+  export interface IMessageResponse {
+    message: string;
+    success: boolean;
+    username: string;
+  
+    id?: string;
+    isBot?: boolean;
+  }

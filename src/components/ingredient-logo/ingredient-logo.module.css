@@ -12,3 +12,9 @@
 .count {
     position: absolute;
 }
+
+.image {
+    width: 64px;
+    height: 56px;
+    object-fit: cover;
+}

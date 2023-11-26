@@ -43,6 +43,11 @@ export const getCurrentUser = (state: RootState) => {
 export const getIngredients = (state: RootState) => {
   return state.ingredients.ingredients;
 };
+
 export const getIsOpenResetPasswordPage = (state: RootState) => {
   return state.resetPassword.isOpenResetPasswordPage;
 };
+
+export const getWSOrders = (state: RootState) => {
+  return state.wsOrder.orders;
+}

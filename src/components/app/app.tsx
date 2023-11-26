@@ -21,6 +21,7 @@ import { getIngradients } from "../../services/actions/ingredients";
 import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
 import Feed from "../../pages/feed/feed";
+import { WS_CONNECTION_START } from "../../services/actions/ws-orders";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ function App() {
 
   useEffect(() => {
     const token = getCookie("accessToken");
+    dispatch({ type: WS_CONNECTION_START })
     if (token) {
       dispatch(getUser());
     }

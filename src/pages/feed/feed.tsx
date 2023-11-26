@@ -7,6 +7,9 @@ function Feed() {
       <div className={`mt-10 ${styles.feedOrdersBlock}`}>
         <FeedOrders />
       </div>
+      <div className={`${styles.ordersInfo}`}>
+        
+      </div>
     </section>
   );
 }
