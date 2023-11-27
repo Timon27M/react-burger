@@ -1,5 +1,6 @@
 import styles from "./feed.module.css";
 import FeedOrders from "../../components/feed-orders/feed-orders";
+import OrdersInfo from "../../components/orders-info/orders-info";
 
 function Feed() {
   return (
@@ -7,8 +8,8 @@ function Feed() {
       <div className={`mt-10 ${styles.feedOrdersBlock}`}>
         <FeedOrders />
       </div>
-      <div className={`${styles.ordersInfo}`}>
-        
+      <div className={`mt-20 ${styles.ordersInfo}`}>
+        <OrdersInfo />
       </div>
     </section>
   );

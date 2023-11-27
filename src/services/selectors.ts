@@ -51,3 +51,11 @@ export const getIsOpenResetPasswordPage = (state: RootState) => {
 export const getWSOrders = (state: RootState) => {
   return state.wsOrder.orders;
 }
+
+export const getWSCountToday = (state: RootState) => {
+  return state.wsOrder.countToday;
+}
+
+export const getWSCount = (state: RootState) => {
+  return state.wsOrder.count;
+}

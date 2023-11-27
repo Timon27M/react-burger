@@ -1,0 +1,24 @@
+.OrdersBoard {
+    width: 280px;
+}
+
+.orderNumber {
+    color: #0CC
+}
+
+.orders {
+    max-height:194px;
+    overflow: hidden;
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+}
+
+.orders::-webkit-scrollbar {
+    background-color: #2f2f37;
+    height: 8px;
+    width: 8px;
+}
+
+.orders::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+}
