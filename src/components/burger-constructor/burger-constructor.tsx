@@ -7,6 +7,7 @@ import {
   getBurgerConstructorIngradients,
   getTotalPice,
   getIsLoggedIn,
+  getOrderLoading,
 } from "../../services/selectors";
 import {
   deleteIngredient,
@@ -32,6 +33,7 @@ function BurgerConstructor() {
 
   const totalPrice = useSelector(getTotalPice);
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const orderIsLoading = useSelector(getOrderLoading)
 
   const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(getBurgerConstructorIngradients);
 
@@ -161,6 +163,7 @@ function BurgerConstructor() {
             size="large"
             extraClass={classButton}
             onClick={clickOrderButton}
+            disabled={ingredientsConstructor.length < 1 || orderIsLoading}
           >
             Оформить заказ
           </Button>

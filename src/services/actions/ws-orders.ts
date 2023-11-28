@@ -22,8 +22,8 @@ type TWSGetMessageAction = {
   readonly type: typeof WS_GET_MESSAGE;
   readonly payload: {
     orders: Array<TOrder>,
-    count: number,
-    countToday: number
+    total: number,
+    totalToday: number
   }
 };
 

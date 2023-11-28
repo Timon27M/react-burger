@@ -11,15 +11,15 @@ import {
 type TWSOrdersState = {
     WSConnected: boolean,
     orders: Array<TOrder>,
-    count: number,
-    countToday: number,
+    total: number,
+    totalToday: number,
 }
 
 const initialState: TWSOrdersState = {
     WSConnected: false,
     orders: [],
-    count: 0,
-    countToday: 0
+    total: 0,
+    totalToday: 0
 }
 
 const wsOrdersReducer = (state = initialState, action: TWSOrdersActions) => {
@@ -51,8 +51,8 @@ const wsOrdersReducer = (state = initialState, action: TWSOrdersActions) => {
             return {
                 ...state,
                 orders: action.payload.orders,
-                count: action.payload.count,
-                countToday: action.payload.countToday,
+                total: action.payload.total,
+                totalToday: action.payload.totalToday,
                 
             }
         }

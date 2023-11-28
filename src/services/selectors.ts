@@ -24,6 +24,10 @@ export const getIsLoadingOrder = (state: RootState) => {
   return state.order.isLoading;
 };
 
+export const getIsOrders = (state: RootState) => {
+  return state.order.orders;
+};
+
 export const getIsOpenedPopupOrder = (state: RootState) => {
   return state.order.isOpenOrderPopup;
 };
@@ -49,13 +53,25 @@ export const getIsOpenResetPasswordPage = (state: RootState) => {
 };
 
 export const getWSOrders = (state: RootState) => {
-  return state.wsOrder.orders;
+  return state.wsOrders.orders;
 }
 
 export const getWSCountToday = (state: RootState) => {
-  return state.wsOrder.countToday;
+  return state.wsOrders.totalToday;
 }
 
 export const getWSCount = (state: RootState) => {
-  return state.wsOrder.count;
+  return state.wsOrders.total;
+}
+
+export const getOrderLoading = (state: RootState) => {
+  return state.order.isLoading;
+}
+
+export const getUserOrders = (state: RootState) => {
+  return state.wsUserOrders.userOrders;
+}
+
+export const getCurrentUserAccessToken = (state: RootState) => {
+  return state.currentUser.accessToken;
 }

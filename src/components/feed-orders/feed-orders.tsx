@@ -4,7 +4,7 @@ import { useSelector } from "../../utils/type-hooks";
 import { getWSOrders } from "../../services/selectors";
 
 function FeedOrders() {
-  const orders = useSelector(getWSOrders);
+  const wsOrders = useSelector(getWSOrders);
 
   return (
     <div className={`${styles.container}`}>
@@ -13,7 +13,7 @@ function FeedOrders() {
       </h2>
       <div className={`${styles.contant}`}>
         <>
-        {orders.map((item) => {
+        {wsOrders.map((item) => {
           return (
             <Order name={item.name} number={item.number} ingredients={item.ingredients} date={item.createdAt} />
             )

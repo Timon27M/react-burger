@@ -17,6 +17,8 @@ export const getUserRequest = (
           type: GET_USER_SUCCESS,
           payload: {
             user: res.user,
+            accessToken: getCookie('accessToken'),
+            refreshToken: getCookie('refreshToken'),
           },
         });
       }
@@ -27,4 +29,4 @@ export const getUserRequest = (
         dispatch(errFunc());
       }
     });
-}
+};

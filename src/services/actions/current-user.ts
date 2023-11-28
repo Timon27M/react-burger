@@ -1,19 +1,16 @@
 import api from "../../utils/api";
-import { deleteCookie, setCookie } from "../../utils/cookie";
+import { deleteCookie, getCookie, setCookie } from "../../utils/cookie";
 import { getUserRequest } from "../../utils/functions";
 import { AppDispacth } from "../../utils/type-hooks";
 import { TUserObj } from "../../utils/types";
+import { WS_USER_ORDERS_CONNECTION_CLOSED } from "./ws-user-orders";
 
 export const GET_USER_REQUEST: "GET_USER_REQUEST" = "GET_USER_REQUEST";
 export const GET_USER_SUCCESS: "GET_USER_SUCCESS" = "GET_USER_SUCCESS";
 export const GET_USER_FAILED: "GET_USER_FAILED" = "GET_USER_FAILED";
 
-export const DELETE_USER = "DELETE_USER";
-
-// interface ILoginUser {
-//   email: string;
-//   password: string;
-// }
+export const DELETE_USER: "DELETE_USER" = "DELETE_USER";
+export const UPDATE_TOKEN: "UPDATE_TOKEN" = "UPDATE_TOKEN";
 
 export const loginUser =
   ({ email, password }: any) =>
@@ -27,6 +24,8 @@ export const loginUser =
             type: GET_USER_SUCCESS,
             payload: {
               user: res.user,
+              accessToken: res.accessToken.split("Bearer ")[1],
+              refreshToken: res.refreshToken,
             },
           });
           setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
@@ -51,6 +50,8 @@ export const registerUser =
             type: GET_USER_SUCCESS,
             payload: {
               user: res.user,
+              accessToken: res.accessToken.split("Bearer ")[1],
+              refreshToken: res.refreshToken,
             },
           });
           setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
@@ -69,6 +70,7 @@ export const logoutUser = () => (dispatch: AppDispacth) => {
     .logoutUser()
     .then((res) => {
       dispatch({ type: DELETE_USER });
+      dispatch({ type: WS_USER_ORDERS_CONNECTION_CLOSED });
       deleteCookie("accessToken");
       deleteCookie("refreshToken");
     })
@@ -87,6 +89,8 @@ export const updateUser = (data: any) => (dispatch: AppDispacth) => {
           type: GET_USER_SUCCESS,
           payload: {
             user: res.user,
+            accessToken: getCookie('accessToken'),
+            refreshToken: getCookie('refreshToken'),
           },
         });
       }
@@ -104,6 +108,13 @@ const updateToken = () => (dispatch: AppDispacth) => {
       if (res && res.success) {
         setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
         setCookie("refreshToken", res.refreshToken);
+        dispatch({
+          type: UPDATE_TOKEN,
+          payload: {
+            accessToken: res.accessToken.split("Bearer ")[1],
+            refreshToken: res.refreshToken,
+          },
+        });
       }
     })
     .then(() => {
@@ -168,6 +179,8 @@ type TGetUserSuccessAction = {
   readonly type: typeof GET_USER_SUCCESS;
   readonly payload: {
     user: TUserObj;
+    accessToken: string | null;
+    refreshToken: string | null;
   };
 };
 
@@ -178,9 +191,17 @@ type TGetUserFailedAction = {
 type TDeleteUserAction = {
   readonly type: typeof DELETE_USER;
 };
+type TUPDATE_TOKEN = {
+  readonly type: typeof UPDATE_TOKEN;
+  readonly payload: {
+    accessToken: string | null;
+    refreshToken: string | null;
+  };
+};
 
 export type TCurrentUserActions =
   | TGetUserRequestAction
   | TGetUserSuccessAction
   | TGetUserFailedAction
-  | TDeleteUserAction;
+  | TDeleteUserAction
+  | TUPDATE_TOKEN;

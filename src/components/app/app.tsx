@@ -2,7 +2,7 @@ import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
 import { Routes, Route, useLocation, useNavigate, Location } from "react-router-dom";
-import { useDispatch } from "../../utils/type-hooks"; 
+import { useDispatch, useSelector } from "../../utils/type-hooks"; 
 import { useEffect } from "react";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
@@ -22,12 +22,19 @@ import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
 import Feed from "../../pages/feed/feed";
 import { WS_CONNECTION_START } from "../../services/actions/ws-orders";
+import OrdersHistory from "./orders-history/orders-history";
+import { WS_USER_ORDERS_CONNECTION_START } from "../../services/actions/ws-user-orders";
+import { getCurrentUserAccessToken, getIsLoggedIn } from "../../services/selectors";
+
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
+  const isLoggedIn = useSelector(getIsLoggedIn);
 
   const navigate = useNavigate();
+
+  const accessToken = useSelector(getCurrentUserAccessToken)
 
   const closePopupOrder = () => {
     dispatch(closeOrderPopup());
@@ -49,6 +56,12 @@ function App() {
     }
     dispatch(getIngradients(api));
   }, []);
+
+  useEffect(() => {
+    if (isLoggedIn && accessToken) {
+      dispatch({ type: WS_USER_ORDERS_CONNECTION_START })
+    }
+  }, [isLoggedIn, accessToken])
 
   return (
     <div className={styles.app}>
@@ -74,7 +87,7 @@ function App() {
         />
         <Route path="/profile/" element={<ProtectedRoute element={Profile} />}>
           <Route path="" element={<ProtectedRoute element={ProfileInfo} />} />
-          <Route path="orders" />
+          <Route path="orders" element={<ProtectedRoute element={OrdersHistory} />}/>
         </Route>
         <Route path="/ingredient/:id" element={<IngredientDetails />} />
         <Route path="*" element={<NotFound />} />
