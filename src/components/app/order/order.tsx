@@ -4,7 +4,6 @@ import {
   FormattedDate,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 import IngredientLogo from "../../ingredient-logo/ingredient-logo";
-import img from "../../../images/core.png";
 import { useSelector } from "../../../utils/type-hooks";
 import { FC } from "react";
 import { TIngradientObj } from "../../../utils/types";
@@ -15,9 +14,10 @@ type TOrderComponent = {
   name: string;
   ingredients: Array<string>;
   date: string;
+  status: string;
 };
 
-const Order: FC<TOrderComponent> = ({ number, name, ingredients, date }) => {
+const Order: FC<TOrderComponent> = ({ status, number, name, ingredients, date }) => {
   const today = new Date();
 
   const allIngredients: Array<TIngradientObj> = useSelector(getIngredients);
@@ -52,7 +52,18 @@ const Order: FC<TOrderComponent> = ({ number, name, ingredients, date }) => {
           <FormattedDate date={new Date(date)} />
         </div>
       </div>
-      <h2 className={`mt-6 mb-6 text text_type_main-medium`}>{name}</h2>
+      <h2 className={`mt-6 mb-2 text text_type_main-medium`}>{name}</h2>
+      <div className={`text text_type_main-small mb-6`}>
+        {status === 'created' && (
+           <p>Создан</p>
+        )}
+        {status === 'pending' && (
+           <p>Готовится</p>
+        )}
+        {status === 'done' && (
+           <p className={`${styles.textDone}`}>Выполнен</p>
+        )}
+        </div>
       <div className={`${styles.content}`}>
         <div className={`pl-5 ${styles.container}`}>
           {iconIngredients.map(

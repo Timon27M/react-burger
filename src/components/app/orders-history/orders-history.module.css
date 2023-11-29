@@ -1,0 +1,19 @@
+.container {
+  /* padding-right: 10px; */
+  text-align: left;
+  overflow: hidden;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  max-height: 800px;
+}
+
+.container::-webkit-scrollbar {
+  background-color: #2f2f37;
+  height: 8px;
+  width: 8px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+

@@ -11,11 +11,11 @@ function FeedOrders() {
       <h2 className={`mb-5 text text_type_main-large ${styles.title}`}>
         Лента заказов
       </h2>
-      <div className={`${styles.contant}`}>
+      <div className={`pr-4 ${styles.contant}`}>
         <>
         {wsOrders.map((item) => {
           return (
-            <Order name={item.name} number={item.number} ingredients={item.ingredients} date={item.createdAt} />
+            <Order status={item.status} name={item.name} number={item.number} ingredients={item.ingredients} date={item.createdAt} />
             )
         })}
         </>

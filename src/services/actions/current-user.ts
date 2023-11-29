@@ -20,6 +20,8 @@ export const loginUser =
       .loginUser(email, password)
       .then((res) => {
         if (res && res.success) {
+          setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
+          setCookie("refreshToken", res.refreshToken);
           dispatch({
             type: GET_USER_SUCCESS,
             payload: {
@@ -28,8 +30,6 @@ export const loginUser =
               refreshToken: res.refreshToken,
             },
           });
-          setCookie("accessToken", res.accessToken.split("Bearer ")[1]);
-          setCookie("refreshToken", res.refreshToken);
         }
       })
       .catch((err) => {

@@ -1,8 +1,12 @@
 .order {
     width: 100%;
-    max-width: 536px;
+    max-width: 556px;
     background-color: #1C1C21;
     border-radius: 40px;
+}
+
+.order:hover {
+    opacity: 0.7;
 }
 
 .data {
@@ -26,3 +30,7 @@
 .price {
     display: flex;
 }
+
+.textDone {
+    color: rgb(0, 204, 204);
+  }
