@@ -4,8 +4,6 @@ import { TWSStoreActions } from "../services/actions/ws-orders";
 import { TWSStoreUserOrdersActions } from "../services/actions/ws-user-orders";
 import { getCookie } from "./cookie";
 
-const accessToken: string | undefined = getCookie('accessToken')
-
 export const socketMiddleware = (
   wsUrl: string,
   wsActions: TWSStoreActions | TWSStoreUserOrdersActions
@@ -19,7 +17,8 @@ export const socketMiddleware = (
       const { wsInit, onOpen, onClose, onError, onMessage } = wsActions;
 
       if (type === wsInit) {
-      socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
+        const accessToken: string | undefined = getCookie("accessToken");
+        socket = new WebSocket(`${wsUrl}?token=${accessToken}`);
       }
 
       if (socket) {
@@ -38,12 +37,10 @@ export const socketMiddleware = (
         socket.onmessage = (event) => {
           const { data } = event;
           const dataParsed = JSON.parse(data);
-          console.log(dataParsed)
           const { success, ...restDataParsed } = dataParsed;
-          console.log(restDataParsed)
           dispatch({
             type: onMessage,
-            payload: restDataParsed
+            payload: restDataParsed,
           });
         };
       }

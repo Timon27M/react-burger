@@ -8,6 +8,8 @@ import { useSelector } from "../../../utils/type-hooks";
 import { FC } from "react";
 import { TIngradientObj } from "../../../utils/types";
 import { getIngredients } from "../../../services/selectors";
+import { Link, useLocation } from "react-router-dom";
+import uniqid from 'uniqid';
 
 type TOrderComponent = {
   number: number;
@@ -17,8 +19,14 @@ type TOrderComponent = {
   status: string;
 };
 
-const Order: FC<TOrderComponent> = ({ status, number, name, ingredients, date }) => {
-  const today = new Date();
+const Order: FC<TOrderComponent> = ({
+  status,
+  number,
+  name,
+  ingredients,
+  date,
+}) => {
+  const location = useLocation();
 
   const allIngredients: Array<TIngradientObj> = useSelector(getIngredients);
 
@@ -45,56 +53,56 @@ const Order: FC<TOrderComponent> = ({ status, number, name, ingredients, date })
     iconIngredients.length - 5 > 0 ? iconIngredients.length - 5 : undefined;
 
   return (
-    <div className={`p-6 mb-4 ${styles.order}`}>
-      <div className={`${styles.data}`}>
-        <p className={`text text_type_digits-default`}>{number}</p>
-        <div className={`text text_type_main-default text_color_inactive`}>
-          <FormattedDate date={new Date(date)} />
+    <Link
+      to={`/feed/${number}`}
+      state={{ background: location }}
+      className={styles.link}
+    >
+      <div className={`p-6 mb-4 ${styles.order}`}>
+        <div className={`${styles.data}`}>
+          <p className={`text text_type_digits-default`}>{number}</p>
+          <div className={`text text_type_main-default text_color_inactive`}>
+            <FormattedDate date={new Date(date)} />
+          </div>
         </div>
-      </div>
-      <h2 className={`mt-6 mb-2 text text_type_main-medium`}>{name}</h2>
-      <div className={`text text_type_main-small mb-6`}>
-        {status === 'created' && (
-           <p>Создан</p>
-        )}
-        {status === 'pending' && (
-           <p>Готовится</p>
-        )}
-        {status === 'done' && (
-           <p className={`${styles.textDone}`}>Выполнен</p>
-        )}
+        <h2 className={`mt-6 mb-2 text text_type_main-medium`}>{name}</h2>
+        <div className={`text text_type_main-small mb-6`}>
+          {status === "created" && <p>Создан</p>}
+          {status === "pending" && <p>Готовится</p>}
+          {status === "done" && (
+            <p className={`${styles.textDone}`}>Выполнен</p>
+          )}
         </div>
-      <div className={`${styles.content}`}>
-        <div className={`pl-5 ${styles.container}`}>
-          {iconIngredients.map(
-            (item: TIngradientObj | undefined, index: number) => {
-              if (index < 6) {
-                let last;
-                if (count !== undefined && index === 5) {
-                  last = true;
-                }
-                if (item !== undefined) {
-                  return (
-                    <IngredientLogo
-                      count={count}
-                      last={last}
-                      link={item.image}
-                    />
-                  );
+        <div className={`${styles.content}`}>
+          <div className={`pl-5 ${styles.container}`}>
+            {iconIngredients.map(
+              (item: TIngradientObj | undefined, index: number) => {
+                if (index < 6) {
+                  let last;
+                  if (count !== undefined && index === 5) {
+                    last = true;
+                  }
+                  if (item !== undefined) {
+                    return (
+                      <IngredientLogo
+                        key={uniqid()}
+                        count={count}
+                        last={last}
+                        link={item.image}
+                      />
+                    );
+                  }
                 }
               }
-            }
-          )}
-
-        </div>
-        <span className={`${styles.price}`}>
-          <p className="text text_type_digits-default mr-2">
-          {orderPrice} 
-          </p>
+            )}
+          </div>
+          <span className={`${styles.price}`}>
+            <p className="text text_type_digits-default mr-2">{orderPrice}</p>
             <CurrencyIcon type="primary" />
-        </span>
+          </span>
+        </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

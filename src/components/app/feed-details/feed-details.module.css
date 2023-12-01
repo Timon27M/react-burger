@@ -1,0 +1,53 @@
+.container {
+  width: 625px;
+}
+
+.ingradient {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.info {
+  width: 100%;
+  text-align: left;
+}
+
+.contant {
+  overflow-y: scroll;
+  max-height: calc(100vh - 685px);
+  scroll-behavior: smooth;
+}
+
+.contant::-webkit-scrollbar {
+  background-color: #2f2f37;
+  height: 8px;
+  width: 8px;
+}
+
+.contant::-webkit-scrollbar-thumb {
+  background-color: #8585ad;
+}
+
+.textDone {
+  color: rgb(0, 204, 204);
+}
+
+.image {
+  width: 64px;
+  height: 56px;
+  object-fit: cover;
+  border: 2px solid var(--button-normal, #801ab2);
+  border-radius: 50%;
+}
+
+.name {
+  text-align: left;
+  min-width: 414px;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

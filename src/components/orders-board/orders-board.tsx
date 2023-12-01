@@ -16,7 +16,7 @@ const OrdersBoard: FC<TOrdersBoard> = ({ title, orders }) => {
                 {
                 orders.map((item) => {
                     return (
-                        <p className={`text text_type_digits-default ${title === 'Готовы' && styles.orderNumber}`}>{item}</p>
+                        <p key={item} className={`text text_type_digits-default ${title === 'Готовы' && styles.orderNumber}`}>{item}</p>
                     )
                 })
                 }

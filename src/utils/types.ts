@@ -21,6 +21,11 @@ export type TIngradientObj = {
     readonly __v: number;
   };
 
+  export type TIngredientDetails = {
+    ingredient: TIngradientObj
+    sum: any
+  }
+
   export type TServerResponse<T> = {
     success: boolean;
   } & T;
@@ -120,6 +125,10 @@ export type TIngradientObj = {
       number: number,
       price: number
   }
+
+  export type TOrderRes = TServerResponse<{
+    orders: Array<TOrder>
+  }>
 
   export type TOwner = {
     owner: {

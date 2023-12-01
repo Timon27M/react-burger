@@ -13,11 +13,18 @@ function FeedOrders() {
       </h2>
       <div className={`pr-4 ${styles.contant}`}>
         <>
-        {wsOrders.map((item) => {
-          return (
-            <Order status={item.status} name={item.name} number={item.number} ingredients={item.ingredients} date={item.createdAt} />
-            )
-        })}
+          {wsOrders.map((item) => {
+            return (
+              <Order
+                key={item._id}
+                status={item.status}
+                name={item.name}
+                number={item.number}
+                ingredients={item.ingredients}
+                date={item.createdAt}
+              />
+            );
+          })}
         </>
       </div>
     </div>

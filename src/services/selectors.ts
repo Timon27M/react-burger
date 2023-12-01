@@ -4,17 +4,13 @@ export const getBurgerConstructorIngradients = (state: RootState) => {
   return state.burgerConstructor.constructorIngredients;
 };
 
-export const getTotalPice = (state: RootState) => {
+export const getTotalPrice = (state: RootState) => {
   return state.burgerConstructor.totalPrice;
 };
 
 export const getIsOpenedPopupIngradient = (state: RootState) => {
   return state.ingredientDetails.isPopupOpened;
 };
-
-// export const getSelectedIngradient = (state: RootState) => {
-//   return state.ingredientDetails.ingredient;
-// };
 
 export const getNumberOrder = (state: RootState) => {
   return state.order.lastNumberOrder;

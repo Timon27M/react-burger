@@ -89,8 +89,8 @@ export const updateUser = (data: any) => (dispatch: AppDispacth) => {
           type: GET_USER_SUCCESS,
           payload: {
             user: res.user,
-            accessToken: getCookie('accessToken'),
-            refreshToken: getCookie('refreshToken'),
+            accessToken: getCookie("accessToken"),
+            refreshToken: getCookie("refreshToken"),
           },
         });
       }

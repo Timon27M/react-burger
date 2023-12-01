@@ -5,7 +5,7 @@ import { useDrop } from "react-dnd/dist/hooks";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
 import {
   getBurgerConstructorIngradients,
-  getTotalPice,
+  getTotalPrice,
   getIsLoggedIn,
   getOrderLoading,
 } from "../../services/selectors";
@@ -31,7 +31,7 @@ function BurgerConstructor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const totalPrice = useSelector(getTotalPice);
+  const totalPrice = useSelector(getTotalPrice);
   const isLoggedIn = useSelector(getIsLoggedIn);
   const orderIsLoading = useSelector(getOrderLoading)
 

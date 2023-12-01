@@ -1,8 +1,14 @@
 import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
-import { Routes, Route, useLocation, useNavigate, Location } from "react-router-dom";
-import { useDispatch, useSelector } from "../../utils/type-hooks"; 
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Location,
+} from "react-router-dom";
+import { useDispatch, useSelector } from "../../utils/type-hooks";
 import { useEffect } from "react";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
@@ -12,9 +18,8 @@ import Profile from "../../pages/profile/profile";
 import ProfileInfo from "../profile-info/profile-info";
 import ProtectedRoute from "../protected-route/protected-route";
 import { getUser } from "../../services/actions/current-user";
-import { deleteCookie, getCookie } from "../../utils/cookie";
+import { getCookie } from "../../utils/cookie";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-// import OrdersHistory from "./orders-history/orders-history";
 import { closeOrderPopup } from "../../services/actions/order";
 import IngredientPopup from "../../pages/ingredient-popup/ingredient-popup";
 import { getIngradients } from "../../services/actions/ingredients";
@@ -24,8 +29,12 @@ import Feed from "../../pages/feed/feed";
 import { WS_CONNECTION_START } from "../../services/actions/ws-orders";
 import OrdersHistory from "./orders-history/orders-history";
 import { WS_USER_ORDERS_CONNECTION_START } from "../../services/actions/ws-user-orders";
-import { getCurrentUserAccessToken, getIsLoggedIn } from "../../services/selectors";
-
+import {
+  getCurrentUserAccessToken,
+  getIsLoggedIn,
+} from "../../services/selectors";
+import FeedDetails from "./feed-details/feed-details";
+import FeedPopup from "../../pages/feed-popup/feed-popup";
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +43,7 @@ function App() {
 
   const navigate = useNavigate();
 
-  const accessToken = useSelector(getCurrentUserAccessToken)
+  const accessToken = useSelector(getCurrentUserAccessToken);
 
   const closePopupOrder = () => {
     dispatch(closeOrderPopup());
@@ -44,14 +53,15 @@ function App() {
     navigate(-1);
   };
 
-  const locationState = location.state as { background: Location }
+  const locationState = location.state as { background: Location };
 
   const background = locationState && locationState.background;
 
   useEffect(() => {
     const token = getCookie("accessToken");
-    dispatch({ type: WS_CONNECTION_START })
+    dispatch({ type: WS_CONNECTION_START });
     if (token) {
+      console.log(token)
       dispatch(getUser());
     }
     dispatch(getIngradients(api));
@@ -59,16 +69,16 @@ function App() {
 
   useEffect(() => {
     if (isLoggedIn && accessToken) {
-      dispatch({ type: WS_USER_ORDERS_CONNECTION_START })
+      dispatch({ type: WS_USER_ORDERS_CONNECTION_START });
     }
-  }, [isLoggedIn, accessToken])
+  }, [accessToken]);
 
   return (
     <div className={styles.app}>
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Main closePopup={closePopupOrder} />} />
-        <Route path="/feed" element={<Feed />} /> 
+        <Route path="/feed" element={<Feed />} />
         <Route
           path="/login"
           element={<ProtectedRoute element={Login} auth />}
@@ -87,9 +97,13 @@ function App() {
         />
         <Route path="/profile/" element={<ProtectedRoute element={Profile} />}>
           <Route path="" element={<ProtectedRoute element={ProfileInfo} />} />
-          <Route path="orders" element={<ProtectedRoute element={OrdersHistory} />}/>
+          <Route
+            path="orders"
+            element={<ProtectedRoute element={OrdersHistory} />}
+          />
         </Route>
         <Route path="/ingredient/:id" element={<IngredientDetails />} />
+        <Route path="/feed/:number" element={<FeedDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {background && (
@@ -99,6 +113,10 @@ function App() {
             element={
               <IngredientPopup closePopup={closePopupIngredientDetails} />
             }
+          />
+          <Route
+            path="/feed/:number"
+            element={<FeedPopup closePopup={closePopupIngredientDetails} />}
           />
         </Routes>
       )}

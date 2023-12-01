@@ -1,36 +1,41 @@
+.link {
+  text-decoration: none;
+  color: white;
+}
+
 .order {
-    width: 100%;
-    max-width: 556px;
-    background-color: #1C1C21;
-    border-radius: 40px;
+  width: 100%;
+  max-width: 556px;
+  background-color: #1c1c21;
+  border-radius: 40px;
 }
 
 .order:hover {
-    opacity: 0.7;
+  opacity: 0.7;
 }
 
 .data {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .container {
-    display: flex;
-    max-width: 300px;
-    overflow: hidden;
+  display: flex;
+  max-width: 300px;
+  overflow: hidden;
 }
 
 .content {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .price {
-    display: flex;
+  display: flex;
 }
 
 .textDone {
-    color: rgb(0, 204, 204);
-  }
+  color: rgb(0, 204, 204);
+}
