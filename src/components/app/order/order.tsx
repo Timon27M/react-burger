@@ -36,11 +36,7 @@ const Order: FC<TOrderComponent> = ({
     (ingredient) => {
       const iconIngredient = allIngredients.find((item) => {
         if (item._id === ingredient) {
-          if (item.type === "bun") {
-            orderPrice += item.price * 2;
-          } else {
             orderPrice += item.price;
-          }
           return item;
         }
       });

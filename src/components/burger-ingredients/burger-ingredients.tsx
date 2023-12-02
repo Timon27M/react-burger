@@ -9,7 +9,6 @@ import { getIngredients } from "../../services/selectors";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState("Булки");
-  // @ts-ignore
   const ingredients: Array<TIngradientObj> = useSelector(getIngredients);
 
   const containerRef = useRef<HTMLDivElement>(null);

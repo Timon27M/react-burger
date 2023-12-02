@@ -2,7 +2,7 @@ import api from "../../utils/api";
 import { deleteCookie, getCookie, setCookie } from "../../utils/cookie";
 import { getUserRequest } from "../../utils/functions";
 import { AppDispacth } from "../../utils/type-hooks";
-import { TUserObj } from "../../utils/types";
+import { TLoginUser, TUserInfo, TUserObj } from "../../utils/types";
 import { WS_USER_ORDERS_CONNECTION_CLOSED } from "./ws-user-orders";
 
 export const GET_USER_REQUEST: "GET_USER_REQUEST" = "GET_USER_REQUEST";
@@ -13,7 +13,7 @@ export const DELETE_USER: "DELETE_USER" = "DELETE_USER";
 export const UPDATE_TOKEN: "UPDATE_TOKEN" = "UPDATE_TOKEN";
 
 export const loginUser =
-  ({ email, password }: any) =>
+  ( email: string, password: string ) =>
   (dispatch: AppDispacth) => {
     dispatch({ type: GET_USER_REQUEST });
     api
@@ -39,7 +39,7 @@ export const loginUser =
   };
 
 export const registerUser =
-  ({ name, email, password }: any) =>
+  ( name: string, email: string, password: string ) =>
   (dispatch: AppDispacth) => {
     dispatch({ type: GET_USER_REQUEST });
     api
@@ -79,10 +79,10 @@ export const logoutUser = () => (dispatch: AppDispacth) => {
     });
 };
 
-export const updateUser = (data: any) => (dispatch: AppDispacth) => {
+export const updateUser = (name: string, email: string) => (dispatch: AppDispacth) => {
   dispatch({ type: GET_USER_REQUEST });
   api
-    .updateUser(data.name, data.email)
+    .updateUser(name, email)
     .then((res) => {
       if (res && res.success) {
         dispatch({

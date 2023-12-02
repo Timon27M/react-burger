@@ -1,4 +1,5 @@
 import { getCookie } from "./cookie";
+import { AppDispacth } from "./type-hooks";
 import { TGetUser } from "./types";
 
 export const getUserRequest = (
@@ -23,7 +24,7 @@ export const getUserRequest = (
         });
       }
     })
-    .catch((err: any) => {
+    .catch((err: string) => {
       console.log(err);
       if (errFunc && getCookie("refreshToken")) {
         dispatch(errFunc());

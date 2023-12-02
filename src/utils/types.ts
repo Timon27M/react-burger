@@ -21,11 +21,6 @@ export type TIngradientObj = {
     readonly __v: number;
   };
 
-  export type TIngredientDetails = {
-    ingredient: TIngradientObj
-    sum: any
-  }
-
   export type TServerResponse<T> = {
     success: boolean;
   } & T;
@@ -48,7 +43,6 @@ export type TIngradientObj = {
   export type TIngredients = TServerResponse<{
     data: TIngradientObj
   }>
-  // export type TIngredients = TServerResponse<TIngradientObj>
   
   export type TOrderAdd = TServerResponse<{
     name: string;
@@ -63,11 +57,6 @@ export type TIngradientObj = {
     refreshToken: string,
   }
   >
-  // export type TUserCreate = TServerResponse<{
-  //   email: string;
-  //   password: string;
-  //   name: string;
-  // }>
   
   export type TUserLogin = TServerResponse<{
     user: TUserInfo
@@ -75,23 +64,10 @@ export type TIngradientObj = {
     refreshToken: string,
   }> 
 
-  // export type TResUpdateToken = TServerResponse<{
-  //   accessToken: string,
-  //   refreshToken: string,
-  // }>
-
-  // export type TUserLogin = TServerResponse<{
-  //   email: string;
-  //   password: string;
-  // }> 
-  
   export type TUpdateToken = TServerResponse<{
     accessToken: string,
     refreshToken: string,
   }>
-  // export type TUpdateToken = TServerResponse<{
-  //   token: string;
-  // }>
   
   export type TMessageResponse = TServerResponse<{
     message: string;
@@ -151,4 +127,9 @@ export type TIngradientObj = {
   
     id?: string;
     isBot?: boolean;
+  }
+
+  export type TLoginUser = {
+    email: string,
+    password: string
   }

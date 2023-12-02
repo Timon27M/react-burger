@@ -1,11 +1,12 @@
 .container {
-  width: 625px;
+  width: 655px;
 }
 
 .ingradient {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  text-align: left;
 }
 
 .info {
@@ -50,4 +51,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.total {
+  text-align: left;
+  min-width: 50px;
 }

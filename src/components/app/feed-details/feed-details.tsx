@@ -36,27 +36,22 @@ function FeedDetails() {
   useEffect(() => {
     if (order) {
       if (order) {
+        let newPrice: number = 0;
         const orderIngredients = order.ingredients.map((ingredient) => {
           return ingredientsAll.find((item) => {
             if (item._id === ingredient) {
+              newPrice += item.price
               return item;
             }
           });
         });
-        setIngredients(orderIngredients);
+        setPrice(newPrice);
+        const uniqOrderIngredients = new Set(orderIngredients)
+        setIngredients(Array.from(uniqOrderIngredients));
+
       }
     }
   }, [order, ingredientsAll]);
-
-  useEffect(() => {
-    if (ingredients) {
-      let newPrice: number = 0;
-      ingredients.forEach((item) => {
-        if (item?.price !== undefined) newPrice += item?.price;
-      });
-      setPrice(newPrice);
-    }
-  }, [ingredients]);
 
   return (
     <>
@@ -94,9 +89,10 @@ function FeedDetails() {
           </p>
           <div className={`${styles.contant} pr-2`}>
             {ingredients.map((item) => {
+             const total = order.ingredients.filter((ingredient) => ingredient === item?._id).length;
               if (item) {
                 return (
-                  <div className={`${styles.ingradient} mt-4`}>
+                  <div key={item._id} className={`${styles.ingradient} mt-4`}>
                     <img
                       className={`${styles.image}`}
                       src={item.image}
@@ -107,8 +103,8 @@ function FeedDetails() {
                     >
                       {item.name}
                     </p>
-                    <p className={`text text_type_digits-default ml-4`}>
-                      {item.price} <CurrencyIcon type="primary" />
+                    <p className={`text text_type_digits-default ml-4 ${styles.total}`}>
+                      {total} x {item.price} <CurrencyIcon type="primary" />
                     </p>
                   </div>
                 );

@@ -20,7 +20,7 @@ function Login() {
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
-    dispatch(loginUser(inputValues));
+    dispatch(loginUser(inputValues.email, inputValues.password));
   }
 
   return (

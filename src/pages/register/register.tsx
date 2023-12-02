@@ -22,7 +22,7 @@ function Register() {
   function handleSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
 
-    dispatch(registerUser(inputValues));
+    dispatch(registerUser(inputValues.name, inputValues.email, inputValues.password));
   }
 
   return (

@@ -59,9 +59,7 @@ function App() {
 
   useEffect(() => {
     const token = getCookie("accessToken");
-    dispatch({ type: WS_CONNECTION_START });
     if (token) {
-      console.log(token)
       dispatch(getUser());
     }
     dispatch(getIngradients(api));
@@ -100,7 +98,7 @@ function App() {
           <Route
             path="orders"
             element={<ProtectedRoute element={OrdersHistory} />}
-          />
+          />  
         </Route>
         <Route path="/ingredient/:id" element={<IngredientDetails />} />
         <Route path="/feed/:number" element={<FeedDetails />} />
