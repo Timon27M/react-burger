@@ -26,24 +26,15 @@ import { getIngradients } from "../../services/actions/ingredients";
 import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
 import Feed from "../../pages/feed/feed";
-import { WS_CONNECTION_START } from "../../services/actions/ws-orders";
 import OrdersHistory from "./orders-history/orders-history";
-import { WS_USER_ORDERS_CONNECTION_START } from "../../services/actions/ws-user-orders";
-import {
-  getCurrentUserAccessToken,
-  getIsLoggedIn,
-} from "../../services/selectors";
 import FeedDetails from "./feed-details/feed-details";
 import FeedPopup from "../../pages/feed-popup/feed-popup";
 
 function App() {
   const dispatch = useDispatch();
   const location = useLocation();
-  const isLoggedIn = useSelector(getIsLoggedIn);
 
   const navigate = useNavigate();
-
-  const accessToken = useSelector(getCurrentUserAccessToken);
 
   const closePopupOrder = () => {
     dispatch(closeOrderPopup());
@@ -64,12 +55,6 @@ function App() {
     }
     dispatch(getIngradients(api));
   }, []);
-
-  useEffect(() => {
-    if (isLoggedIn && accessToken) {
-      dispatch({ type: WS_USER_ORDERS_CONNECTION_START });
-    }
-  }, [accessToken]);
 
   return (
     <div className={styles.app}>

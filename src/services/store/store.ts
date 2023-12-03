@@ -17,7 +17,8 @@ export type AppActions =
   | TIndgredientsActions
   | TIngredientDetailsActions
   | TResetPasswordActions
-  | TOrderActions;
+  | TOrderActions
+  | TWSOrdersActions;
 
   const wsActions: TWSStoreActions = {
     wsInit: WS_CONNECTION_START,

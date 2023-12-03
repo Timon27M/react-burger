@@ -1,3 +1,4 @@
+import { AppDispacth } from "../../utils/type-hooks";
 import { TIngradientObj, TIngradientObjConstructor } from "../../utils/types";
 import { nanoid } from "nanoid";
 
@@ -17,7 +18,7 @@ export const deleteIngredient = (uniqId: string) => ({
   payload: uniqId,
 });
 export const updateTotalPrice = () => ({ type: ADD_TOTALPRICE });
-export const deleteIngredientsConstructor = () => (dispatch: any) => {
+export const deleteIngredientsConstructor = () => (dispatch: AppDispacth) => {
   dispatch({ type: DELETE_INGREDIENTS });
 };
 
