@@ -1,22 +1,28 @@
-import { GET_RESET_PASSWORD_PAGE, TResetPasswordActions } from "../actions/reset-password";
+import {
+  GET_RESET_PASSWORD_PAGE,
+  TResetPasswordActions,
+} from "../actions/reset-password";
 
 type TResetPasswordState = {
-    isOpenResetPasswordPage: boolean
-}
+  isOpenResetPasswordPage: boolean;
+};
 
 const initialState: TResetPasswordState = {
-    isOpenResetPasswordPage: false
-}
+  isOpenResetPasswordPage: false,
+};
 
-const resetPasswordReducer = (state = initialState, action: TResetPasswordActions) => {
-    switch (action.type) {
-        case GET_RESET_PASSWORD_PAGE: {
-            return {...state, isOpenResetPasswordPage: action.payload}
-        }
-        default: {
-            return state
-        }
+const resetPasswordReducer = (
+  state = initialState,
+  action: TResetPasswordActions
+) => {
+  switch (action.type) {
+    case GET_RESET_PASSWORD_PAGE: {
+      return { ...state, isOpenResetPasswordPage: action.payload };
     }
-}
+    default: {
+      return state;
+    }
+  }
+};
 
-export default resetPasswordReducer
+export default resetPasswordReducer;

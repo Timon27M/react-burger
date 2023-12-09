@@ -2,6 +2,7 @@ import styles from "./burger-constructor.module.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "../../utils/type-hooks";
 import { useDrop } from "react-dnd/dist/hooks";
+import { nanoid } from "nanoid";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
 import {
   getBurgerConstructorIngradients,
@@ -81,7 +82,8 @@ function BurgerConstructor() {
           }
         });
       }
-      dispatch(addIngredient(ingredient));
+      const newId = nanoid();
+      dispatch(addIngredient(ingredient, newId));
       dispatch(updateTotalPrice());
     },
     collect: (monitor) => ({

@@ -1,6 +1,5 @@
 import { AppDispacth } from "../../utils/type-hooks";
 import { TIngradientObj, TIngradientObjConstructor } from "../../utils/types";
-import { nanoid } from "nanoid";
 
 export const ADD_INGREDIENT: "ADD_INGREDIENT" = "ADD_INGREDIENT";
 export const DELETE_INGREDIENT: "DELETE_INGREDIENT" = "DELETE_INGREDIENT";
@@ -9,9 +8,9 @@ export const ADD_TOTALPRICE: "ADD_TOTALPRICE" = "ADD_TOTALPRICE";
 export const UPDATE_SORT_INGREDIENTS: "UPDATE_SORT_INGREDIENTS" =
   "UPDATE_SORT_INGREDIENTS";
 
-export const addIngredient = (ingredientObj: TIngradientObj) => ({
+export const addIngredient = (ingredientObj: TIngradientObj, id: string) => ({
   type: ADD_INGREDIENT,
-  payload: { ...ingredientObj, uniqId: nanoid() },
+  payload: { ...ingredientObj, uniqId: id },
 });
 export const deleteIngredient = (uniqId: string) => ({
   type: DELETE_INGREDIENT,
