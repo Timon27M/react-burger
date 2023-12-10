@@ -1,8 +1,14 @@
 import styles from "./app.module.css";
 import Main from "../../pages/main/main";
 import AppHeader from "../app-header/app-header";
-import { Routes, Route, useLocation, useNavigate, Location } from "react-router-dom";
-import { useDispatch } from "../../utils/type-hooks"; 
+import {
+  Routes,
+  Route,
+  useLocation,
+  useNavigate,
+  Location,
+} from "react-router-dom";
+import { useDispatch, useSelector } from "../../utils/type-hooks";
 import { useEffect } from "react";
 import Login from "../../pages/login/login";
 import Register from "../../pages/register/register";
@@ -14,12 +20,15 @@ import ProtectedRoute from "../protected-route/protected-route";
 import { getUser } from "../../services/actions/current-user";
 import { getCookie } from "../../utils/cookie";
 import IngredientDetails from "../ingredient-details/ingredient-details";
-// import OrdersHistory from "./orders-history/orders-history";
 import { closeOrderPopup } from "../../services/actions/order";
 import IngredientPopup from "../../pages/ingredient-popup/ingredient-popup";
 import { getIngradients } from "../../services/actions/ingredients";
 import api from "../../utils/api";
 import NotFound from "../../pages/not-found/not-found";
+import Feed from "../../pages/feed/feed";
+import OrdersHistory from "./orders-history/orders-history";
+import FeedDetails from "./feed-details/feed-details";
+import FeedPopup from "../../pages/feed-popup/feed-popup";
 
 function App() {
   const dispatch = useDispatch();
@@ -35,7 +44,7 @@ function App() {
     navigate(-1);
   };
 
-  const locationState = location.state as { background: Location }
+  const locationState = location.state as { background: Location };
 
   const background = locationState && locationState.background;
 
@@ -52,6 +61,7 @@ function App() {
       <AppHeader />
       <Routes location={background || location}>
         <Route path="/" element={<Main closePopup={closePopupOrder} />} />
+        <Route path="/feed" element={<Feed />} />
         <Route
           path="/login"
           element={<ProtectedRoute element={Login} auth />}
@@ -70,9 +80,13 @@ function App() {
         />
         <Route path="/profile/" element={<ProtectedRoute element={Profile} />}>
           <Route path="" element={<ProtectedRoute element={ProfileInfo} />} />
-          <Route path="orders" />
+          <Route
+            path="orders"
+            element={<ProtectedRoute element={OrdersHistory} />}
+          />  
         </Route>
         <Route path="/ingredient/:id" element={<IngredientDetails />} />
+        <Route path="/feed/:number" element={<FeedDetails />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       {background && (
@@ -82,6 +96,10 @@ function App() {
             element={
               <IngredientPopup closePopup={closePopupIngredientDetails} />
             }
+          />
+          <Route
+            path="/feed/:number"
+            element={<FeedPopup closePopup={closePopupIngredientDetails} />}
           />
         </Routes>
       )}

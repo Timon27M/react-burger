@@ -5,8 +5,9 @@ import { useDrop } from "react-dnd/dist/hooks";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
 import {
   getBurgerConstructorIngradients,
-  getTotalPice,
+  getTotalPrice,
   getIsLoggedIn,
+  getOrderLoading,
 } from "../../services/selectors";
 import {
   deleteIngredient,
@@ -22,11 +23,7 @@ import { useNavigate } from "react-router-dom";
 import { addIngredient } from "../../services/actions/burger-constructor";
 import ingredientsApi from "../../utils/api";
 import { getOrder } from "../../services/actions/order";
-import { TIngradientObj } from "../../utils/types";
-
-type TIngradientObjConstructor = TIngradientObj & {
-  readonly uniqId: string;
-};
+import { TIngradientObjConstructor } from "../../utils/types";
 
 function BurgerConstructor() {
   const [ingradientBun, setIngradientBun] =
@@ -34,8 +31,9 @@ function BurgerConstructor() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const totalPrice = useSelector(getTotalPice);
+  const totalPrice = useSelector(getTotalPrice);
   const isLoggedIn = useSelector(getIsLoggedIn);
+  const orderIsLoading = useSelector(getOrderLoading)
 
   const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(getBurgerConstructorIngradients);
 
@@ -59,10 +57,10 @@ function BurgerConstructor() {
       const ingradientsOrderId = [...ingredientsConstructor].map((item) => {
         return item._id;
       });
-      const ingradientsObj = {
+      const ingradientsId = {
         ingredients: ingradientsOrderId,
       };
-      dispatch(getOrder(ingredientsApi, ingradientsObj));
+      dispatch(getOrder(ingredientsApi, ingradientsId));
     } else {
       navigate("/login");
     }
@@ -165,6 +163,7 @@ function BurgerConstructor() {
             size="large"
             extraClass={classButton}
             onClick={clickOrderButton}
+            disabled={ingredientsConstructor.length < 1 || orderIsLoading}
           >
             Оформить заказ
           </Button>

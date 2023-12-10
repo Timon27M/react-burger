@@ -5,11 +5,11 @@ import { useSelector } from "../../utils/type-hooks";
 import { useState, useRef } from "react";
 import IngradientCard from "../ingradient-card/ingradient-card";
 import { TIngradientObj } from "../../utils/types";
+import { getIngredients } from "../../services/selectors";
 
 const BurgerIngredients = () => {
   const [current, setCurrent] = useState("Булки");
-  // @ts-ignore
-  const ingredients: Array<TIngradientObj> = useSelector((state) => state.ingredients.ingredients);
+  const ingredients: Array<TIngradientObj> = useSelector(getIngredients);
 
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -18,12 +18,17 @@ const BurgerIngredients = () => {
   const mainRef = useRef<HTMLHeadingElement>(null);
 
   function handleScroll() {
-    if (containerRef.current && bunRef.current && sauceRef.current && mainRef.current) {
+    if (
+      containerRef.current &&
+      bunRef.current &&
+      sauceRef.current &&
+      mainRef.current
+    ) {
       const bunDistance = Math.abs(
         bunRef.current.getBoundingClientRect().top -
           containerRef.current.getBoundingClientRect().top
       );
-   
+
       const mainDistance = Math.abs(
         mainRef.current.getBoundingClientRect().top -
           containerRef.current.getBoundingClientRect().top
@@ -33,17 +38,15 @@ const BurgerIngredients = () => {
         sauceRef.current.getBoundingClientRect().top -
           containerRef.current.getBoundingClientRect().top
       );
-    
-  
 
-    if (bunDistance < sauceDistance && bunDistance < mainDistance) {
-      setCurrent("Булки");
-    } else if (sauceDistance < mainDistance && sauceDistance < bunDistance) {
-      setCurrent("Соусы");
-    } else if (mainDistance < bunDistance && mainDistance < sauceDistance) {
-      setCurrent("Начинки");
+      if (bunDistance < sauceDistance && bunDistance < mainDistance) {
+        setCurrent("Булки");
+      } else if (sauceDistance < mainDistance && sauceDistance < bunDistance) {
+        setCurrent("Соусы");
+      } else if (mainDistance < bunDistance && mainDistance < sauceDistance) {
+        setCurrent("Начинки");
+      }
     }
-  }
   }
 
   return (
@@ -181,6 +184,6 @@ const BurgerIngredients = () => {
       </div>
     </section>
   );
-}
+};
 
 export default BurgerIngredients;

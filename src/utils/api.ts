@@ -8,6 +8,7 @@ import {
   TUpdateToken,
   TMessageResponse,
   TGetUser,
+  TOrderRes,
 } from "./types";
 
 class Api {
@@ -147,6 +148,15 @@ class Api {
         token: token,
       }),
     }).then((res) => this._checkStatus<TMessageResponse>(res));
+  }
+
+  getOrder(number: string): Promise<TOrderRes> {
+    return fetch(this._baseUrl + `/orders/${number}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res) => this._checkStatus<TOrderRes>(res));
   }
 }
 

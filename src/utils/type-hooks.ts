@@ -6,10 +6,10 @@ import {
 import store from "../services/store/store";
 import rootReducer from "../services/reducers/root-reducer";
 
-type AppDispacth = typeof store.dispatch;
-
-type DispatchFunc = () => AppDispacth;
 type RootState = ReturnType<typeof rootReducer>
+export type AppDispacth = typeof store.dispatch;
+
+export type DispatchFunc = () => AppDispacth;
 
 
 export const useSelector: TypedUseSelectorHook<RootState> = selector;

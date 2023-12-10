@@ -1,0 +1,9 @@
+.ordersBoards {
+    display: flex;
+    gap: 28px;
+    text-align: left;
+}
+
+.ordersInfo {
+    text-align: left;
+}

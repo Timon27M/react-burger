@@ -1,12 +1,13 @@
 import { getCookie } from "./cookie";
+import { AppDispacth } from "./type-hooks";
 import { TGetUser } from "./types";
 
 export const getUserRequest = (
-  dispatch: any,
+  dispatch: AppDispacth,
   api: any,
   GET_USER_REQUEST: string,
   GET_USER_SUCCESS: string,
-  errFunc: () => void
+  errFunc: () => (dispatch: AppDispacth) => void
 ) => {
   dispatch({ type: GET_USER_REQUEST });
   api
@@ -17,14 +18,16 @@ export const getUserRequest = (
           type: GET_USER_SUCCESS,
           payload: {
             user: res.user,
+            accessToken: getCookie('accessToken'),
+            refreshToken: getCookie('refreshToken'),
           },
         });
       }
     })
-    .catch((err: any) => {
+    .catch((err: string) => {
       console.log(err);
       if (errFunc && getCookie("refreshToken")) {
         dispatch(errFunc());
       }
     });
-}
+};

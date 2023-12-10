@@ -1,0 +1,26 @@
+.container {
+    min-width: 636px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.contant {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow-y: scroll;
+    max-height: calc(100vh - 330px);
+    max-width: 600px;
+    scroll-behavior: smooth;
+}
+
+.contant::-webkit-scrollbar {
+    background-color: #2f2f37;
+    height: 8px;
+    width: 8px;
+}
+
+.contant::-webkit-scrollbar-thumb {
+    background-color: #8585ad;
+}

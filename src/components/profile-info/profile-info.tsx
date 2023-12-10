@@ -39,7 +39,7 @@ function ProfileInfo() {
 
   function handleSubmit(evt: React.SyntheticEvent) {
     evt.preventDefault();
-    dispatch(updateUser(inputValues));
+    dispatch(updateUser(inputValues.name, inputValues.email));
   }
 
   function clickCancel(evt: React.SyntheticEvent) {

@@ -1,47 +1,47 @@
 .root {
-    display: flex;
-    width: 50%;
-    justify-content: end;
+  display: flex;
+  width: 50%;
+  justify-content: end;
 }
 
 .mainContent {
-    max-width: 600px;
-    display: flex;
-    flex-direction: column;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
 }
 
 .title {
-    width: 100%;
-    text-align: start;
+  width: 100%;
+  text-align: start;
 }
 
 .navBar {
-    display: flex;
+  display: flex;
 }
 
 .modalBlock {
-    overflow-y: scroll;
-    max-height: calc(100vh - 330px);
-    scroll-behavior: smooth;
+  overflow-y: scroll;
+  max-height: calc(100vh - 330px);
+  scroll-behavior: smooth;
 }
 
 .modalBlock::-webkit-scrollbar {
-    background-color: #2f2f37;
-    height: 8px;
-    width: 8px;
+  background-color: #2f2f37;
+  height: 8px;
+  width: 8px;
 }
 
 .modalBlock::-webkit-scrollbar-thumb {
-    background-color: #8585ad;
+  background-color: #8585ad;
 }
 
 .container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 24px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 24px;
 }
 
 .titleIngradient {
-    width: 100%;
-    text-align: left;
+  width: 100%;
+  text-align: left;
 }

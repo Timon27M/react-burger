@@ -1,12 +1,18 @@
 import {
   OPEN_INGREDIENT_POPUP,
   CLOSE_INGREDIENT_POPUP,
+  TIngredientDetailsActions,
 } from "../actions/ingredient-details";
-const initialState = {
+
+type TIngredientDetailsState = {
+  isPopupOpened: boolean
+}
+
+const initialState: TIngredientDetailsState = {
   isPopupOpened: false,
 };
 
-const ingredientDetailsReducer = (state = initialState, action) => {
+const ingredientDetailsReducer = (state = initialState, action: TIngredientDetailsActions) => {
   switch (action.type) {
     case OPEN_INGREDIENT_POPUP: {
       return { ...state, isPopupOpened: true };

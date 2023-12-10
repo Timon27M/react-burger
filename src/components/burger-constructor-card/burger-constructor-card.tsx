@@ -18,11 +18,8 @@ const BurgerConstructorCard: FC<IBurgerConstructorCard> = ({ children, index }) 
   const dispatch = useDispatch();
   const ref = useRef(null);
 
-  const [{ isHover }, dropRef] = useDrop<any, any, any>({
+  const [{ isHover }, dropRef] = useDrop({
     accept: "ingridient",
-    collect: (monitor) => ({
-      isHover: monitor.isOver(),
-    }),
     drop(item: IItemId) {
       const dragIndex = item.index;
       const hoverIndex = index;
@@ -30,7 +27,7 @@ const BurgerConstructorCard: FC<IBurgerConstructorCard> = ({ children, index }) 
       if (dragIndex === hoverIndex) {
         return;
       }
-
+      
       dispatch({
         type: UPDATE_SORT_INGREDIENTS,
         dragIndex: Number(dragIndex),
@@ -38,6 +35,9 @@ const BurgerConstructorCard: FC<IBurgerConstructorCard> = ({ children, index }) 
       });
       item.index = index;
     },
+    collect: (monitor) => ({
+      isHover: monitor.isOver(),
+    }),
   });
 
   const [{ isDragging }, dragRef] = useDrag({
