@@ -15,7 +15,7 @@ function OrderDetails() {
         </h2>
       ) : (
         <div className={styles.content}>
-          <h2 className={`mt-10 text text_type_digits-large ${styles.number}`}>
+          <h2 data-test="orderNumber" className={`mt-10 text text_type_digits-large ${styles.number}`}>
             {numberOrder}
           </h2>
           <p className={`mt-8 text text_type_main-medium ${styles.title}`}>

@@ -38,11 +38,13 @@ function Login() {
           value={inputValues.email}
           onChange={handleChange}
           extraClass="mb-6"
+          data-testid='email_input'
         />
         <PasswordInput
           name="password"
           value={inputValues.password}
           onChange={handleChange}
+          data-testid='password_input'
         />
       </ComponentAuth>
       <p className="mt-20 text text_type_main-default text_color_inactive">

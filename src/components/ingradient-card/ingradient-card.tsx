@@ -46,6 +46,7 @@ const IngradientCard: FC<IIngradientCard> = ({ image, price, name, ingradient })
       state={{ background: location }}
       className={styles.container}
       ref={dragRef}
+      data-test="ingredientItem"
     >
       <img className={styles.image} src={image} alt="картинка" />
       <p className={`text text_type_digits-default m-2 ${styles.price}`}>

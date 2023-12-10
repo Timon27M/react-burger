@@ -97,10 +97,10 @@ function BurgerConstructor() {
     <section className={styles.root}>
       <div
         className={`mt-25 ml-10 ${styles.mainContent} ${backgroundOpacity}`}
-        ref={drop}
+        ref={drop} data-test="constructorContainer"
       >
         {ingredientsConstructor.length > 0 ? (
-          <div className={styles.container}>
+          <div className={styles.container} data-test="constructorBunTop">
             {ingradientBun && (
               <div className={`pl-8 pr-4`}>
                 <ConstructorElement
@@ -114,7 +114,7 @@ function BurgerConstructor() {
               </div>
             )}
 
-            <div className={styles.elementsDynamic}>
+            <div className={styles.elementsDynamic} data-test="constructorMainIngredients">
               {ingredientsConstructor.map((item, index: number) => {
                 if (item.type === "main" || item.type === "sauce") {
                   return (
@@ -138,7 +138,7 @@ function BurgerConstructor() {
             </div>
 
             {ingradientBun && (
-              <div className={`pl-8 pr-4`}>
+              <div className={`pl-8 pr-4`} data-test="constructorBunBottom">
                 <ConstructorElement
                   key={ingradientBun.uniqId}
                   type="bottom"
@@ -166,6 +166,7 @@ function BurgerConstructor() {
             extraClass={classButton}
             onClick={clickOrderButton}
             disabled={ingredientsConstructor.length < 1 || orderIsLoading}
+            data-test="submitOrderButton"
           >
             Оформить заказ
           </Button>
