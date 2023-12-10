@@ -34,9 +34,11 @@ function BurgerConstructor() {
 
   const totalPrice = useSelector(getTotalPrice);
   const isLoggedIn = useSelector(getIsLoggedIn);
-  const orderIsLoading = useSelector(getOrderLoading)
+  const orderIsLoading = useSelector(getOrderLoading);
 
-  const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(getBurgerConstructorIngradients);
+  const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(
+    getBurgerConstructorIngradients
+  );
 
   const classButton =
     ingredientsConstructor.length < 1 ? styles.buttonDisabled : "";
@@ -97,7 +99,8 @@ function BurgerConstructor() {
     <section className={styles.root}>
       <div
         className={`mt-25 ml-10 ${styles.mainContent} ${backgroundOpacity}`}
-        ref={drop} data-test="constructorContainer"
+        ref={drop}
+        data-test="constructorContainer"
       >
         {ingredientsConstructor.length > 0 ? (
           <div className={styles.container} data-test="constructorBunTop">
@@ -114,7 +117,10 @@ function BurgerConstructor() {
               </div>
             )}
 
-            <div className={styles.elementsDynamic} data-test="constructorMainIngredients">
+            <div
+              className={styles.elementsDynamic}
+              data-test="constructorMainIngredients"
+            >
               {ingredientsConstructor.map((item, index: number) => {
                 if (item.type === "main" || item.type === "sauce") {
                   return (
