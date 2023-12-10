@@ -5,9 +5,9 @@ describe("Отправка заказа", () => {
     const email = "qwer@qq.qq";
     const password = "qwerqwer";
     cy.viewport(1920, 1280);
-    cy.visit("http://localhost:3000/login");
-    cy.get("[data-testid=email_input]").type(`${email}`);
-    cy.get("[data-testid=password_input]").type(`${password}{enter}`);
+    cy.visit("http://localhost:3000/#/login");
+    cy.get(selectors.login.emailInput).type(`${email}`);
+    cy.get(selectors.login.passwordInput).type(`${password}{enter}`);
   });
 
   it("Заказ должен отправляться", () => {

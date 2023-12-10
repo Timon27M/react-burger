@@ -1,15 +1,14 @@
-// https://example.cypress.io
 import { selectors } from "../support/selectors";
 describe("ingredient popup open", () => {
   before(() => {
     cy.visit("http://localhost:3000");
     cy.viewport(1920, 1280);
   });
-  it("Должно открываться и закрываться модальное окно с информацией об ингредиенте", () => {
-    cy.get(selectors.ingredients.ingredient + ":eq(3)").click();
-    cy.get(selectors.modal.container).should("exist");
-    cy.get(selectors.modal.container + " h2").contains("Детали ингредиента");
-
+  it("should open the modal", () => {
+    cy.get(selectors.ingredients.ingredientName).contains('Соус фирменный Space Sauce').click();
+    cy.get(selectors.ingredients.ingredientDetailsName).contains(
+      "Соус фирменный Space Sauce"
+    );
     cy.get(selectors.modal.closeButton).click();
     cy.get(selectors.modal.container).should("not.exist");
   });

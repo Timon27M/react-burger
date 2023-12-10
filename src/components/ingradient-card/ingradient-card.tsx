@@ -59,7 +59,7 @@ const IngradientCard: FC<IIngradientCard> = ({
       <p className={`text text_type_digits-default m-2 ${styles.price}`}>
         {price} <CurrencyIcon type="primary" />
       </p>
-      <p className="m-0 text text_type_main-default">{name}</p>
+      <p className="m-0 text text_type_main-default" data-test='ingredientItemName'>{name}</p>
       {count && count > 0 && (
         <Counter count={count} size="default" extraClass="m-1" />
       )}

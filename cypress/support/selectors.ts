@@ -13,6 +13,8 @@ export const selectors = {
   },
   ingredients: {
     ingredient: "[data-test=ingredientItem]",
+    ingredientName: "[data-test=ingredientItemName]",
+    ingredientDetailsName: "[data-test=ingredientDetailsName]"
   },
 
   login: {
