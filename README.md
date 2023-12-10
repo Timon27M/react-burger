@@ -1,4 +1,4 @@
-# Сайт: [Ссылка на сайт](https://timon27m.github.io/)
+# Сайт: [Ссылка на сайт](https://timon27m.github.io/react-burger/)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
