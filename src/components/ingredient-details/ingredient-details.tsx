@@ -37,7 +37,7 @@ function IngredientDetails() {
               src={selectedIngredient.image}
               alt={`картинка ${selectedIngredient.name}`}
             />
-            <p className="mt-4 text text_type_main-medium">
+            <p className="mt-4 text text_type_main-medium" data-test="ingredientDetailsName">
               {selectedIngredient.name}
             </p>
             <div className={`mt-8 ${styles.blockData}`}>

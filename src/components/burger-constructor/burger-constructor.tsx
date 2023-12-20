@@ -2,6 +2,7 @@ import styles from "./burger-constructor.module.css";
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "../../utils/type-hooks";
 import { useDrop } from "react-dnd/dist/hooks";
+import { nanoid } from "nanoid";
 import BurgerConstructorCard from "../burger-constructor-card/burger-constructor-card";
 import {
   getBurgerConstructorIngradients,
@@ -33,9 +34,11 @@ function BurgerConstructor() {
 
   const totalPrice = useSelector(getTotalPrice);
   const isLoggedIn = useSelector(getIsLoggedIn);
-  const orderIsLoading = useSelector(getOrderLoading)
+  const orderIsLoading = useSelector(getOrderLoading);
 
-  const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(getBurgerConstructorIngradients);
+  const ingredientsConstructor: Array<TIngradientObjConstructor> = useSelector(
+    getBurgerConstructorIngradients
+  );
 
   const classButton =
     ingredientsConstructor.length < 1 ? styles.buttonDisabled : "";
@@ -81,7 +84,8 @@ function BurgerConstructor() {
           }
         });
       }
-      dispatch(addIngredient(ingredient));
+      const newId = nanoid();
+      dispatch(addIngredient(ingredient, newId));
       dispatch(updateTotalPrice());
     },
     collect: (monitor) => ({
@@ -96,9 +100,10 @@ function BurgerConstructor() {
       <div
         className={`mt-25 ml-10 ${styles.mainContent} ${backgroundOpacity}`}
         ref={drop}
+        data-test="constructorContainer"
       >
         {ingredientsConstructor.length > 0 ? (
-          <div className={styles.container}>
+          <div className={styles.container} data-test="constructorBunTop">
             {ingradientBun && (
               <div className={`pl-8 pr-4`}>
                 <ConstructorElement
@@ -112,7 +117,10 @@ function BurgerConstructor() {
               </div>
             )}
 
-            <div className={styles.elementsDynamic}>
+            <div
+              className={styles.elementsDynamic}
+              data-test="constructorMainIngredients"
+            >
               {ingredientsConstructor.map((item, index: number) => {
                 if (item.type === "main" || item.type === "sauce") {
                   return (
@@ -136,7 +144,7 @@ function BurgerConstructor() {
             </div>
 
             {ingradientBun && (
-              <div className={`pl-8 pr-4`}>
+              <div className={`pl-8 pr-4`} data-test="constructorBunBottom">
                 <ConstructorElement
                   key={ingradientBun.uniqId}
                   type="bottom"
@@ -164,6 +172,7 @@ function BurgerConstructor() {
             extraClass={classButton}
             onClick={clickOrderButton}
             disabled={ingredientsConstructor.length < 1 || orderIsLoading}
+            data-test="submitOrderButton"
           >
             Оформить заказ
           </Button>

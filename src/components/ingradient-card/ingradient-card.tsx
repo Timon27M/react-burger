@@ -8,19 +8,26 @@ import {
 import { Link, useLocation } from "react-router-dom";
 import { getBurgerConstructorIngradients } from "../../services/selectors";
 import { useMemo, FC } from "react";
-import { TIngradientObj } from "../../utils/types"; 
+import { TIngradientObj } from "../../utils/types";
 
 interface IIngradientCard {
   image: string;
   price: number;
   name: string;
-  ingradient: TIngradientObj
+  ingradient: TIngradientObj;
 }
 
-const IngradientCard: FC<IIngradientCard> = ({ image, price, name, ingradient }) => {
+const IngradientCard: FC<IIngradientCard> = ({
+  image,
+  price,
+  name,
+  ingradient,
+}) => {
   const location = useLocation();
 
-  const constructorIngradients: Array<TIngradientObj> = useSelector(getBurgerConstructorIngradients);
+  const constructorIngradients: Array<TIngradientObj> = useSelector(
+    getBurgerConstructorIngradients
+  );
 
   const count = useMemo(() => {
     const checkedIngradient = constructorIngradients.filter((item) => {
@@ -46,15 +53,18 @@ const IngradientCard: FC<IIngradientCard> = ({ image, price, name, ingradient })
       state={{ background: location }}
       className={styles.container}
       ref={dragRef}
+      data-test="ingredientItem"
     >
       <img className={styles.image} src={image} alt="картинка" />
       <p className={`text text_type_digits-default m-2 ${styles.price}`}>
         {price} <CurrencyIcon type="primary" />
       </p>
-      <p className="m-0 text text_type_main-default">{name}</p>
-      {count && count > 0 && <Counter count={count} size="default" extraClass="m-1" />}
+      <p className="m-0 text text_type_main-default" data-test='ingredientItemName'>{name}</p>
+      {count && count > 0 && (
+        <Counter count={count} size="default" extraClass="m-1" />
+      )}
     </Link>
   );
-}
+};
 
 export default IngradientCard;

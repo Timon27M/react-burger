@@ -8,11 +8,11 @@ import {
 } from "../actions/order";
 
 type TOrderState = {
-  orders: Array<TOrderInfo>,
-  lastNumberOrder: number | null,
-  isLoading: boolean,
-  isOpenOrderPopup: boolean
-}
+  orders: Array<TOrderInfo>;
+  lastNumberOrder: number | null;
+  isLoading: boolean;
+  isOpenOrderPopup: boolean;
+};
 
 const initialState: TOrderState = {
   orders: [],

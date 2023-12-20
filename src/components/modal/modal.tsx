@@ -23,21 +23,26 @@ const Modal: FC<TModal> = ({ children, closePopup }) => {
   function stopPropagation(e: React.SyntheticEvent) {
     e.stopPropagation();
   }
-    return ReactDOM.createPortal(
-      <>
-        <ModalOverflow closePopup={closePopup}>
-          <div
-            className={`p-10 pb-2 ${styles.container}`}
-            onClick={stopPropagation}
+  return ReactDOM.createPortal(
+    <>
+      <ModalOverflow closePopup={closePopup}>
+        <div
+          className={`p-10 pb-2 ${styles.container}`}
+          onClick={stopPropagation}
+          data-testid="modalContainer"
+        >
+          <button
+            className={`p-0 ${styles.closeButton}`}
+            onClick={closePopup}
+            data-testid="modalCloseButton"
           >
-            <button className={`p-0 ${styles.closeButton}`} onClick={closePopup}>
-              <CloseIcon type="primary" />
-            </button>
-            {children}
-          </div>
-        </ModalOverflow>
-      </>,
-      modalRoot
-      );
+            <CloseIcon type="primary" />
+          </button>
+          {children}
+        </div>
+      </ModalOverflow>
+    </>,
+    modalRoot
+  );
 };
 export default Modal;
